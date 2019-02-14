@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include<string.h>
+#include <string.h>
 
 int main(void) {
   int fd[2];
@@ -35,10 +35,10 @@ int main(void) {
   } else {
   	/* Cierre del descriptor de salida en el padre */
   	close(fd[1]);
+  	wait(NULL);
   	/* Leer algo de la tubería... el saludo! */
   	nbytes = read(fd[0], readbuffer, sizeof(readbuffer));
   	printf("He recibido el string: %s", readbuffer);
-  	wait(NULL);
   	exit(EXIT_SUCCESS);
   }
 }
