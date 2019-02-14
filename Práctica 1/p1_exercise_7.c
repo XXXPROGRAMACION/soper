@@ -68,11 +68,13 @@ void processCat () {
         Creamos un nuevo proceso hijo y en el ejecutamos execv para ejecutar el
         comando cat con el vector de argumentos args. El padre debe esperar a que
         el hijo termine
-        */
-       
+        */       
         pid_t pid = fork();
 
-        if (pid == 0) execvp("cat", args);
+        if (pid == 0) {
+            execvp("cat", args);
+            printf("Error en la ejecución de exec.\n");
+        }
 
         wait(NULL);
     }
@@ -84,17 +86,18 @@ void processCat () {
 }
 
 void showAllFiles () {
-    /* METER CODIGO */
-   /*
-    * Creamos un nuevo proceso hijo usando la llamada execlp y en el ejecutamos el
-    * comando ls -l. El proceso padre debe de esperar a que el hijo termine.
+    /* METER CODIGO
+    Creamos un nuevo proceso hijo usando la llamada execlp y en el ejecutamos el
+    comando ls -l. El proceso padre debe de esperar a que el hijo termine.
     */
+    pid_t pid;
 
-   pid_t pid;
+    pid = fork();
 
-   pid = fork();
-
-   if (pid == 0) execlp("ls", "ls", "-l", NULL);
+    if (pid == 0) {
+        execlp("ls", "ls", "-l", NULL);
+        printf("Error en la ejecución de exec.\n");
+    }
 
    wait(NULL);
 }
