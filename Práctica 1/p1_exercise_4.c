@@ -1,5 +1,6 @@
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
 
@@ -14,10 +15,10 @@ int main() {
         if (pid != 0) break;
     }
 
-    wait(NULL);
+    while (wait(NULL) > 0);
 
     if (i == 0) printf("Soy el padre\n");
     else printf("Soy el hijo %d\n", i);
 
-    return 0;
+    exit(EXIT_SUCCESS);
 }
