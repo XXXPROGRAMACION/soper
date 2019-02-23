@@ -18,12 +18,12 @@ int main(void)
 			printf("Error al emplear fork\n");
 			exit(EXIT_FAILURE);
 		}
-		else if(pid ==  0)
+		else if(pid == 0)
 		{
 			printf("HIJO:\n\tMi pid: %d\n\tEl de mi padre: %d\n", getpid(), getppid());
 			exit(EXIT_SUCCESS);
 		}
-		else if(pid >  0)
+		else if(pid > 0)
 		{
 			wait(NULL);
 			printf("PADRE %d\n", i);

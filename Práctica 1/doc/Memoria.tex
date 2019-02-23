@@ -15,31 +15,31 @@
 
 \section*{Respuestas a las preguntas cortas}
 \subsection*{Ejercicio 3}
-\subsubsection*{a)}
+\subsubsection*{a) Analiza el texto que imprime el programa. ¿Se puede saber a priori en qué orden se imprimirá el texto ? ¿Por qué?}
 No se puede saber cual se ejecuta antes,
 ya que el padre no espera a la ejecución del hijo.
 
-\subsubsection*{b)}
+\subsubsection*{b) Cambia el código para que el proceso hijo imprima su PID y el de su padre en vez de la variable i.}
 Lo hemos hecho usando las funciones \textit{getpid()} y \textit{getppid()}.
 
-\subsubsection*{c)}
+\subsubsection*{c) Analiza el árbol de procesos que genera el código de arriba. Muéstralo en la memoria como un diagrama de árbol (como el que aparece en el ejercicio 4) explicando porqué es así.}
 \begin{center}
 \includegraphics[scale=0.75]{3c.png}
 \end{center}
 El padre va creando procesos hijos y no espera a que estos terminen su ejecución para terminar él la suya, de manera que deja hijos huérfanos. 
 
 \subsection*{Ejercicio 4}
-\subsubsection*{a)}
+\subsubsection*{a) El código del ejercicio 3 deja procesos huérfanos, ¿Por qué?.}
 El padre puede dejar 2 hijos huérfanos al solo tener un \textit{wait()} e iniciar 3 procesos hijo.
 
-\subsubsection*{b)}
+\subsubsection*{b) Introduce el mínimo número de cambios en el código del ejercicio 3 para que no deje procesos huérfanos.}
 Los cambios se limitan a introducir un \textit{wait()} dentro del bucle en el que el padre va creando procesos.
 
 \subsection*{Ejercicio 5}
-\subsubsection*{a)}
+\subsubsection*{a) En el programa anterior se reserva memoria en el proceso padre y la inicializa en el proceso hijo usando el método strcpy(que copia un stringa una posición de memoria), una vez el proceso hijo termina el padre lo imprime por pantalla. ¿Qué ocurre cuando ejecutamos el código? ¿Es este programa correcto? ¿Por qué? justifica tu respuesta.}
 El padre no imprime el valor al que el hijo ha inicializado la variable. Suponemos que esto se debe a que, cuando se ejecuta \textit{fork()}, se trata de la misma forma a la memoria dinámica y a la estática, generando una nueva copia para el proceso hijo.
 
-\subsubsection*{b)}
+\subsubsection*{b) El programa anterior contiene un memory leak ya que el array sentence nunca se libera. Corrige el código para eliminar este memory leak. ¿Dónde hay que liberar la memoria en el padre, en el hijo o en ambos?. Justifica tu respuesta.}
 La respuesta va ligada al punto anterior, al hacer una nueva copia de la memoria dinámica, es necesario liberarla dos veces, una en cada proceso.
 
 \section*{Detalles de implementación}
@@ -50,7 +50,7 @@ Nos limitamos a implementar los cambios funcionales especificados modificando lo
 Nuestro programa tiene un proceso padre que crea una cantidad determinada de procesos hijos. Todos los procesos esperan a todos sus hijos e imprimen si son padres o hijos.
 
 \subsection*{Ejercicio 7}
-Álex te elijo a ti.
+En este ejercicio hemos tenido que añadir dos comandos shell al código ya dado, estos se ejecutan en procesos independientes. En el caso de ``ls'' utilizamos la función execlp(), que indica que el programa estará en path y que los datos se pasarán como lista de argumentos. Para ``cat'' utilizamos execvp(), que también indica que el programa se situa en path, pero en este caso los argumentos son pasados en un array.
 
 \subsection*{Ejercicio 9}
 Primero creamos los procesos y los pipes, y nos cercioramos de que ambos se hayan creado correctamente. Después cada proceso ejecuta su funcionalidad, valiéndose de pipes para pasarse la información entre ellos.
