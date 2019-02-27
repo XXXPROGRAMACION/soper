@@ -57,6 +57,7 @@ Primero creamos los procesos y los pipes, y nos cercioramos de que ambos se haya
 
 \subsection*{Ejercicio 12}
 Primero creamos los hilos e inicializamos la matriz de argumentos, a partir de la cual se calcularán las potencias de 2. Después sincronizamos el proceso principal con el resto de hilos e imprimimos los resultados que han calculado. \\
+
 Para el cálculo de las potencias de 2 hemos usado el operador $\ll$ (bitwise left shift), que desplaza el número dado una cantidad de posiciones hacia la izquierda en binario. Como cada desplazamiento equivale a multiplicar el número por 2, simplemente lo desplazamos \textit{N} posiciones para calcular \textit{$2^N$}. Hemos usado este método por que resulta mucho más eficiente que multiplicar el número repetidamente por 2, aunque en función del compilador este podría realizar también esta optimización.
 
 \end{document}

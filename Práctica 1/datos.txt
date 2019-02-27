@@ -1,0 +1,11 @@
+Grupo: 2213
+Pareja: 4
+Fecha: 28/02
+
+Miembro 1:
+    - Alejandro Pascual Pozo
+    - alejandro.pascualp@estudiante.uam.es
+
+Miembro 2:
+    - Víctor Yrazusta Ibarra
+    - victor.yrazsuta@estudiante.uam.es
