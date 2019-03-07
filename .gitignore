@@ -1,7 +1,1 @@
-*
-!*.*
-!doc/
-doc/*.log
-doc/*.aux
-doc/*.gz
 !makefile

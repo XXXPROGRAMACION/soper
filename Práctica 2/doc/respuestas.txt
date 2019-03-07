@@ -1,0 +1,13 @@
+2.  Cada hijo imprime únicamente el mensaje previo al sleep, ya que su padre les
+    manda la señal SIGTERM antes de que se complete su espera.
+
+3.  a)  No, la llamada a sigaction sustituye el manejador predeterminado por el 
+        definido en el programa, pero este no será ejecutado hasta que no llegue la
+        señal SIGINT.
+    b)  El printf en main se imprime al inicio y cada 9999 segundos. El printf en
+        el manejador se imprime cuando llega la señal SIGINT.
+    c)  Si no se ha definido un manejador propio se ejecutará el predeterminado,
+        que interrumpe la ejecución del proceso.
+    d)  El manejador nunca se ejecutaría, ya que la señal SIGKILL nunca llega al 
+        proceso, sino que es manejada por el sistema operativo. Además, en tiempo
+        de ejecución recibimos un error de sigaction por argumento inválido.
