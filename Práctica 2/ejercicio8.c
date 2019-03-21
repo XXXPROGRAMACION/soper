@@ -24,7 +24,7 @@ void manejador_SIGINT(int sig) {
 }
 
 void manejador_SIGTERM(int sig) {
-
+    exit(EXIT_SUCCESS);
 }
 
 int main() {
