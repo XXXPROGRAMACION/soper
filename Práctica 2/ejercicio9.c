@@ -19,8 +19,6 @@ void manejador_SIGTERM(int sig) {
     exit(EXIT_SUCCESS);
 }
 
-// LA CARRERA NO COMIENZA DE MANERA SINCRONIZADA
-
 int main() {
     pid_t pid;
     int id, num, ganador, vuelta, i;

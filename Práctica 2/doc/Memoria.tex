@@ -54,7 +54,7 @@ Esta diferencia puede deberse al funcionamiento de la función sleep(), sospecha
 \subsection*{Ejercicio 2}
 Hemos escrito el código siguiendo el enunciado y sin mayores modificaciones o complicaciones. Utilizamos un bucle en el que el padre crea un bucle, duerme 5 segundos y hace que el hijo termine.
 
-\subsection*{Ejercicio 3}
+\subsection*{Ejercicio 3d}
 Hemos modificado el programa de referencia sustituyendo SIGTERM por SIGKILL. Cabe destacar que el propio entorno de desarrollo nos avisaba de que cometíamos un error al tratar de capturar SIGKILL.
 
 \subsection*{Ejercicio 4}
@@ -62,10 +62,11 @@ Hemos implementado el programa tal y como venía definido en el enunciado. El pa
 
 Hemos tenido que darles un manejador sin funcionalidad tanto al padre como al gestor. Esto se debe a que cuando kill manda una señal a un grupo de procesos se la manda a todos, también a quién ha ejecutado kill. Como no queríamos que se imprimiese en pantalla el feedback por defecto para una señal sin manejador propio, les hemos dado un manejador vacío. 
 
-\subsection*{Ejercicio 6}
-a) Hemos seguido las instrucciones del ejercicio sin complicaciones. Para establecer qué señales ignorar utilizamos sigprocmask(SIG\_BLOCK, ...) y para dejar de bloquearlas sigprocmask(SIG\_UNBLOCK, ...). \\
+\subsection*{Ejercicio 6a}
+Hemos seguido las instrucciones del ejercicio sin complicaciones. Para establecer qué señales ignorar utilizamos sigprocmask(SIG\_BLOCK, ...) y para dejar de bloquearlas sigprocmask(SIG\_UNBLOCK, ...). \\
 
-b) Cabe destacar que en esta versión, al no tener control sobre cuando puede ser interrumpido el programa, es posible que el printf() utilzado para contar sea interrumpido a mitad de ejecución, por lo que usamos fflush() para evitar problemas al imprimir el mensaje final.
+\subsection*{Ejercicio 6b}
+Cabe destacar que en esta versión, al no tener control sobre cuando puede ser interrumpido el programa, es posible que el printf() utilzado para contar sea interrumpido a mitad de ejecución, por lo que usamos fflush() para evitar problemas al imprimir el mensaje final.
 
 \subsection*{Ejercicio 8}
 Hemos implementado el ejercicio aplicando el algoritmo especificado. Tal y como queda reflejado en las respuestas a las preguntas anteriores, este algoritmo da prioridad a la ejecución continua de lectores. Esto supone que en determinadas condiciones (como la existencia de un gran número de lectores o un tiempo de espera muy corto) el escritor pueda sufrir inanición.
