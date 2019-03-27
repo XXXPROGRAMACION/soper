@@ -8,7 +8,6 @@
 #define N_ITER 5
 #define SECS 40
 
-
 int main(void) {
     pid_t pid;
     int counter;
@@ -29,8 +28,9 @@ int main(void) {
         exit(EXIT_FAILURE);
     }
     if (pid == 0) {
-        if (alarm(SECS))
+        if (alarm(SECS)) {
             fprintf(stderr, "Existe una alarma previa establecida\n");
+        }
         while (1) {
             if (sigprocmask(SIG_BLOCK, &set1, &oldset) < 0) {
                 perror("sigprocmask");

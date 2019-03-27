@@ -1,0 +1,56 @@
+\documentclass[]{article}
+
+\title{Memoria de la práctica 2\\
+	\Large Sistemas operativos 2018-2019}
+
+\author{Alejandro Pascual y V\'ictor Yrazusta}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[legalpaper, margin=1in]{geometry}
+
+\begin{document}
+
+\maketitle
+
+\section*{Respuestas a las preguntas cortas}
+\subsection*{Ejercicio 2}
+\subsubsection*{¿Qué mensajes imprime cada hijo? ¿Por qué?}
+Cada hijo imprime únicamente el mensaje previo al sleep, ya que su padre les manda la señal SIGTERM antes de que se complete su espera.
+
+\subsection*{Ejercicio 3}
+\subsubsection*{a) ¿La llamada a signaction supone que se ejecute la función manejador?}
+No, la llamada a sigaction sustituye el manejador predeterminado por el definido en el programa, pero este no será ejecutado hasta que no llegue la señal SIGINT.
+
+\subsubsection*{b) ¿Cuándo aparece el printf en pantalla?}
+El printf en main se imprime al inicio y cada 9999 segundos. El printf en el manejador se imprime cuando llega la señal SIGINT.
+
+\subsubsection*{c) ¿Qué ocurre por defecto cuando un programa recibe una señal y no la tiene capturada?}
+Si no se ha definido un manejador propio se ejecutará el predeterminado, que interrumpe la ejecución del proceso.
+
+\subsubsection*{d) Modifica el programa anterior en un nuevo ejercicio3d.c que capture la señal SIGKILL ycuya función manejadora escriba  ``He conseguido capturar SIGKILL''. ¿Por qué nunca sale por pantalla ``He conseguido capturar SIGKILL''?}
+El manejador nunca se ejecutaría, ya que la señal SIGKILL nunca llega al proceso, sino que es manejada por el sistema operativo. Además, en tiempo de ejecución recibimos un error de sigaction por argumento inválido.
+
+\subsection*{Ejercicio 6}
+\subsubsection*{¿Qué sucede cuando el hijo recibe la señal de alarma?}
+Cuando el hijo recibe la alarma, pueden pasar dos cosas. Si está ``contando'' tendrá una máscara para la señal SIGALRM, por lo que la ignorará hasta terminar de contar. Si no está ``contando'' terminará inmediatamente, independientemente de si está bloqueado por sleep() o no.
+
+\section*{Detalles de implementación}
+\subsection*{Ejercicio 3}
+Nos limitamos a implementar los cambios funcionales especificados modificando lo menos posible el código.
+
+\subsection*{Ejercicio 4}
+Nuestro programa tiene un proceso padre que crea una cantidad determinada de procesos hijos. Todos los procesos esperan a todos sus hijos e imprimen si son padres o hijos.
+
+\subsection*{Ejercicio 7}
+En este ejercicio hemos tenido que añadir dos comandos shell al código ya dado, estos se ejecutan en procesos independientes. En el caso de ``ls'' utilizamos la función execlp(), que indica que el programa estará en path y que los datos se pasarán como lista de argumentos. Para ``cat'' utilizamos execvp(), que también indica que el programa se situa en path, pero en este caso los argumentos son pasados en un array.
+
+\subsection*{Ejercicio 9}
+Primero creamos los procesos y los pipes, y nos cercioramos de que ambos se hayan creado correctamente. Después cada proceso ejecuta su funcionalidad, valiéndose de pipes para pasarse la información entre ellos.
+
+\subsection*{Ejercicio 12}
+Primero creamos los hilos e inicializamos la matriz de argumentos, a partir de la cual se calcularán las potencias de 2. Después sincronizamos el proceso principal con el resto de hilos e imprimimos los resultados que han calculado. \\
+
+Para el cálculo de las potencias de 2 hemos usado el operador $\ll$ (bitwise left shift), que desplaza el número dado una cantidad de posiciones hacia la izquierda en binario. Como cada desplazamiento equivale a multiplicar el número por 2, simplemente lo desplazamos \textit{N} posiciones para calcular \textit{$2^N$}. Hemos usado este método por que resulta mucho más eficiente que multiplicar el número repetidamente por 2, aunque en función del compilador este podría realizar también esta optimización.
+
+\end{document}
