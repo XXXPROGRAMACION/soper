@@ -11,6 +11,7 @@
 #define NUM_MAX 15
 #define SEM_FICHERO "/sem_fichero"
 #define SEM_HIJOS "/sem_hijos"
+#define SEM_CARRERA "/sem_carrera"
 #define FICHERO "carrera.txt"
 
 void manejador_SIGTERM(int sig) {
@@ -25,6 +26,7 @@ int main() {
     int id, num, ganador, vuelta, i;
     sem_t *sem_fichero = NULL;
     sem_t *sem_hijos = NULL;
+    sem_t *sem_carrera = NULL;
     FILE *file = NULL;
     int *vueltas;
     struct sigaction act;
@@ -38,6 +40,14 @@ int main() {
         perror("sem_open");
         exit(EXIT_FAILURE);
     }
+
+    if ((sem_carrera = sem_open(SEM_CARRERA, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0)) == SEM_FAILED) {
+        perror("sem_open");
+        exit(EXIT_FAILURE);
+    }
+
+    file = fopen(FICHERO, "w");
+    fclose(file);
 
     sem_post(sem_fichero);
     sem_post(sem_hijos);
@@ -55,8 +65,10 @@ int main() {
         if (pid < 0) {
             sem_unlink(SEM_FICHERO);
             sem_unlink(SEM_HIJOS);
+            sem_unlink(SEM_CARRERA);
             sem_close(sem_fichero);
             sem_close(sem_hijos);
+            sem_close(sem_carrera);
             kill(0, SIGTERM);
             exit(EXIT_FAILURE);
         }
@@ -67,6 +79,7 @@ int main() {
     }
 
     if (pid == 0) {
+        sem_wait(sem_carrera);
         while (1) {
             sem_wait(sem_hijos);
             sem_wait(sem_fichero);
@@ -75,8 +88,10 @@ int main() {
             if (file == NULL) {
                 sem_unlink(SEM_FICHERO);
                 sem_unlink(SEM_HIJOS);
+                sem_unlink(SEM_CARRERA);
                 sem_close(sem_fichero);
                 sem_close(sem_hijos);
+                sem_close(sem_carrera);
                 kill(0, SIGTERM);
             }
 
@@ -90,6 +105,7 @@ int main() {
             usleep(rand()%100001);
         }
     } else {
+        for (i = 0; i < N_PROC; i++) sem_post(sem_carrera);
         vueltas = (int *) calloc(N_PROC, sizeof(int));
         ganador = -1;
         vuelta = 0;
@@ -103,8 +119,10 @@ int main() {
                 free(vueltas);
                 sem_unlink(SEM_FICHERO);    
                 sem_unlink(SEM_HIJOS);
+                sem_unlink(SEM_CARRERA);
                 sem_close(sem_fichero);
                 sem_close(sem_hijos);
+                sem_close(sem_carrera);
                 kill(0, SIGTERM);
             } 
 
@@ -131,8 +149,10 @@ int main() {
                 free(vueltas);
                 sem_unlink(SEM_FICHERO);    
                 sem_unlink(SEM_HIJOS);
+                sem_unlink(SEM_CARRERA);
                 sem_close(sem_fichero);
                 sem_close(sem_hijos);
+                sem_close(sem_carrera);
                 kill(0, SIGTERM);
             }
 
