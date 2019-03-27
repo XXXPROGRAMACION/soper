@@ -35,6 +35,21 @@ El manejador nunca se ejecutaría, ya que la señal SIGKILL nunca llega al proce
 \subsubsection*{¿Qué sucede cuando el hijo recibe la señal de alarma?}
 Cuando el hijo recibe la alarma, pueden pasar dos cosas. Si está ``contando'' tendrá una máscara para la señal SIGALRM, por lo que la ignorará hasta terminar de contar. Si no está ``contando'' terminará inmediatamente, independientemente de si está bloqueado por sleep() o no.
 
+\subsection*{Ejercicio 8}
+\subsubsection*{a) ¿Qué pasa cuando SECS=0 y N\_READ=1? ¿Se producen lecturas? ¿Se producen escrituras? ¿Por qué?}
+Se producen lecturas y escrituras sucesivamente, una a una ya que solo hay un escritor y un lector. No se producen escrituras ni lecturas consecutivas gracias al semáforo de escritura.
+
+\subsubsection*{b) ¿Qué pasa cuando SECS=1 y N\_READ=10? ¿Se producen lecturas? ¿Se producen escrituras? ¿Por qué?}
+Se producen tanto escrituras como lecturas, ya que tanto los lectores como los escritores se esperan mutuamente para intercalar su ejecución.
+
+\subsubsection*{c) ¿Qué pasa cuando SECS=0 y N\_READ=10? ¿Se producen lecturas? ¿Se producen escrituras? ¿Por qué?}
+Se producen tanto escrituras como lecturas, pero aparecen con mucha más frecuencia las lecturas y no se intercalan correctamente debido a que, al haber varios lectores y estos no esperar al terminar la lectura, cuando los lectores terminan de leer hay otros que vuelven a empezar en ese momento, de manera que muchas veces no se procesa correctamente cuándo han terminado todos la lectura al haber algunos que vuelven a entrar antes de que todos salgan. 
+
+
+\subsubsection*{c) ¿Qué pasa si los procesos escritores/lectores no duermen nada entre escrituras/lecturas (si se elimina totalmente el sleep del bucle)? ¿Se producen lecturas? ¿Se producen escrituras? ¿Por qué?}
+Se producen tanto lecturas como escrituras, pero estas se intercalan anárquicamente y no de la manera estructurada en la que se deberían suceder. Esto es debido a que, al no esperar, es principalmente el sistema operativo quien decide quien toma el control de la CPU.
+
+
 \section*{Detalles de implementación}
 \subsection*{Ejercicio 3}
 Nos limitamos a implementar los cambios funcionales especificados modificando lo menos posible el código.
