@@ -9,8 +9,8 @@
 #define SECS 40
 
 void manejador(int sig) {
-    printf("Soy %d y he recibido la señal SIGTERM\n", getpid());
     fflush(stdout);
+    printf("Soy %d y he recibido la señal SIGTERM\n", getpid());    
     exit(EXIT_SUCCESS);
 }
 

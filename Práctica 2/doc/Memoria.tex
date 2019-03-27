@@ -37,35 +37,40 @@ Cuando el hijo recibe la alarma, pueden pasar dos cosas. Si está ``contando'' t
 
 \subsection*{Ejercicio 8}
 \subsubsection*{a) ¿Qué pasa cuando SECS=0 y N\_READ=1? ¿Se producen lecturas? ¿Se producen escrituras? ¿Por qué?}
-Se producen lecturas y escrituras sucesivamente, una a una ya que solo hay un escritor y un lector. No se producen escrituras ni lecturas consecutivas gracias al semáforo de escritura.
+Se producen lecturas y escrituras sucesivamente, una a una ya que solo hay un escritor y un lector. Esto se debe a que el lector cambia el semáforo de escritura tras cada lectura, permitiendo que se intercalen sus ejecuciones.
 
 \subsubsection*{b) ¿Qué pasa cuando SECS=1 y N\_READ=10? ¿Se producen lecturas? ¿Se producen escrituras? ¿Por qué?}
-Se producen tanto escrituras como lecturas, ya que tanto los lectores como los escritores se esperan mutuamente para intercalar su ejecución.
+Se produce una escritura por cada 10 lecturas. Esto se debe a que los tiempos de ejecución son mucho menores que los tiempos de espera, por lo que los lectores modifican el semáforo de escritura una vez se han ejecutado los 10.
 
 \subsubsection*{c) ¿Qué pasa cuando SECS=0 y N\_READ=10? ¿Se producen lecturas? ¿Se producen escrituras? ¿Por qué?}
-Se producen tanto escrituras como lecturas, pero aparecen con mucha más frecuencia las lecturas y no se intercalan correctamente debido a que, al haber varios lectores y estos no esperar al terminar la lectura, cuando los lectores terminan de leer hay otros que vuelven a empezar en ese momento, de manera que muchas veces no se procesa correctamente cuándo han terminado todos la lectura al haber algunos que vuelven a entrar antes de que todos salgan. 
+Principalmente se producen lecturas y, aunque en la práctica podemos observar escrituras, es posible que el escritor no pueda ejecutarse nunca. Esto se debe a que los lectores pueden volver a la cola de lecturas nada más terminar de leer, por lo que es posible que la cola nunca se vacíe, impidiendo la escritura.
 
+\subsubsection*{d) ¿Qué pasa si los procesos escritores/lectores no duermen nada entre escrituras/lecturas (si se elimina totalmente el sleep del bucle)? ¿Se producen lecturas? ¿Se producen escrituras? ¿Por qué?}
+En este caso la respuesta teórica es muy similar a la anterior, sin embargo, en la práctica, en cuanto es el turno de  los lectores el escritor no vuelve a ejecutarse. \\
 
-\subsubsection*{c) ¿Qué pasa si los procesos escritores/lectores no duermen nada entre escrituras/lecturas (si se elimina totalmente el sleep del bucle)? ¿Se producen lecturas? ¿Se producen escrituras? ¿Por qué?}
-Se producen tanto lecturas como escrituras, pero estas se intercalan anárquicamente y no de la manera estructurada en la que se deberían suceder. Esto es debido a que, al no esperar, es principalmente el sistema operativo quien decide quien toma el control de la CPU.
-
+Esta diferencia puede deberse al funcionamiento de la función sleep(), sospechamos que aunque el tiempo indicado sea 0, el programa es interrumpido de todos modos. Esto supondría aumentar mucho la probabilidad de que, en el caso anterior, al escritor le toque ejecutarse justo cuando ningún lector está leyendo. En este caso, sin embargo, que se de dicha situación es tan poco probable que no hemos podido llegar a observarla.
 
 \section*{Detalles de implementación}
+\subsection*{Ejercicio 2}
+Hemos escrito el código siguiendo el enunciado y sin mayores modificaciones o complicaciones. Utilizamos un bucle en el que el padre crea un bucle, duerme 5 segundos y hace que el hijo termine.
+
 \subsection*{Ejercicio 3}
-Nos limitamos a implementar los cambios funcionales especificados modificando lo menos posible el código.
+Hemos modificado el programa de referencia sustituyendo SIGTERM por SIGKILL. Cabe destacar que el propio entorno de desarrollo nos avisaba de que cometíamos un error al tratar de capturar SIGKILL.
 
 \subsection*{Ejercicio 4}
-Nuestro programa tiene un proceso padre que crea una cantidad determinada de procesos hijos. Todos los procesos esperan a todos sus hijos e imprimen si son padres o hijos.
+Hemos implementado el programa tal y como venía definido en el enunciado. El padre crea un gestor, que a su vez crea N hijos (que le van confirmando su correcta preparación), y este le avisa cuando todos los participantes están listos. Cuando esto ocurre el padre da la señal de salida y el resultado varía en función de la administración de la multiprogramación por parte del procesador. \\
 
-\subsection*{Ejercicio 7}
-En este ejercicio hemos tenido que añadir dos comandos shell al código ya dado, estos se ejecutan en procesos independientes. En el caso de ``ls'' utilizamos la función execlp(), que indica que el programa estará en path y que los datos se pasarán como lista de argumentos. Para ``cat'' utilizamos execvp(), que también indica que el programa se situa en path, pero en este caso los argumentos son pasados en un array.
+Hemos tenido que darles un manejador sin funcionalidad tanto al padre como al gestor. Esto se debe a que cuando kill manda una señal a un grupo de procesos se la manda a todos, también a quién ha ejecutado kill. Como no queríamos que se imprimiese en pantalla el feedback por defecto para una señal sin manejador propio, les hemos dado un manejador vacío. 
+
+\subsection*{Ejercicio 6}
+a) Hemos seguido las instrucciones del ejercicio sin complicaciones. Para establecer qué señales ignorar utilizamos sigprocmask(SIG\_BLOCK, ...) y para dejar de bloquearlas sigprocmask(SIG\_UNBLOCK, ...). \\
+
+b) Cabe destacar que en esta versión, al no tener control sobre cuando puede ser interrumpido el programa, es posible que el printf() utilzado para contar sea interrumpido a mitad de ejecución, por lo que usamos fflush() para evitar problemas al imprimir el mensaje final.
+
+\subsection*{Ejercicio 8}
+Hemos implementado el ejercicio aplicando el algoritmo especificado. Tal y como queda reflejado en las respuestas a las preguntas anteriores, este algoritmo da prioridad a la ejecución continua de lectores. Esto supone que en determinadas condiciones (como la existencia de un gran número de lectores o un tiempo de espera muy corto) el escritor pueda sufrir inanición.
 
 \subsection*{Ejercicio 9}
-Primero creamos los procesos y los pipes, y nos cercioramos de que ambos se hayan creado correctamente. Después cada proceso ejecuta su funcionalidad, valiéndose de pipes para pasarse la información entre ellos.
-
-\subsection*{Ejercicio 12}
-Primero creamos los hilos e inicializamos la matriz de argumentos, a partir de la cual se calcularán las potencias de 2. Después sincronizamos el proceso principal con el resto de hilos e imprimimos los resultados que han calculado. \\
-
-Para el cálculo de las potencias de 2 hemos usado el operador $\ll$ (bitwise left shift), que desplaza el número dado una cantidad de posiciones hacia la izquierda en binario. Como cada desplazamiento equivale a multiplicar el número por 2, simplemente lo desplazamos \textit{N} posiciones para calcular \textit{$2^N$}. Hemos usado este método por que resulta mucho más eficiente que multiplicar el número repetidamente por 2, aunque en función del compilador este podría realizar también esta optimización.
+Hemos creado tres semáforos para gestionar la concurrencia del padre y los hijos. Uno de ellos (sem\_hijos) nos permite hacer que solo haya un hijo esperando a escribir en el fichero, para que el padre solo tenga que esperar a un hijo como máximo. El segundo (sem\_fichero) controla la lectura y escritura en el fichero. El tercero (sem\_carrera) nos permite asegurarnos de que todos los procesos comienzan la carrera a la vez.
 
 \end{document}
