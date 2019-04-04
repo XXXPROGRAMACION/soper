@@ -4,12 +4,14 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <semaphore.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 
 #define MEM "mem"
+#define SEM "sem"
 #define NAME_MAX 128
 
 typedef struct {
@@ -19,6 +21,7 @@ typedef struct {
 } ClientInfo;
 
 ClientInfo *info = NULL;
+sem_t *sem = NULL;
 
 void manejador_SIGUSR1(int pid) {
     if (info != NULL) {
@@ -26,12 +29,14 @@ void manejador_SIGUSR1(int pid) {
         printf("Id actual: %d\n", info->id);
         printf("Nombre: %s\n", info->name);
     }
+
+    sem_post(sem);
 }
 
 int main(int argc, char **argv) {
     int n, i;
     pid_t pid;
-    struct sigaction act;
+    struct sigaction act;    
 
     if (argc != 2) {
         printf("Número de argumentos inválido.\n");
@@ -65,6 +70,17 @@ int main(int argc, char **argv) {
         return 1;
     }
 
+    if ((sem = sem_open(SEM, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0)) == SEM_FAILED) {
+        perror("sem_open");
+        close(fd_shm);
+        exit(EXIT_FAILURE);
+    }
+    sem_unlink(SEM);
+    sem_post(sem);
+
+    info->previous_id = -1;
+    info->id = 0;
+
     for (i = 0; i < n; i++) {
         pid = fork();
         if (pid == 0) break;
@@ -76,18 +92,22 @@ int main(int argc, char **argv) {
         act.sa_flags = 0;
 
         if (sigaction(SIGUSR1, &act, NULL) < 0) {
-            perror("sigaction");
+            perror("sigaction");            
             close(fd_shm);
+            sem_close(sem);
             exit(EXIT_FAILURE);
         }
 
         while (wait(NULL) >= 0 || errno == EINTR);
 
         close(fd_shm);
+        sem_close(sem);
         exit(EXIT_SUCCESS);
     } else { //Hijos
         srand(getpid());
         sleep(1+(double)rand()/RAND_MAX*10);
+
+        sem_wait(sem);
 
         info->previous_id++;
         printf("¡Da de alta a un cliente!\n");
@@ -95,9 +115,10 @@ int main(int argc, char **argv) {
         scanf("%s", info->name);
         info->id++;
 
-        kill(getppid(), SIGUSR1);
+        kill(getppid(), SIGUSR1);        
 
         close(fd_shm);
+        sem_close(sem);
         exit(EXIT_SUCCESS);
     }
 }
