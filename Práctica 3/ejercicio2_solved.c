@@ -25,9 +25,9 @@ sem_t *sem = NULL;
 
 void manejador_SIGUSR1(int pid) {
     if (info != NULL) {
-        printf("Id previa: %d\n", info->previous_id);
+        printf("\nId previa: %d\n", info->previous_id);
         printf("Id actual: %d\n", info->id);
-        printf("Nombre: %s\n", info->name);
+        printf("Nombre: %s\n\n", info->name);
     }
 
     sem_post(sem);
@@ -71,13 +71,12 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    if ((sem = sem_open(SEM, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0)) == SEM_FAILED) {
+    if ((sem = sem_open(SEM, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 1)) == SEM_FAILED) {
         perror("sem_open");
         close(fd_shm);
         exit(EXIT_FAILURE);
     }
     sem_unlink(SEM);
-    sem_post(sem);
 
     info->previous_id = -1;
     info->id = 0;

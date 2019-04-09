@@ -22,9 +22,9 @@ ClientInfo *info = NULL;
 
 void manejador_SIGUSR1(int pid) {
     if (info != NULL) {
-        printf("Id previa: %d\n", info->previous_id);
+        printf("\nId previa: %d\n", info->previous_id);
         printf("Id actual: %d\n", info->id);
-        printf("Nombre: %s\n", info->name);
+        printf("Nombre: %s\n\n", info->name);
     }
 }
 
