@@ -29,9 +29,10 @@ void manejador_SIGUSR1(int pid) {
 }
 
 int main(int argc, char **argv) {
-    int n, i;
     pid_t pid;
     struct sigaction act;
+    int fd_shm, error;
+    int n, i;
 
     if (argc != 2) {
         printf("Número de argumentos inválido.\n");
@@ -44,14 +45,14 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    int fd_shm = shm_open(MEM, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
+    fd_shm = shm_open(MEM, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
     if (fd_shm == -1) {
         printf("Error creando la memoria compartida.\n");
         return 1;
     }
     shm_unlink(MEM);
 
-    int error =  ftruncate(fd_shm, sizeof(ClientInfo));
+    error =  ftruncate(fd_shm, sizeof(ClientInfo));
     if (error == -1) {
         fprintf(stderr, "Error cambiando el tamaño de la memoria compartida.\n");
         shm_unlink(MEM);
@@ -60,7 +61,7 @@ int main(int argc, char **argv) {
 
     info = mmap(NULL, sizeof(ClientInfo), PROT_READ | PROT_WRITE, MAP_SHARED, fd_shm, 0);
     if (info == NULL) {
-        printf("Error creando la memoria compartida.\n");
+        printf("Error enlazando la memoria compartida.\n");
         close(fd_shm);
         return 1;
     }
