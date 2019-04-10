@@ -76,15 +76,15 @@ int main() {
     }
 
     while (1) {
-        sem_wait(slots);
+        sem_wait(slots); // Comprueba que haya algún hueco libre
 
-        sem_wait(sem);
+        sem_wait(sem); // Inicio de la zona crítica
 
-        scanf("%c", &caracter);        
-        if (feof(stdin)) {
+        scanf("%c", &caracter);
+        if (feof(stdin)) { // Si la entrada finaliza se inserta un 0 y se termina
             cola_circular_insertar(cola_circular, '\0');
             sem_post(items);
-            sem_post(sem);
+            sem_post(sem); // Final de la zona crítica en caso de terminar
 
             sem_unlink(SLOTS);
             sem_close(slots);
@@ -96,9 +96,9 @@ int main() {
             munmap(cola_circular, sizeof(ColaCircular));
             exit(EXIT_SUCCESS);
         }
-        cola_circular_insertar(cola_circular, caracter);
-        sem_post(items);
+        cola_circular_insertar(cola_circular, caracter); // Inserta un elemento
+        sem_post(items); // Indica que hay un elemento más para consumir
 
-        sem_post(sem);
+        sem_post(sem); // Final de la zona crítica
     }
 }

@@ -1,4 +1,0 @@
-2. b) El programa falla porque el incremento del id anterior se produce antes
-      del scanf, que es donde los procesos se quedan esperando. Esto hace que
-      tras introducir el nombre de un usuario multitud de procesos hayan 
-      modificado dicho valor, haciendo que no se corresponde con el valor real.

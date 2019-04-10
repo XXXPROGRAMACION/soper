@@ -15,9 +15,9 @@
 #define NAME_MAX 128
 
 typedef struct {
-    int previous_id;        //!< Id of the previous client.
-    int id;                 //!< Id of the current client.
-    char name[NAME_MAX];    //!< Name of the client.
+    int previous_id;
+    int id;
+    char name[NAME_MAX]; 
 } ClientInfo;
 
 ClientInfo *info = NULL;
@@ -30,7 +30,7 @@ void manejador_SIGUSR1(int pid) {
         printf("Nombre: %s\n\n", info->name);
     }
 
-    sem_post(sem);
+    sem_post(sem); // Fin de la zona crítica
 }
 
 int main(int argc, char **argv) {
@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
         srand(getpid());
         sleep(1+(double)rand()/RAND_MAX*10);
 
-        sem_wait(sem);
+        sem_wait(sem); // Inicio de la zona crítica
 
         info->previous_id++;
         printf("¡Da de alta a un cliente!\n");
@@ -114,7 +114,7 @@ int main(int argc, char **argv) {
         scanf("%s", info->name);
         info->id++;
 
-        kill(getppid(), SIGUSR1);        
+        kill(getppid(), SIGUSR1); // Se notifica al padre
 
         close(fd_shm);
         sem_close(sem);

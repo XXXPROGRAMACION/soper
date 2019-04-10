@@ -63,12 +63,12 @@ int main() {
     for (i = 0; i < TAM; i++) sem_post(slots);
 
     while (1) {
-        sem_wait(items);
+        sem_wait(items); // Comprueba que haya elementos que consumir
 
-        sem_wait(sem);
+        sem_wait(sem); // Inicio de la zona crítica
 
         caracter = cola_circular_extraer(cola_circular);
-        if (caracter == '\0') {
+        if (caracter == '\0') { // Si se lee un \0 se termina
             printf("\n");
 
             sem_close(slots);
@@ -78,8 +78,8 @@ int main() {
             exit(EXIT_SUCCESS);
         }
         printf("%c", caracter);
-        sem_post(slots);
+        sem_post(slots); // Indica que hay un nuevo hueco libre
 
-        sem_post(sem);
+        sem_post(sem); // Final de la zona crítica
     }
 }
