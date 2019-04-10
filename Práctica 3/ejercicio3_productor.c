@@ -11,61 +11,69 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 
+#define MEM "mem"
+
 #define SEM "sem"
 #define ITEMS "items"
 #define SLOTS "slots"
 
-#define MEM "mem"
-
 int main() {
     ColaCircular *cola_circular;
     sem_t *sem, *items, *slots;
-    int fd_shm, error; 
+    int mem, error; 
     char caracter;
 
-    fd_shm = shm_open(MEM, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
-    if (fd_shm == -1) {
+    mem = open(MEM, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
+    if (mem == -1) {
         printf("Error creando la memoria compartida.\n");
-        return 1;
+        exit(EXIT_FAILURE);
     }
-    shm_unlink(MEM);
 
-    error = ftruncate(fd_shm, sizeof(ColaCircular));
+    error = ftruncate(mem, sizeof(ColaCircular));
     if (error == -1) {
         fprintf(stderr, "Error cambiando el tamaño de la memoria compartida.\n");
-        shm_unlink(MEM);
-        return EXIT_FAILURE;
+        unlink(MEM);
+        close(mem);
+        exit(EXIT_FAILURE);
     }
 
-    cola_circular = mmap(NULL, sizeof(ColaCircular), PROT_READ | PROT_WRITE, MAP_SHARED, fd_shm, 0);
+    cola_circular = mmap(NULL, sizeof(ColaCircular), PROT_READ | PROT_WRITE, MAP_SHARED, mem, 0);
     if (cola_circular == NULL) {
         printf("Error enlazando la memoria compartida.\n");
-        close(fd_shm);
-        return 1;
+        unlink(MEM);
+        close(mem);
+        exit(EXIT_FAILURE);
     }
+    close(mem);
 
     cola_circular_inicializar(cola_circular);
 
     if ((sem = sem_open(SEM, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 1)) == SEM_FAILED) {
         perror("sem_open");
-        close(fd_shm);
+        unlink(MEM);
+        munmap(cola_circular, sizeof(ColaCircular));
         exit(EXIT_FAILURE);
     }
-    sem_unlink(SEM);
 
     if ((items = sem_open(ITEMS, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0)) == SEM_FAILED) {
         perror("sem_open");
-        close(fd_shm);
+        sem_unlink(SEM);
+        sem_close(sem);
+        unlink(MEM);
+        munmap(cola_circular, sizeof(ColaCircular));
         exit(EXIT_FAILURE);
     }
-    sem_unlink(ITEMS);
 
-    if ((slots = sem_open(SLOTS, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, TAM)) == SEM_FAILED) {
+    if ((slots = sem_open(SLOTS, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0)) == SEM_FAILED) {
         perror("sem_open");
-        close(fd_shm);
+        sem_unlink(ITEMS);
+        sem_close(items);
+        sem_unlink(SEM);
+        sem_close(sem);
+        unlink(MEM);
+        munmap(cola_circular, sizeof(ColaCircular));
         exit(EXIT_FAILURE);
     }
-    sem_unlink(SLOTS);
 
     while (1) {
         sem_wait(slots);
@@ -76,16 +84,19 @@ int main() {
         if (feof(stdin)) {
             cola_circular_insertar(cola_circular, '\0');
             sem_post(items);
-            printf("-->Fin\n");
+            sem_post(sem);
 
-            sem_close(sem);
-            sem_close(items);
+            sem_unlink(SLOTS);
             sem_close(slots);
-            close(fd_shm);
+            sem_unlink(ITEMS);
+            sem_close(items);
+            sem_unlink(SEM);
+            sem_close(sem);
+            unlink(MEM);
+            munmap(cola_circular, sizeof(ColaCircular));
             exit(EXIT_SUCCESS);
         }
         cola_circular_insertar(cola_circular, caracter);
-        printf("-->%c\n", caracter);
         sem_post(items);
 
         sem_post(sem);
