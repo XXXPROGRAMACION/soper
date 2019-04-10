@@ -30,4 +30,9 @@ Para resolver el problema del productor-consumidor en este ejercicio hemos utili
 Hemos observado que los elementos que eran insertados en la cola, situada en la memoria compartida, antes de que el consumidor se ejecutase no podían ser leídos correctamente por este. Debido a este problema inicializamos el semáforo
 que representa los huecos libres al ejecutar el consumidor.
 
+\subsection*{Ejercicio 4}
+Para resolver el ejercicio 4 hemos implementado los procesos A, B y C como se especificaba en el enunciado. Hemos usado la llamada a execlp porque era la que más cómoda nos resultaba para ejecutar los procesos después de los fork del padre. Hemos reservado un byte adicional en el mensaje que transmitimos para poder imprimirlo directamente insertando un carácter de terminación de cadena.
+\\
+
+ El padre espera a la terminación de los hijos y se preocupa de eliminar las colas de mensajes antes de terminar su ejecución.
 \end{document}
