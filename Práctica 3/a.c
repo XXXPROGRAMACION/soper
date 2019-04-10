@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 
     if (argc != 3) {
         printf("Número de argumentos inválido. Uso: \n");
-        printf("\t./a fichero nombre_cola_mensajes\n");
+        printf("\ta fichero nombre_cola_escritura\n");
         return EXIT_FAILURE;
     }
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 
     cola = mq_open(argv[2], O_WRONLY);
     if (cola == (mqd_t)-1) {
-        printf("Error abriendo la cola de mensajes %s\n", argv[2]);
+        printf("Error abriendo la cola de escritura %s\n", argv[2]);
         fclose(f);
         return EXIT_FAILURE;
     }

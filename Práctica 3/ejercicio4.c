@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
 
     if (argc != 4) {
         printf("Número de argumentos inválido. Uso: \n");
-        printf("\t./%s fichero nombre_cola_1 nombre_cola_2\n", argv[0]);
+        printf("\t%s fichero nombre_cola_1 nombre_cola_2\n", argv[0]);
         return EXIT_FAILURE;
     }
 
@@ -43,21 +43,19 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
 
-    cola_1 = mq_open(argv[2], O_CREAT, S_IRUSR | S_IWUSR, &atributos);
+    cola_1 = mq_open(argv[2], O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, &atributos);
     if (cola_1 == (mqd_t)-1) {
         printf("Error creando la primera cola \"%s\"\n", argv[2]);
         return EXIT_FAILURE;
     }
-    mq_close(cola_1);
 
-    cola_2 = mq_open(argv[3], O_CREAT, S_IRUSR | S_IWUSR, &atributos);
+    cola_2 = mq_open(argv[3], O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, &atributos);
     if (cola_2 == (mqd_t)-1) {
         printf("Error creando la segunda cola \"%s\"\n", argv[3]);
         mq_unlink(argv[2]);
         mq_close(cola_1);
         return EXIT_FAILURE;
     }
-    mq_close(cola_2);
 
     for (i = 0; i < 4; i++) {
         pid = fork();
@@ -65,23 +63,24 @@ int main(int argc, char **argv) {
     }
 
     if (i == 0) {
-        execlp("./a", argv[1], argv[2], NULL);
+        execlp("./a", "./a", argv[1], argv[2], NULL);
         printf("Error en el exec en a\n");
         return EXIT_FAILURE;
     } else if (i == 1) {
-        execlp("./b", argv[2], argv[3], NULL);
+        execlp("./b", "./b", argv[2], argv[3], NULL);
         printf("Error en el exec en b\n");
         return EXIT_FAILURE;
     } else if (i == 2) {
-        execlp("./c", argv[3], NULL);
+        execlp("./c", "./c", argv[3], NULL);
         printf("Error en el exec en c\n");
         return EXIT_FAILURE;
     } else if (i == 3) {
-        while (wait(NULL) >= 0);
+        /*while (wait(NULL) >= 0);
+        printf("Cerrando colas...\n");
         mq_unlink(argv[2]);
         mq_unlink(argv[3]);
         mq_close(cola_1);
-        mq_close(cola_2);
+        mq_close(cola_2);*/
     }
 
     return EXIT_SUCCESS;

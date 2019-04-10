@@ -24,14 +24,14 @@ int main(int argc, char **argv) {
 
     if (argc != 2) {
         printf("Número de argumentos inválido. Uso: \n");
-        printf("\t./%s nombre_cola_lectura\n", argv[0]);
+        printf("\t%s nombre_cola_lectura\n", argv[0]);
         return EXIT_FAILURE;
     }
 
 
     cola_lectura = mq_open(argv[1], O_RDONLY);
     if (cola_lectura == (mqd_t)-1) {
-        printf("Error abriendo la cola de lectura %s\n", argv[2]);
+        printf("Error abriendo la cola de lectura %s\n", argv[1]);
         return EXIT_FAILURE;
     }
     mq_unlink(argv[1]);

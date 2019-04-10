@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 
     if (argc != 3) {
         printf("Número de argumentos inválido. Uso: \n");
-        printf("\t./%s nombre_cola_lectura nombre_cola_escritura\n", argv[0]);
+        printf("\t%s nombre_cola_lectura nombre_cola_escritura\n", argv[0]);
         return EXIT_FAILURE;
     }
 
