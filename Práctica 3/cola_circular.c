@@ -2,13 +2,9 @@
 #include <stdlib.h>
 
 void cola_circular_inicializar(ColaCircular *cola_circular) {
-    ColaCircular *cola_circular;
-    int i;
-
+    
     cola_circular->pos_ini = 0;
     cola_circular->pos_fin = 0;
-
-    return cola_circular;
 }
 
 void cola_circular_insertar(ColaCircular *cola_circular, char caracacter) {
