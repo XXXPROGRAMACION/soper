@@ -41,34 +41,33 @@ int main(int argc, char **argv) {
 
     if (argc != 2) {
         printf("Número de argumentos inválido.\n");
-        return 1;
+        exit(EXIT_FAILURE);
     }
 
     n = atoi(argv[1]);
     if (n <= 0) {
         printf("Número de procesos inválido.\n");
-        return 1;
+        exit(EXIT_FAILURE);
     }
 
     fd_shm = shm_open(MEM, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
     if (fd_shm == -1) {
         printf("Error creando la memoria compartida.\n");
-        return 1;
+        exit(EXIT_FAILURE);
     }
     shm_unlink(MEM);
 
     error =  ftruncate(fd_shm, sizeof(ClientInfo));
     if (error == -1) {
         fprintf(stderr, "Error cambiando el tamaño de la memoria compartida.\n");
-        shm_unlink(MEM);
-        return EXIT_FAILURE;
+        exit(EXIT_FAILURE);
     }
 
     info = mmap(NULL, sizeof(ClientInfo), PROT_READ | PROT_WRITE, MAP_SHARED, fd_shm, 0);
     if (info == NULL) {
         printf("Error enlazando la memoria compartida.\n");
         close(fd_shm);
-        return 1;
+        exit(EXIT_FAILURE);
     }
 
     if ((sem = sem_open(SEM, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 1)) == SEM_FAILED) {
