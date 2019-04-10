@@ -45,17 +45,22 @@ int main(int argc, char *argv) {
         printf("Error abriendo la cola de lectura %s\n", argv[2]);
         return EXIT_FAILURE;
     }
+    mq_unlink(cola_lectura);
 
     cola_escritura = mq_open(argv[1], O_CREAT | O_WRONLY);
     if (cola_escritura == (mqd_t)-1) {
         printf("Error abriendo la cola de escritura %s\n", argv[2]);
+        mq_close(cola_lectura);
         return EXIT_FAILURE;
     }
+    mq_unlink(cola_escritura);
 
     m_recibido = (Mensaje *) malloc(sizeof(Mensaje));
     do {        
         if (mq_receive(cola_lectura, m_recibido, sizeof(Mensaje), NULL) == -1) {
             printf("Error leyendo mensaje de la cola\n");
+            mq_close(cola_lectura);
+            mq_close(cola_escritura);
             return EXIT_FAILURE;
         }
 
@@ -74,9 +79,14 @@ int main(int argc, char *argv) {
 
         if (mq_send(cola_escritura, (char *) &m_cod, sizeof(m_cod), 1) == -1) {
             printf("Error enviando mensaje a la cola\n");
+            mq_close(cola_lectura);
+            mq_close(cola_escritura);
             return EXIT_FAILURE;
         }
     } while (1);
+
+    mq_close(cola_lectura);
+    mq_close(cola_escritura);
 
     return EXIT_SUCCESS;
 }

@@ -47,8 +47,10 @@ int main(int argc, char *argv) {
     cola = mq_open(argv[2], O_CREAT | O_WRONLY);
     if (cola == (mqd_t)-1) {
         printf("Error abriendo la cola de mensajes %s\n", argv[2]);
+        fclose(f);
         return EXIT_FAILURE;
     }
+    mq_unlink(cola);
 
     do {
         m = (Mensaje *) malloc(TAM*sizeof(char));
@@ -64,9 +66,14 @@ int main(int argc, char *argv) {
 
         if (mq_send(cola, (char *) &m, sizeof(m), 1) == -1) {
             printf("Error enviando mensaje a la cola\n");
+            fclose(f);
+            mq_close(cola);
             return EXIT_FAILURE;
         }
     } while (!feof(f));
+
+    fclose(f);
+    mq_close(cola);
 
     return EXIT_SUCCESS;
 }
