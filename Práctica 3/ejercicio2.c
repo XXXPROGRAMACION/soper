@@ -13,9 +13,9 @@
 #define NAME_MAX 128
 
 typedef struct {
-    int previous_id;        //!< Id of the previous client.
-    int id;                 //!< Id of the current client.
-    char name[NAME_MAX];    //!< Name of the client.
+    int previous_id;
+    int id;
+    char name[NAME_MAX];
 } ClientInfo;
 
 ClientInfo *info = NULL;
