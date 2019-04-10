@@ -18,23 +18,16 @@ typedef struct {
     int num_bytes;
 } Mensaje;
 
-int main(int argc, char *argv) {
+int main(int argc, char **argv) {
     int i;
     char buffer;
     FILE *f = NULL;
     Mensaje *m = NULL;
-    mqd_t cola = NULL;
-    
-    struct mq_attr atributos = {
-        .mq_flags = 0,
-        .mq_maxmsg = MAX_MSG,
-        .mq_curmsgs = 0,
-        .mq_msgsize = sizeof(Mensaje)
-    };
+    mqd_t cola = (mqd_t)-1;
 
     if (argc != 3) {
         printf("Número de argumentos inválido. Uso: \n");
-        printf("\t./a fichero nombre_cola_mensajes\n");
+        printf("\ta fichero nombre_cola_escritura\n");
         return EXIT_FAILURE;
     }
 
@@ -44,11 +37,13 @@ int main(int argc, char *argv) {
         return EXIT_FAILURE;
     }
 
-    cola = mq_open(argv[2], O_CREAT | O_WRONLY);
+    cola = mq_open(argv[2], O_WRONLY);
     if (cola == (mqd_t)-1) {
-        printf("Error abriendo la cola de mensajes %s\n", argv[2]);
+        printf("Error abriendo la cola de escritura %s\n", argv[2]);
+        fclose(f);
         return EXIT_FAILURE;
     }
+    mq_unlink(argv[2]);
 
     do {
         m = (Mensaje *) malloc(TAM*sizeof(char));
@@ -64,9 +59,14 @@ int main(int argc, char *argv) {
 
         if (mq_send(cola, (char *) &m, sizeof(m), 1) == -1) {
             printf("Error enviando mensaje a la cola\n");
+            fclose(f);
+            mq_close(cola);
             return EXIT_FAILURE;
         }
     } while (!feof(f));
+
+    fclose(f);
+    mq_close(cola);
 
     return EXIT_SUCCESS;
 }
