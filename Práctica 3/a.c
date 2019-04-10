@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 
     if (argc != 3) {
         printf("Número de argumentos inválido. Uso: \n");
-        printf("\ta fichero nombre_cola_escritura\n");
+        printf("\t%s fichero nombre_cola_escritura\n", argv[0]);
         return EXIT_FAILURE;
     }
 
@@ -39,34 +39,39 @@ int main(int argc, char **argv) {
 
     cola = mq_open(argv[2], O_WRONLY);
     if (cola == (mqd_t)-1) {
-        printf("Error abriendo la cola de escritura %s\n", argv[2]);
+        printf("A: Error abriendo la cola de escritura %s\n", argv[2]);
+        printf("Errno: %d\n", errno);
         fclose(f);
         return EXIT_FAILURE;
     }
-    mq_unlink(argv[2]);
 
     do {
         m = (Mensaje *) malloc(TAM*sizeof(char));
         m->info = (char *) malloc(TAM*sizeof(char));
         i = 0;
-        while (!feof(f) && i < TAM) {
+        while (!feof(f) && i < TAM-1) {
             fscanf(f, "%c", &buffer);
             m->info[i] = buffer;
             i++;
         }
+        m->info[i-1] = '\0';
+
+        printf("¡Mensaje preparado!: %s\n", m->info);
 
         m->num_bytes = i+1;
 
         if (mq_send(cola, (char *) &m, sizeof(m), 1) == -1) {
-            printf("Error enviando mensaje a la cola\n");
+            printf("A: Error enviando mensaje a la cola\n");
             fclose(f);
             mq_close(cola);
             return EXIT_FAILURE;
         }
+        printf("¡Mensaje enviado!: %s\n", m->info);
     } while (!feof(f));
 
     fclose(f);
     mq_close(cola);
 
+    printf("A: Fin\n");
     return EXIT_SUCCESS;
 }

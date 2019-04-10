@@ -43,13 +43,13 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
 
-    cola_1 = mq_open(argv[2], O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, &atributos);
+    cola_1 = mq_open(argv[2], O_CREAT, S_IRUSR | S_IWUSR, &atributos);
     if (cola_1 == (mqd_t)-1) {
         printf("Error creando la primera cola \"%s\"\n", argv[2]);
         return EXIT_FAILURE;
     }
 
-    cola_2 = mq_open(argv[3], O_CREAT | O_RDWR, S_IRUSR | S_IWUSR, &atributos);
+    cola_2 = mq_open(argv[3], O_CREAT, S_IRUSR | S_IWUSR, &atributos);
     if (cola_2 == (mqd_t)-1) {
         printf("Error creando la segunda cola \"%s\"\n", argv[3]);
         mq_unlink(argv[2]);
@@ -63,6 +63,7 @@ int main(int argc, char **argv) {
     }
 
     if (i == 0) {
+        sleep(4);
         execlp("./a", "./a", argv[1], argv[2], NULL);
         printf("Error en el exec en a\n");
         return EXIT_FAILURE;
@@ -71,6 +72,7 @@ int main(int argc, char **argv) {
         printf("Error en el exec en b\n");
         return EXIT_FAILURE;
     } else if (i == 2) {
+        while(1);
         execlp("./c", "./c", argv[3], NULL);
         printf("Error en el exec en c\n");
         return EXIT_FAILURE;
