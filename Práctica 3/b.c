@@ -34,27 +34,29 @@ int main(int argc, char **argv) {
 
     cola_lectura = mq_open(argv[1], O_RDONLY);
     if (cola_lectura == (mqd_t)-1) {
-        printf("Error abriendo la cola de lectura %s\n", argv[2]);
+        printf("B: Error abriendo la cola de lectura %s\n", argv[2]);
+        printf("Errno: %d\n", errno);
         return EXIT_FAILURE;
     }
-    mq_unlink(argv[1]);
 
     cola_escritura = mq_open(argv[2], O_WRONLY);
     if (cola_escritura == (mqd_t)-1) {
-        printf("Error abriendo la cola de escritura %s\n", argv[2]);
+        printf("B: Error abriendo la cola de escritura %s\n", argv[2]);
+        printf("Errno: %d\n", errno);
         mq_close(cola_lectura);
         return EXIT_FAILURE;
     }
-    mq_unlink(argv[2]);
 
     m_recibido = (Mensaje *) malloc(sizeof(Mensaje));
     do {        
         if (mq_receive(cola_lectura, (char *) m_recibido, sizeof(Mensaje), NULL) == -1) {
-            printf("Error leyendo mensaje de la cola\n");
+            printf("B: Error leyendo mensaje de la cola\n");
             mq_close(cola_lectura);
             mq_close(cola_escritura);
             return EXIT_FAILURE;
         }
+
+        printf("¡Mensaje recibido!: %s\n", m_recibido->info);
 
         m_cod = (Mensaje *) malloc(sizeof(Mensaje));
         m_cod->info = (char *) malloc(m_recibido->num_bytes*sizeof(char));
@@ -70,7 +72,7 @@ int main(int argc, char **argv) {
         }
 
         if (mq_send(cola_escritura, (char *) &m_cod, sizeof(m_cod), 1) == -1) {
-            printf("Error enviando mensaje a la cola\n");
+            printf("B: Error enviando mensaje a la cola\n");
             mq_close(cola_lectura);
             mq_close(cola_escritura);
             return EXIT_FAILURE;
@@ -80,5 +82,6 @@ int main(int argc, char **argv) {
     mq_close(cola_lectura);
     mq_close(cola_escritura);
 
+    printf("B: Fin\n");
     return EXIT_SUCCESS;
 }

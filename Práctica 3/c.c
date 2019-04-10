@@ -31,15 +31,15 @@ int main(int argc, char **argv) {
 
     cola_lectura = mq_open(argv[1], O_RDONLY);
     if (cola_lectura == (mqd_t)-1) {
-        printf("Error abriendo la cola de lectura %s\n", argv[1]);
+        printf("C: Error abriendo la cola de lectura %s\n", argv[1]);
+        printf("Errno: %d\n", errno);
         return EXIT_FAILURE;
     }
-    mq_unlink(argv[1]);
 
     m_recibido = (Mensaje *) malloc(sizeof(Mensaje));
  
     if (mq_receive(cola_lectura, (char *) m_recibido, sizeof(Mensaje), NULL) == -1) {
-        printf("Error leyendo mensaje de la cola\n");
+        printf("C: Error leyendo mensaje de la cola\n");
         return EXIT_FAILURE;
     }
 
@@ -47,5 +47,7 @@ int main(int argc, char **argv) {
 
     mq_close(cola_lectura);
 
+
+    printf("C: Fin\n");
     return EXIT_SUCCESS;
 }
