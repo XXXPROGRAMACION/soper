@@ -1,7 +1,7 @@
 TARGET = ../target
 
 CC = gcc
-CFLAGS = -g -Wall -pthread -I.
+CFLAGS = -g -Wall -pthread
 LDLIBS = -lrt -lncurses
 
 BOLD=\e[1m
@@ -19,4 +19,3 @@ simulador:
 monitor:
 	mkdir -p $(TARGET)
 	$(CC) $(CFLAGS) gamescreen.c mapa.c monitor.c -o $(TARGET)/monitor -lrt -lncurses -lm
-		

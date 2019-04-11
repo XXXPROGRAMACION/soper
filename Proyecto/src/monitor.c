@@ -11,36 +11,26 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-#include <simulador.h>
-#include <gamescreen.h>
-#include <mapa.h>
+#include "simulador.h"
+#include "gamescreen.h"
+#include "mapa.h"
 
+void mapa_print(tipo_mapa *mapa) {
+	int i, j;
 
-void mapa_print(tipo_mapa *mapa)
-{
-	int i,j;
-
-	for(j=0;j<MAPA_MAXY;j++) {
-		for(i=0;i<MAPA_MAXX;i++) {
-			tipo_casilla cas=mapa_get_casilla(mapa,j, i);
-			//printf("%c",cas.simbolo);
-			screen_addch(j, i, cas.simbolo);
+	for (i = 0; i < MAPA_MAX_Y; i++) {
+		for (j = 0; j < MAPA_MAX_X; j++) {
+			tipo_casilla cas = mapa_get_casilla(mapa, i, j);
+			screen_addch(i, j, cas.simbolo);
 		}
-		//printf("\n");
 	}
 	screen_refresh();
 }
 
-
 int main() {
-
-
 	screen_init();
 
-
-
 	screen_end();
-
 
 	exit(EXIT_SUCCESS);
 }

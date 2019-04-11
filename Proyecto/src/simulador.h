@@ -8,8 +8,8 @@
 
 /*** SCREEN ***/
 extern char symbol_equipos[N_EQUIPOS]; // Símbolos de los diferentes equipos en el mapa (mirar mapa.c)
-#define MAPA_MAXX 20 // Número de columnas del mapa
-#define MAPA_MAXY 20 // Número de
+#define MAPA_MAX_X 20 // Número de columnas del mapa
+#define MAPA_MAX_Y 20 // Número de filas del mapa
 #define SCREEN_REFRESH 10000 // Frequencia de refresco del mapa en el monitor
 #define SYMB_VACIO '.' // Símbolo para casilla vacia
 #define SYMB_TOCADO '%' // Símbolo para tocado
@@ -23,15 +23,14 @@ extern char symbol_equipos[N_EQUIPOS]; // Símbolos de los diferentes equipos en
 #define MOVER_ALCANCE 1 // Máximo de casillas a mover
 #define TURNO_SECS 5 // Segundos que dura un turno
 
-
 /*** MAPA ***/
 // Información de nave
 typedef struct {
 	int vida; // Vida que le queda a la nave
-	int posx; // Columna en el mapa
-	int posy; // Fila en el mapa
+	int pos_x; // Columna en el mapa
+	int pos_y; // Fila en el mapa
 	int equipo; // Equipo de la nave
-	int numNave; // Numero de la nave en el equipo
+	int num_nave; // Numero de la nave en el equipo
 	bool viva; // Si la nave está viva o ha sido destruida
 } tipo_nave;
 
@@ -39,13 +38,12 @@ typedef struct {
 typedef struct {
 	char simbolo; // Símbolo que se mostrará en la pantalla para esta casilla
 	int equipo; // Si está vacia = -1. Si no, número de equipo de la nave que está en la casilla
-	int numNave; // Número de nave en el equipo de la nave que está en la casilla
+	int num_nave; // Número de nave en el equipo de la nave que está en la casilla
 } tipo_casilla;
-
 
 typedef struct {
 	tipo_nave info_naves[N_EQUIPOS][N_NAVES];
-	tipo_casilla casillas[MAPA_MAXY][MAPA_MAXX];
+	tipo_casilla casillas[MAPA_MAX_Y][MAPA_MAX_X];
 	int num_naves[N_EQUIPOS]; // Número de naves vivas en un equipo
 } tipo_mapa;
 

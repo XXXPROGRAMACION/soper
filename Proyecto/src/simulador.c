@@ -11,15 +11,10 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-#include <mapa.h>
-
+#include "mapa.h"
 
 int main() {
-
-	int ret=0;
+	int ret = 0;
 	
     exit(ret);
 }
-
-
-
