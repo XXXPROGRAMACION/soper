@@ -3,8 +3,17 @@
 
 #include <stdbool.h>
 
-#define N_EQUIPOS 3 // Número de equipos
-#define N_NAVES 3 // Número de naves por equipo
+#define N_EQUIPOS 3 	// Número de equipos
+#define N_NAVES 3 		// Número de naves por equipo
+#define BUFFER_SIZE 80 	// Tamaño del buffer que se usa para leer de los pipes
+#define TAM 256    		// Tamaño máximo de los mensajes
+#define MAX_MSG 10		// Número máximo de mensajes en la cola
+#define MENSAJE_TURNO_NUEVO "Turno nuevo" 	// Mensaje que envía el simulador a los jefes para indicar que es un turno nuevo
+#define NOMBRE_COLA "/cola_simulador"		// Nombre de la cola que comunica a las naves con el simulador
+
+typedef struct {
+	char info[TAM];
+} Mensaje;
 
 /*** SCREEN ***/
 extern char symbol_equipos[N_EQUIPOS]; // Símbolos de los diferentes equipos en el mapa (mirar mapa.c)
