@@ -1,9 +1,7 @@
 #ifndef SRC_MAPA_H_
 #define SRC_MAPA_H_
 
-#include <stdbool.h>
-
-#include "simulador.h"
+#include "types.h"
 
 // Pone una casilla del mapa a vacío
 int mapa_clean_casilla(tipo_mapa *mapa, int pos_y, int pos_x);

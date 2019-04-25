@@ -1,8 +1,3 @@
-#include <stdbool.h>
-#include <math.h>
-#include <stdlib.h>
-#include <unistd.h>
-
 #include "mapa.h"
 
 char symbol_equipos[N_EQUIPOS] = {'A', 'B', 'C'};

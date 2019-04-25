@@ -1,7 +1,19 @@
-#ifndef SRC_SIMULADOR_H_
-#define SRC_SIMULADOR_H_
+#ifndef TYPES_H
+#define TYPES_H
 
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <mqueue.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <signal.h>
+#include <math.h>
 #include <stdbool.h>
+#include <unistd.h>
+#include <semaphore.h>
 
 #define N_EQUIPOS 3 	// Número de equipos
 #define N_NAVES 3 		// Número de naves por equipo
@@ -10,6 +22,9 @@
 #define MAX_MSG 10		// Número máximo de mensajes en la cola
 #define MENSAJE_TURNO_NUEVO "Turno nuevo" 	// Mensaje que envía el simulador a los jefes para indicar que es un turno nuevo
 #define NOMBRE_COLA "/cola_simulador"		// Nombre de la cola que comunica a las naves con el simulador
+#define EQUIPOS_LISTOS "equipos_listos"		// Nombre del semáforo que controla que todos los equipos estén listos
+
+#define SHM_MAP_NAME "/shm_naves"
 
 typedef struct {
 	char info[TAM];
@@ -30,7 +45,7 @@ extern char symbol_equipos[N_EQUIPOS]; // Símbolos de los diferentes equipos en
 #define ATAQUE_ALCANCE 20 // Distancia máxima de un ataque
 #define ATAQUE_DANO 10 // Daño de un ataque
 #define MOVER_ALCANCE 1 // Máximo de casillas a mover
-#define TURNO_SECS 5 // Segundos que dura un turno
+#define TURNO_SECS 2 // Segundos que dura un turno
 
 /*** MAPA ***/
 // Información de nave
@@ -56,6 +71,4 @@ typedef struct {
 	int num_naves[N_EQUIPOS]; // Número de naves vivas en un equipo
 } tipo_mapa;
 
-#define SHM_MAP_NAME "/shm_naves"
-
-#endif /* SRC_SIMULADOR_H_ */
+#endif
