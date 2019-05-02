@@ -12,6 +12,7 @@ void jefe(int n_equipo, int fd_sim[2], sem_t *equipos_listos) {
 
     printf("Jefe %d: equipo %d listo\n", n_equipo+1, n_equipo+1);
     sem_post(equipos_listos);
+    printf("Despues de post\n");
 
     while (true) {
         read(fd_sim[0], buffer, sizeof(buffer));

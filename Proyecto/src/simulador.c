@@ -4,7 +4,7 @@
 
 void simulador();
 void simulador_crear_jefes(int fd_sim[N_EQUIPOS][2], sem_t *equipos_listos);
-void simulador_configurar_semaforo(sem_t *equipos_listos);
+void simulador_configurar_semaforo(sem_t **equipos_listos);
 void simulador_configurar_manejador();
 void simulador_configurar_cola();
 void manejador_SIGINT(int pid);
@@ -21,7 +21,7 @@ void simulador() {
     char buffer[BUFFER_SIZE];
     int i;
 
-    simulador_configurar_semaforo(equipos_listos);
+    simulador_configurar_semaforo(&equipos_listos);
 
     printf("Simulador: iniciando la partida\n");
 
@@ -80,9 +80,9 @@ void simulador_crear_jefes(int fd_sim[N_EQUIPOS][2], sem_t *equipos_listos) {
     }
 }
 
-void simulador_configurar_semaforo(sem_t *equipos_listos) {
+void simulador_configurar_semaforo(sem_t **equipos_listos) {
     // Configura el semáforo de equipos listos
-    if ((equipos_listos = sem_open(EQUIPOS_LISTOS, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0)) == SEM_FAILED) {
+    if ((*equipos_listos = sem_open(EQUIPOS_LISTOS, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0)) == SEM_FAILED) {
         perror("sem_open");
         exit(EXIT_FAILURE);
     }

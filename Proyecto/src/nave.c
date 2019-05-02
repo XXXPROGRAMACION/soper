@@ -10,6 +10,9 @@ void nave(int n_equipo, int n_nave, int fd_jefe[2]) {
 
     nave_configurar_cola(n_equipo, n_nave, &cola);
 
+
+    printf("Nave sale\n");
+
     exit(EXIT_SUCCESS);
 }
 
