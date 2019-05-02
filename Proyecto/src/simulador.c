@@ -6,7 +6,7 @@ void simulador();
 void simulador_crear_jefes(int fd_sim[N_EQUIPOS][2], sem_t *equipos_listos);
 void simulador_configurar_semaforo(sem_t **equipos_listos);
 void simulador_configurar_manejador();
-void simulador_configurar_cola();
+void simulador_configurar_cola(mqd_t *cola);
 void manejador_SIGINT(int pid);
 
 int main() {
@@ -17,9 +17,10 @@ void simulador() {
     int fd_sim[N_EQUIPOS][2];
     sem_t *equipos_listos = NULL;
     mqd_t cola = -1;
-    // Mensaje mensaje;
+    Mensaje mensaje;
     char buffer[BUFFER_SIZE];
-    int i;
+    int i, n_naves_restantes;
+    n_naves_restantes = N_EQUIPOS*N_NAVES;
 
     simulador_configurar_semaforo(&equipos_listos);
 
@@ -51,6 +52,11 @@ void simulador() {
         }
 
         printf("Simulador: todos los equipos listos\n");
+
+        for (i = 0; i < n_naves_restantes; i++) {
+            mq_receive(cola, (char *) &mensaje, sizeof(mensaje), 0);
+            printf("Simulador: mensaje recibido: Nave %d del equipo %d \"%s\"\n", mensaje.n_nave, mensaje.n_equipo, mensaje.info);
+        }
     }
 
     exit(EXIT_SUCCESS);

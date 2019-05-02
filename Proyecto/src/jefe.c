@@ -3,7 +3,7 @@
 void jefe_crear_naves(int n_equipo, int fd_jefe[N_NAVES][2]);
 
 void jefe(int n_equipo, int fd_sim[2], sem_t *equipos_listos) {
-	int fd_jefe[N_NAVES][2];
+	int fd_jefe[N_NAVES][2], i;
     char buffer[BUFFER_SIZE];
 
     close(fd_sim[1]);
@@ -12,7 +12,6 @@ void jefe(int n_equipo, int fd_sim[2], sem_t *equipos_listos) {
 
     printf("Jefe %d: equipo %d listo\n", n_equipo+1, n_equipo+1);
     sem_post(equipos_listos);
-    printf("Despues de post\n");
 
     while (true) {
         read(fd_sim[0], buffer, sizeof(buffer));
@@ -20,6 +19,10 @@ void jefe(int n_equipo, int fd_sim[2], sem_t *equipos_listos) {
             //Turno nuevo
             printf("Jefe %d: recibido inicio de turno\n", n_equipo+1); // PRUEBA
             sem_post(equipos_listos);
+            strcpy(buffer, MENSAJE_ATACAR_NAVE);
+            for (i = 0; i < N_NAVES; i++) {
+                write(fd_jefe[i][1], buffer, sizeof(MENSAJE_ATACAR_NAVE));
+            }
         }
     }
 

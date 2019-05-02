@@ -21,6 +21,8 @@
 #define TAM 256    		// Tamaño máximo de los mensajes
 #define MAX_MSG 10		// Número máximo de mensajes en la cola
 #define MENSAJE_TURNO_NUEVO "Turno nuevo" 	// Mensaje que envía el simulador a los jefes para indicar que es un turno nuevo
+#define MENSAJE_MOVER_NAVE "Mover nave" 	// Mensaje que envía el jefe a las naves para que estas se muevan
+#define MENSAJE_ATACAR_NAVE "Atacar nave" 	// Mensaje que envía el jefe a las naves para que estas ataquen
 #define NOMBRE_COLA "/cola_simulador"		// Nombre de la cola que comunica a las naves con el simulador
 #define EQUIPOS_LISTOS "equipos_listos"		// Nombre del semáforo que controla que todos los equipos estén listos
 
@@ -28,6 +30,7 @@
 
 typedef struct {
 	char info[TAM];
+	int n_nave, n_equipo;
 } Mensaje;
 
 /*** SCREEN ***/
