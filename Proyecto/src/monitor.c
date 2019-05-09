@@ -23,15 +23,21 @@
 void mapa_print(tipo_mapa *mapa);
 void monitor_configurar_semaforos(sem_t **sem_monitor);
 void monitor_configurar_memoria_compartida(int *shm, tipo_mapa **mapa);
+void simulador_configurar_manejador();
 
+/**
+ * Ejecuta el monitor
+ */
 int main() {
 	sem_t *sem_monitor = NULL;
     int shm = -1;
     tipo_mapa *mapa = NULL;
 
-    // Configuramos el semáforo y la memoria
+    // Configuramos el semáforo, la memoria y el manejador de SIGINT
 	monitor_configurar_semaforos(&sem_monitor);
 	monitor_configurar_memoria_compartida(&shm, &mapa);
+    simulador_configurar_manejador();
+    
 
 	sem_wait(sem_monitor);
 
@@ -104,4 +110,36 @@ void monitor_configurar_memoria_compartida(int *shm, tipo_mapa **mapa) {
     }
 
     close(*shm);
+}
+
+/**
+ * Crea el manejador de SIGINT, en caso de que se desee interrumpir la ejecución a mitad del 
+ * proceso.
+ */
+void simulador_configurar_manejador() {
+    struct sigaction act;
+    sigemptyset(&(act.sa_mask));
+    act.sa_flags = 0;
+    
+    // Crea el manejador de SIGINT
+    act.sa_handler = manejador_SIGINT;
+    if (sigaction(SIGINT, &act, NULL) < 0) {
+        mq_unlink(NOMBRE_COLA);
+        sem_unlink(SEM_MONITOR);
+        shm_unlink(SHM);
+        perror("sigaction");
+        exit(EXIT_FAILURE);
+    }
+}
+
+/**
+ * Manejador de SIGINT. Hace screen_end() para finalizar el modo pantalla.
+ * @param pid Id del proceso
+ */
+void manejador_SIGINT(int pid) {
+    printf("Simulador: se termina la ejecucion\n");
+    mq_unlink(NOMBRE_COLA);
+    sem_unlink(SEM_MONITOR);
+    shm_unlink(SHM);
+    kill(0, SIGKILL);
 }

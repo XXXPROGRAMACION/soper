@@ -304,7 +304,7 @@ void simulador_configurar_semaforos(sem_t** sem_monitor, sem_t **sem_equipos_lis
 
 /**
  * Crea los manejadores de las señales utilizadas. SIGINT en caso de que se desee interrumpir la
- * ejecución a mitad del procesom SIGALRM para la duración de los turnos y SIGTERM para que las
+ * ejecución a mitad del proceso, SIGALRM para la duración de los turnos y SIGTERM para que las
  * naves finalicen cuando los jefes se lo ordenen.
  */
 void simulador_configurar_manejadores() {
@@ -322,7 +322,7 @@ void simulador_configurar_manejadores() {
         exit(EXIT_FAILURE);
     }
 
-    // Crea el manejador de SIGINT
+    // Crea el manejador de SIGALRM
     act.sa_handler = manejador_SIGALRM;
     if (sigaction(SIGALRM, &act, NULL) < 0) {
         mq_unlink(NOMBRE_COLA);
