@@ -1,5 +1,6 @@
-/** @file monitor.c
- *  @brief Código fuente del monitor
+/** 
+ * @file monitor.c
+ * @brief Código fuente del monitor
  */
 
 #include <fcntl.h>
@@ -19,20 +20,8 @@
 #include "mapa.h"
 #include "types.h"
 
-/** Imprime el mapa
- *  @param mapa Mapa a imprimir 
- */
 void mapa_print(tipo_mapa *mapa);
-
-/** Configura el semáforo que permite al monitor esperar hasta que comience la simulación.
- *  @param sem_monitor Semáforo que permite al monitor esperar hasta que comience la simulación
- */
 void monitor_configurar_semaforos(sem_t **sem_monitor);
-
-/** Configura la memoria compartida necesaria para el monitor.
- *  @param shm Referencia a la memoria compartida que se va a abrir
- *  @param mapa Mapa a abrir en memoria compartida
- */
 void monitor_configurar_memoria_compartida(int *shm, tipo_mapa **mapa);
 
 int main() {
@@ -58,6 +47,10 @@ int main() {
 	exit(EXIT_SUCCESS);
 }
 
+/** 
+ * Imprime el mapa
+ * @param mapa Mapa a imprimir 
+ */
 void mapa_print(tipo_mapa *mapa) {
 	int i, j;
 
@@ -71,6 +64,10 @@ void mapa_print(tipo_mapa *mapa) {
 	screen_refresh();
 }
 
+/** 
+ * Configura el semáforo que permite al monitor esperar hasta que comience la simulación.
+ * @param sem_monitor Semáforo que permite al monitor esperar hasta que comience la simulación
+ */
 void monitor_configurar_semaforos(sem_t** sem_monitor) {
     // Configura el semáforo del monitor
     if ((*sem_monitor = sem_open(SEM_MONITOR, O_CREAT, S_IRUSR | S_IWUSR, 0)) == SEM_FAILED) {
@@ -79,6 +76,11 @@ void monitor_configurar_semaforos(sem_t** sem_monitor) {
     }
 }
 
+/**
+ * Configura la memoria compartida necesaria para el monitor.
+ * @param shm Referencia a la memoria compartida que se va a abrir
+ * @param mapa Mapa a abrir en memoria compartida
+ */
 void monitor_configurar_memoria_compartida(int *shm, tipo_mapa **mapa) {
     *shm = shm_open(SHM, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     if (*shm == -1) {
