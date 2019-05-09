@@ -13,6 +13,7 @@ void simulador_configurar_semaforos(sem_t **sem_monitor, sem_t **sem_equipos_lis
 void simulador_configurar_manejadores();
 void simulador_configurar_cola(mqd_t *cola);
 void simulador_configurar_memoria_compartida(int *shm, tipo_mapa **mapa);
+void simulador_configurar_mapa(tipo_mapa *mapa);
 void simulador_configurar_naves(tipo_mapa *mapa);
 void manejador_SIGINT(int pid);
 void manejador_SIGALRM(int pid);
@@ -53,6 +54,7 @@ void simulador() {
     simulador_configurar_manejadores();
     simulador_configurar_cola(&cola);
     simulador_configurar_memoria_compartida(&shm, &mapa);
+    simulador_configurar_mapa(mapa);
     simulador_configurar_naves(mapa);
 
     printf("Simulador: iniciando la partida\n");
@@ -154,7 +156,7 @@ void simulador() {
         
             nave_aux = mapa_get_nave(mapa, mensaje.n_equipo, mensaje.n_nave);
 
-            // Si la nave actual ha sido destruida esta ronda, ignora su acción
+            // Si la nave actual ha sido destraveuida esta ronda, ignora su acción
             if (!nave_aux.viva) continue;
 
             // Comprueba cual es la acción actual de la nave
@@ -193,7 +195,7 @@ void simulador() {
                             // Si debe ser destruida, quita una nave a su equipo y ordena a su jefe que la destruya
                             nave_aux.viva = false;
                             n_naves_destruidas++;
-                            mapa_set_num_naves(mapa, nave_aux.equipo, mapa_get_num_naves(mapa, ave_aux.equipo)-1);
+                            mapa_set_num_naves(mapa, nave_aux.equipo, mapa_get_num_naves(mapa, nave_aux.equipo)-1);
                             sprintf(buffer, "%s %d", DESTRUIR, nave_aux.num_nave);
                             write(fd_sim[nave_aux.equipo][1], buffer, sizeof(buffer));
                         }
@@ -402,6 +404,21 @@ void simulador_configurar_memoria_compartida(int *shm, tipo_mapa **mapa) {
 
     close(*shm);
 }
+
+/**
+ * Inicializa todas las casillas del mapa de la simulación
+ * @param mapa Mapa de la simulación.
+ */
+void simulador_configurar_mapa(tipo_mapa *mapa) {
+    int i, j;
+
+    for (i = 0; i < MAPA_MAX_Y; i++) {
+        for (j = 0; j < MAPA_MAX_X; j++) {
+            mapa_clean_casilla(mapa, i, j);
+        }
+    }
+}
+
 
 /**
  * Configura y añade al mapa las naves de los diferentes equipos, que aparecen en las cuatro
