@@ -26,6 +26,7 @@ void jefe(tipo_mapa *mapa, int n_equipo, int fd_sim[2], sem_t *sem_equipos_listo
 
     close(fd_sim[1]);
 
+    // Creamos las naves
     jefe_crear_naves(mapa, n_equipo, fd_jefe, sem_equipos_listos, pids_naves);
     
     sem_post(sem_equipos_listos);
@@ -36,7 +37,7 @@ void jefe(tipo_mapa *mapa, int n_equipo, int fd_sim[2], sem_t *sem_equipos_listo
         read(fd_sim[0], buffer, sizeof(buffer));
 
         if (!strcmp(buffer, TURNO)) {
-            //Turno nuevo
+            // Turno nuevo
             for (i = 0; i < N_NAVES; i++) {
                 if (!mapa_get_nave(mapa, n_equipo, i).viva) continue; 
 
@@ -53,8 +54,11 @@ void jefe(tipo_mapa *mapa, int n_equipo, int fd_sim[2], sem_t *sem_equipos_listo
 
             sem_post(sem_equipos_listos);
         } else if (!strcmp(buffer, FIN)) {
+            // Fin de la ejecución
             close(fd_sim[0]);
             sem_close(sem_equipos_listos);
+
+            // Terminamos a todas las naves
             for (i = 0; i < N_NAVES; i++) {
                 close(fd_jefe[i][1]);
                 kill(pids_naves[i], SIGTERM);
@@ -64,7 +68,7 @@ void jefe(tipo_mapa *mapa, int n_equipo, int fd_sim[2], sem_t *sem_equipos_listo
 
             exit(EXIT_SUCCESS);
         } else {
-            //Destruir nave
+            // Destruir nave
             sscanf(buffer, "%*s %d", &num_nave_destruir);
             strcpy(buffer, DESTRUIR);
             write(fd_jefe[num_nave_destruir][1], buffer, sizeof(buffer));
