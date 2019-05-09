@@ -24,6 +24,7 @@ void mapa_print(tipo_mapa *mapa);
 void monitor_configurar_semaforos(sem_t **sem_monitor);
 void monitor_configurar_memoria_compartida(int *shm, tipo_mapa **mapa);
 void simulador_configurar_manejador();
+void manejador_SIGINT(int pid);
 
 /**
  * Ejecuta el monitor
@@ -134,6 +135,6 @@ void simulador_configurar_manejador() {
 void manejador_SIGINT(int pid) {
 
 	screen_end();    
-    
+
     kill(0, SIGKILL);
 }
