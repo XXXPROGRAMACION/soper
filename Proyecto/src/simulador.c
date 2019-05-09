@@ -11,6 +11,10 @@ void simulador_configurar_memoria_compartida(int *shm, tipo_mapa **mapa);
 void simulador_configurar_mapa(tipo_mapa *mapa);
 void simulador_configurar_naves(tipo_mapa *mapa);
 void manejador_SIGINT(int pid);
+void manejador_SIGALRM(int pid);
+void manejador_SIGTERM(int pid);
+
+sem_t *sem_alarma = NULL;
 
 int main() {
     simulador();
@@ -24,13 +28,16 @@ void simulador() {
     int shm = -1;
     tipo_mapa *mapa = NULL;
     Mensaje mensaje;
+    tipo_nave nave_aux;
+    tipo_casilla casilla_aux;
     char buffer[BUFFER_SIZE];
-    int i, n_naves_restantes;
-    n_naves_restantes = N_EQUIPOS*N_NAVES;
+    int n_naves_restantes, n_naves_destruidas;
+    int naves_equipo[N_EQUIPOS];
+    int ganador;
+    int i;
 
     printf("Simulador: configurando recursos compartidos\n");
 
-    srand(time(NULL));
     simulador_configurar_semaforos(&sem_monitor, &sem_equipos_listos);
     simulador_configurar_manejador();
     simulador_configurar_cola(&cola);
@@ -46,20 +53,68 @@ void simulador() {
     
     for (i = 0; i < N_EQUIPOS; i++) {
         sem_wait(sem_equipos_listos);
+        naves_equipo[i] = N_NAVES;
     }
 
     sem_post(sem_monitor);
 
-    strcpy(buffer, MENSAJE_TURNO_NUEVO);
+    srand(time(NULL));
+    n_naves_restantes = N_EQUIPOS*N_NAVES;
+    
     while (true) {
+        mapa_restore(mapa);
+
         printf("------------------------------------------------\n");
-        printf("Simulador: empieza el turno (prueba)\n");
-        
+
+        ganador = -1;
+        for (i = 0; i < N_EQUIPOS; i++) {
+            if (naves_equipo[i] > 0) {
+                if (ganador == -1) {
+                    ganador = i;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        if (i == N_EQUIPOS) {
+            if (ganador != -1) {
+                printf("GANA EL EQUIPO %c!\n", symbol_equipos[ganador]);
+            } else {
+                printf("TODOS PIERDEN!\n");
+            }
+
+            strcpy(buffer, FIN);
+            for (i = 0; i < N_EQUIPOS; i++) {
+                write(fd_sim[i][1], buffer, sizeof(buffer));
+            }
+
+            while (wait(NULL) > 0);
+
+            sem_close(sem_equipos_listos);
+            sem_close(sem_monitor);
+            mq_close(cola);
+            close(shm);
+            munmap(mapa, sizeof(mapa));
+            for (i = 0; i < N_EQUIPOS; i++) {
+                close(fd_sim[i][1]);                
+            }
+
+            mq_unlink(NOMBRE_COLA);
+            sem_unlink(SEM_MONITOR);
+            shm_unlink(SHM);
+
+            exit(EXIT_SUCCESS);
+        }
+
+        printf("Simulador: empieza el turno (prueba)\n");        
+
+        strcpy(buffer, TURNO);
         for (i = 0; i < N_EQUIPOS; i++) {
             write(fd_sim[i][1], buffer, sizeof(buffer));
         }
 
-        sleep(TURNO_SECS);
+        alarm(TURNO_SECS);
 
         for (i = 0; i < N_EQUIPOS; i++) {
             sem_wait(sem_equipos_listos);
@@ -67,15 +122,65 @@ void simulador() {
 
         printf("Simulador: todos los equipos han hecho sus movimientos\n");
 
+        n_naves_destruidas = 0;
         for (i = 0; i < n_naves_restantes*2; i++) {
             mq_receive(cola, (char *) &mensaje, sizeof(mensaje), NULL);
-            if (strcmp(mensaje.info, MENSAJE_MOVER_NAVE)) {
-                printf("ACCION MOVER  [%c%d] Objetivo (%d, %d)\n", symbol_equipos[mensaje.n_equipo], mensaje.n_nave, mensaje.x, mensaje.y);
-            } else if (strcmp(mensaje.info, MENSAJE_ATACAR_NAVE)) {
-                printf("ACCION ATACAR [%c%d] Objetivo (%d, %d)\n", symbol_equipos[mensaje.n_equipo], mensaje.n_nave, mensaje.x, mensaje.y);
+        
+            nave_aux = mapa_get_nave(mapa, mensaje.n_equipo, mensaje.n_nave);
+
+            if (!nave_aux.viva) continue;
+
+            if (!strcmp(mensaje.info, MOVER_ALEATORIO)) {
+                if (mensaje.x >= 0 && mensaje.y >= 0) {
+                    if (mapa_is_casilla_vacia(mapa, mensaje.y, mensaje.x)) {
+                        mapa_clean_casilla(mapa, nave_aux.pos_y, nave_aux.pos_x);
+                        nave_aux.pos_x = mensaje.x;
+                        nave_aux.pos_y = mensaje.y;
+                        mapa_set_nave(mapa, nave_aux);
+
+                        printf("ACCION MOVER  [%c%d] Objetivo (%02d, %02d)\n", symbol_equipos[mensaje.n_equipo], mensaje.n_nave, mensaje.x, mensaje.y);
+                    } else {
+                        printf("ACCION MOVER  [%c%d] Objetivo (%02d, %02d) - Cancelado, casilla ocupada\n", symbol_equipos[mensaje.n_equipo], mensaje.n_nave, mensaje.x, mensaje.y);
+                    }
+                } else {
+                    printf("ACCION MOVER  [%c%d] Sin objetivo\n", symbol_equipos[mensaje.n_equipo], mensaje.n_nave);
+                }  
+            } else if (!strcmp(mensaje.info, ATACAR)) {
+                if (mensaje.x >= 0 && mensaje.y >= 0) {
+                    mapa_send_misil(mapa, nave_aux.pos_y, nave_aux.pos_x, mensaje.y, mensaje.x);
+
+                    if (!mapa_is_casilla_vacia(mapa, mensaje.y, mensaje.x)) {
+                        casilla_aux = mapa_get_casilla(mapa, mensaje.y, mensaje.x);
+                        nave_aux = mapa_get_nave(mapa, casilla_aux.equipo, casilla_aux.num_nave);
+                        nave_aux.vida -= ATAQUE_DANO;
+                        if (nave_aux.vida <= 0) {
+                            nave_aux.viva = false;
+                            n_naves_destruidas++;
+                            naves_equipo[nave_aux.equipo]--;
+                            sprintf(buffer, "%s %d", DESTRUIR, nave_aux.num_nave);
+                            write(fd_sim[nave_aux.equipo][1], buffer, sizeof(buffer));
+                        }
+                        mapa_set_nave(mapa, nave_aux);
+
+                        if (nave_aux.viva) {
+                            printf("ACCION ATACAR [%c%d] Objetivo (%02d, %02d) - %c%d impactada (vida = %d)\n", symbol_equipos[mensaje.n_equipo], mensaje.n_nave, mensaje.x, mensaje.y, symbol_equipos[nave_aux.equipo], nave_aux.num_nave, nave_aux.vida);
+                        } else {
+                            printf("ACCION ATACAR [%c%d] Objetivo (%02d, %02d) - %c%d impactada (destruida)\n", symbol_equipos[mensaje.n_equipo], mensaje.n_nave, mensaje.x, mensaje.y, symbol_equipos[nave_aux.equipo], nave_aux.num_nave);
+                        }
+                    } else {
+                        printf("ACCION ATACAR [%c%d] Objetivo (%02d, %02d)\n", symbol_equipos[mensaje.n_equipo], mensaje.n_nave, mensaje.x, mensaje.y);
+                    }
+                } else {
+                    printf("ACCION ATACAR [%c%d] Sin objetivo\n", symbol_equipos[mensaje.n_equipo], mensaje.n_nave);
+                }                
             }
+
             usleep(100000);
         }
+
+        n_naves_restantes -= n_naves_destruidas;
+
+        sem_wait(sem_alarma);
     }
 
     mq_close(cola);
@@ -121,16 +226,37 @@ void simulador_configurar_semaforos(sem_t** sem_monitor, sem_t **sem_equipos_lis
         exit(EXIT_FAILURE);
     }    
     sem_unlink(SEM_EQUIPOS_LISTOS);
+
+    // Configura el semáforo de la alarma
+    if ((sem_alarma = sem_open(SEM_ALARMA, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0)) == SEM_FAILED) {
+        perror("sem_open");
+        exit(EXIT_FAILURE);
+    }
+    sem_unlink(SEM_ALARMA);
 }
 
 void simulador_configurar_manejador() {
     struct sigaction act;
-    
-    // Crea el manejador de SIGINT
     sigemptyset(&(act.sa_mask));
     act.sa_flags = 0;
+    
+    // Crea el manejador de SIGINT
     act.sa_handler = manejador_SIGINT;
     if (sigaction(SIGINT, &act, NULL) < 0) {
+        perror("sigaction");
+        exit(EXIT_FAILURE);
+    }
+
+    // Crea el manejador de SIGINT
+    act.sa_handler = manejador_SIGALRM;
+    if (sigaction(SIGALRM, &act, NULL) < 0) {
+        perror("sigaction");
+        exit(EXIT_FAILURE);
+    }
+
+    // Crea el manejador de SIGTERM
+    act.sa_handler = manejador_SIGTERM;
+    if (sigaction(SIGTERM, &act, NULL) < 0) {
         perror("sigaction");
         exit(EXIT_FAILURE);
     }
@@ -192,51 +318,74 @@ void simulador_configurar_mapa(tipo_mapa *mapa) {
 }
 
 void simulador_configurar_naves(tipo_mapa *mapa) {
-    int i, j;
+    tipo_nave nave;
 
-    for (i = 0; i < N_EQUIPOS; i++) {
-        for (j = 0; j < N_NAVES; j++) {
-            mapa->info_naves[i][j].equipo = i;
-            mapa->info_naves[i][j].num_nave = j;
-            mapa->info_naves[i][j].vida = VIDA_MAX;
-            mapa->info_naves[i][j].viva = true;
-        }
-    }
+    nave.vida = VIDA_MAX;
+    nave.viva = true;
 
-    mapa->info_naves[0][0].pos_x = 0;
-    mapa->info_naves[0][0].pos_y = 0;
-    mapa->info_naves[0][1].pos_x = 1;
-    mapa->info_naves[0][1].pos_y = 0;
-    mapa->info_naves[0][2].pos_x = 0;
-    mapa->info_naves[0][2].pos_y = 1;
-
-    mapa->info_naves[1][0].pos_x = MAPA_MAX_X-1;
-    mapa->info_naves[1][0].pos_y = 0;
-    mapa->info_naves[1][1].pos_x = MAPA_MAX_X-2;
-    mapa->info_naves[1][1].pos_y = 0;
-    mapa->info_naves[1][2].pos_x = MAPA_MAX_X-1;
-    mapa->info_naves[1][2].pos_y = 1;
-
-    mapa->info_naves[2][0].pos_x = 0;
-    mapa->info_naves[2][0].pos_y = MAPA_MAX_Y-1;
-    mapa->info_naves[2][1].pos_x = 1;
-    mapa->info_naves[2][1].pos_y = MAPA_MAX_Y-1;
-    mapa->info_naves[2][2].pos_x = 0;
-    mapa->info_naves[2][2].pos_y = MAPA_MAX_Y-2;
-
-    mapa->info_naves[3][0].pos_x = MAPA_MAX_X-1;
-    mapa->info_naves[3][0].pos_y = MAPA_MAX_Y-1;
-    mapa->info_naves[3][1].pos_x = MAPA_MAX_X-2;
-    mapa->info_naves[3][1].pos_y = MAPA_MAX_Y-1;
-    mapa->info_naves[3][2].pos_x = MAPA_MAX_X-1;
-    mapa->info_naves[3][2].pos_y = MAPA_MAX_Y-2;
-
-    for (i = 0; i < N_EQUIPOS; i++) {
-        mapa_set_num_naves(mapa, i, N_NAVES);
-        for (j = 0; j < N_NAVES; j++) {
-            mapa_set_nave(mapa, mapa->info_naves[i][j]);
-        }
-    }
+    // EQUIPO 1
+    nave.equipo = 0;
+    mapa_set_num_naves(mapa, 0, N_NAVES);
+    nave.num_nave = 0;
+    nave.pos_x = 1;
+    nave.pos_y = 1;
+    mapa_set_nave(mapa, nave);
+    nave.num_nave = 1;
+    nave.pos_x = 3;
+    nave.pos_y = 1;
+    mapa_set_nave(mapa, nave);
+    nave.num_nave = 2;
+    nave.pos_x = 1;
+    nave.pos_y = 3;
+    mapa_set_nave(mapa, nave);
+    
+    // EQUIPO 2
+    nave.equipo = 1;
+    mapa_set_num_naves(mapa, 1, N_NAVES);
+    nave.num_nave = 0;
+    nave.pos_x = MAPA_MAX_X-2;
+    nave.pos_y = 1;
+    mapa_set_nave(mapa, nave);
+    nave.num_nave = 1;
+    nave.pos_x = MAPA_MAX_X-4;
+    nave.pos_y = 1;
+    mapa_set_nave(mapa, nave);
+    nave.num_nave = 2;
+    nave.pos_x = MAPA_MAX_X-2;
+    nave.pos_y = 3;
+    mapa_set_nave(mapa, nave);
+    
+    // EQUIPO 3
+    nave.equipo = 2;
+    mapa_set_num_naves(mapa, 2, N_NAVES);
+    nave.num_nave = 0;
+    nave.pos_x = 1;
+    nave.pos_y = MAPA_MAX_Y-2;
+    mapa_set_nave(mapa, nave);
+    nave.num_nave = 1;
+    nave.pos_x = 3;
+    nave.pos_y = MAPA_MAX_Y-2;
+    mapa_set_nave(mapa, nave);
+    nave.num_nave = 2;
+    nave.pos_x = 1;
+    nave.pos_y = MAPA_MAX_Y-4;
+    mapa_set_nave(mapa, nave);
+    
+    // EQUIPO 4
+    nave.equipo = 3;
+    mapa_set_num_naves(mapa, 3, N_NAVES);
+    nave.num_nave = 0;
+    nave.pos_x = MAPA_MAX_X-2;
+    nave.pos_y = MAPA_MAX_Y-2;
+    mapa_set_nave(mapa, nave);
+    nave.num_nave = 1;
+    nave.pos_x = MAPA_MAX_X-4;
+    nave.pos_y = MAPA_MAX_Y-2;
+    mapa_set_nave(mapa, nave);
+    nave.num_nave = 2;
+    nave.pos_x = MAPA_MAX_X-2;
+    nave.pos_y = MAPA_MAX_Y-4;
+    mapa_set_nave(mapa, nave);
 }
 
 void manejador_SIGINT(int pid) {
@@ -245,4 +394,12 @@ void manejador_SIGINT(int pid) {
     sem_unlink(SEM_MONITOR);
     shm_unlink(SHM);
     kill(0, SIGKILL);
+}
+
+void manejador_SIGALRM(int pid) {
+    sem_post(sem_alarma);
+}
+
+void manejador_SIGTERM(int pid) {
+    exit(EXIT_SUCCESS);
 }

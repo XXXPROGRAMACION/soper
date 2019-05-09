@@ -21,11 +21,14 @@
 #define BUFFER_SIZE 80 	// Tamaño del buffer que se usa para leer de los pipes
 #define TAM 256    		// Tamaño máximo de los mensajes
 #define MAX_MSG 10		// Número máximo de mensajes en la cola
-#define MENSAJE_TURNO_NUEVO "Turno nuevo" 	// Mensaje que envía el simulador a los jefes para indicar que es un turno nuevo
-#define MENSAJE_MOVER_NAVE "Mover nave" 	// Mensaje que envía el jefe a las naves para que estas se muevan
-#define MENSAJE_ATACAR_NAVE "Atacar nave" 	// Mensaje que envía el jefe a las naves para que estas ataquen
+#define TURNO "turno" 	// Mensaje que envía el simulador a los jefes para indicar que es un turno nuevo
+#define MOVER_ALEATORIO "mover_aleatorio" 	// Mensaje que envía el jefe a las naves para que estas se muevan
+#define ATACAR "atacar" 					// Mensaje que envía el jefe a las naves para que estas ataquen
+#define DESTRUIR "destruir"					// Mensaje que envía el jefe a las naves para que estas finalicen
+#define FIN "fin"
 #define NOMBRE_COLA "/cola_simulador"		// Nombre de la cola que comunica a las naves con el simulador
 #define SEM_EQUIPOS_LISTOS "sem_equipos_listos"		// Nombre del semáforo que controla que todos los equipos estén listos
+#define SEM_ALARMA "sem_alarma"		// Nombre del semáforo que controla la alarma del simulador
 #define SEM_MONITOR "sem_monitor"
 #define SHM "shm"
 
@@ -49,10 +52,9 @@ typedef struct {
 #define SYMB_AGUA 'w' // Símbolo para agua
 
 /*** SIMULACION ***/
-#define VIDA_MAX 50 // Vida inicial de una nave
+#define VIDA_MAX 10 // Vida inicial de una nave
 #define ATAQUE_ALCANCE 20 // Distancia máxima de un ataque
-#define ATAQUE_DANO 10 // Daño de un ataque
-#define MOVER_ALCANCE 1 // Máximo de casillas a mover
+#define ATAQUE_DANO 50 // Daño de un ataque
 #define TURNO_SECS 2 // Segundos que dura un turno
 
 /*** MAPA ***/
