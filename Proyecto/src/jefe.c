@@ -1,7 +1,23 @@
 #include "jefe.h"
 
+/** Crea las naves del jefe y las conexiones entre las naves y el jefe.
+ *  @param mapa Puntero al mapa sobre el que trabajan el jefe y las naves
+ *  @param n_equipo Número de equipo del jefe y las naves
+ *  @param fd_jefe Pipes que conectarán al jefe con sus naves
+ *  @param sem_equipos_listos Semáforo que permite al simulador saber cúando estan listos los jefes
+ *  @param pids_naves En esta estructura se almacenarán los PIDs de las naves que se creen
+ */
 void jefe_crear_naves(tipo_mapa *mapa, int n_equipo, int fd_jefe[N_NAVES][2], sem_t *sem_equipos_listos, pid_t pids_naves[N_NAVES]);
 
+/** Emula el comportamiento de un jefe. Se ocupa de crear los procesos nave y de mandarles
+ *  órdenes de acción en cada turno. Gestiona la comunicación entre el simulador y las naves.
+ *  @param mapa Puntero al mapa sobre el que debe trabajar el jefe
+ *  @param n_equipo Número de equipo del jefe
+ *  @param fd_sim Pipe que le permite comunicarse con el simulador
+ *  @param sem_equipos_listos Semáforo que permite al simulador saber cúando estan listos los jefes
+ *  @see nave()
+ *  @see simulador() 
+ */
 void jefe(tipo_mapa *mapa, int n_equipo, int fd_sim[2], sem_t *sem_equipos_listos) {
     pid_t pids_naves[N_NAVES];
 	int fd_jefe[N_NAVES][2];
