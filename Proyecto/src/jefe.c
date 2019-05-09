@@ -4,10 +4,9 @@
  *  @param mapa Puntero al mapa sobre el que trabajan el jefe y las naves
  *  @param n_equipo Número de equipo del jefe y las naves
  *  @param fd_jefe Pipes que conectarán al jefe con sus naves
- *  @param sem_equipos_listos Semáforo que permite al simulador saber cúando estan listos los jefes
  *  @param pids_naves En esta estructura se almacenarán los PIDs de las naves que se creen
  */
-void jefe_crear_naves(tipo_mapa *mapa, int n_equipo, int fd_jefe[N_NAVES][2], sem_t *sem_equipos_listos, pid_t pids_naves[N_NAVES]);
+void jefe_crear_naves(tipo_mapa *mapa, int n_equipo, int fd_jefe[N_NAVES][2], pid_t pids_naves[N_NAVES]);
 
 /** Emula el comportamiento de un jefe. Se ocupa de crear los procesos nave y de mandarles
  *  órdenes de acción en cada turno. Gestiona la comunicación entre el simulador y las naves.
@@ -27,7 +26,7 @@ void jefe(tipo_mapa *mapa, int n_equipo, int fd_sim[2], sem_t *sem_equipos_listo
     close(fd_sim[1]);
 
     // Creamos las naves
-    jefe_crear_naves(mapa, n_equipo, fd_jefe, sem_equipos_listos, pids_naves);
+    jefe_crear_naves(mapa, n_equipo, fd_jefe, pids_naves);
     
     sem_post(sem_equipos_listos);
 
@@ -57,6 +56,7 @@ void jefe(tipo_mapa *mapa, int n_equipo, int fd_sim[2], sem_t *sem_equipos_listo
             // Fin de la ejecución
             close(fd_sim[0]);
             sem_close(sem_equipos_listos);
+            munmap(mapa, sizeof(mapa));
 
             // Terminamos a todas las naves
             for (i = 0; i < N_NAVES; i++) {
@@ -78,7 +78,7 @@ void jefe(tipo_mapa *mapa, int n_equipo, int fd_sim[2], sem_t *sem_equipos_listo
     exit(EXIT_SUCCESS);
 }
 
-void jefe_crear_naves(tipo_mapa *mapa, int n_equipo, int fd_jefe[N_NAVES][2], sem_t *sem_equipos_listos, pid_t pids_naves[N_NAVES]) {
+void jefe_crear_naves(tipo_mapa *mapa, int n_equipo, int fd_jefe[N_NAVES][2], pid_t pids_naves[N_NAVES]) {
     int pipe_ret, pid, i;
 
     for (i = 0; i < N_NAVES; i++) {
@@ -91,7 +91,7 @@ void jefe_crear_naves(tipo_mapa *mapa, int n_equipo, int fd_jefe[N_NAVES][2], se
         }
 
         pid = fork();
-        if (pid == 0) nave(mapa, n_equipo, i, fd_jefe[i], sem_equipos_listos);
+        if (pid == 0) nave(mapa, n_equipo, i, fd_jefe[i]);
 
         pids_naves[i] = pid;
 
