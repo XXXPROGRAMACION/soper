@@ -36,8 +36,7 @@ int main() {
     // Configuramos el semáforo, la memoria y el manejador de SIGINT
 	monitor_configurar_semaforos(&sem_monitor);
 	monitor_configurar_memoria_compartida(&shm, &mapa);
-    simulador_configurar_manejador();
-    
+    simulador_configurar_manejador();    
 
 	sem_wait(sem_monitor);
 
@@ -124,10 +123,6 @@ void simulador_configurar_manejador() {
     // Crea el manejador de SIGINT
     act.sa_handler = manejador_SIGINT;
     if (sigaction(SIGINT, &act, NULL) < 0) {
-        mq_unlink(NOMBRE_COLA);
-        sem_unlink(SEM_MONITOR);
-        shm_unlink(SHM);
-        perror("sigaction");
         exit(EXIT_FAILURE);
     }
 }
@@ -137,9 +132,8 @@ void simulador_configurar_manejador() {
  * @param pid Id del proceso
  */
 void manejador_SIGINT(int pid) {
-    printf("Simulador: se termina la ejecucion\n");
-    mq_unlink(NOMBRE_COLA);
-    sem_unlink(SEM_MONITOR);
-    shm_unlink(SHM);
+
+	screen_end();    
+    
     kill(0, SIGKILL);
 }
