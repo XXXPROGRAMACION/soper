@@ -1,3 +1,7 @@
+/** @file nave.c
+ *  @brief Codigo fuente de nave
+ */
+
 #include "nave.h"
 
 /** Configura la cola de mensajes que comunica a la nave con el simulador

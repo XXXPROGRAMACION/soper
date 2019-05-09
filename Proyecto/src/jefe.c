@@ -1,3 +1,7 @@
+/** @file jefe.c
+ *  @brief Código fuente de jefe
+ */
+
 #include "jefe.h"
 
 /** Crea las naves del jefe y las conexiones entre las naves y el jefe.

@@ -1,3 +1,7 @@
+/** @file monitor.c
+ *  @brief Código fuente del monitor
+ */
+
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>

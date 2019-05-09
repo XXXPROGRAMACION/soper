@@ -1,3 +1,7 @@
+/** @file nave.h
+ *  @brief Recoge la funcionalidad de una nave
+ */
+
 #ifndef NAVE_H
 #define NAVE_H
 

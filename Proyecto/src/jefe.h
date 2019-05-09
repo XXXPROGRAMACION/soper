@@ -1,3 +1,7 @@
+/** @file jefe.h
+ *  @brief Recoge la funcionalidad de un jefe
+ */
+
 #ifndef JEFE_H
 #define JEFE_H
 
