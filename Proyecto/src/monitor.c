@@ -1,3 +1,7 @@
+/** @file monitor.c
+ *  @brief Código fuente del monitor
+ */
+
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
@@ -15,8 +19,20 @@
 #include "mapa.h"
 #include "types.h"
 
+/** Imprime el mapa
+ *  @param mapa Mapa a imprimir 
+ */
 void mapa_print(tipo_mapa *mapa);
+
+/** Configura el semáforo que permite al monitor esperar hasta que comience la simulación.
+ *  @param sem_monitor Semáforo que permite al monitor esperar hasta que comience la simulación
+ */
 void monitor_configurar_semaforos(sem_t **sem_monitor);
+
+/** Configura la memoria compartida necesaria para el monitor.
+ *  @param shm Referencia a la memoria compartida que se va a abrir
+ *  @param mapa Mapa a abrir en memoria compartida
+ */
 void monitor_configurar_memoria_compartida(int *shm, tipo_mapa **mapa);
 
 int main() {
@@ -24,6 +40,7 @@ int main() {
     int shm = -1;
     tipo_mapa *mapa = NULL;
 
+    // Configuramos el semáforo y la memoria
 	monitor_configurar_semaforos(&sem_monitor);
 	monitor_configurar_memoria_compartida(&shm, &mapa);
 
