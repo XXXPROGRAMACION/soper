@@ -4,6 +4,6 @@
 #include "types.h"
 #include "nave.h"
 
-void jefe(int n_equipo, int fd_sim[2], sem_t *equipos_listos);
+void jefe(tipo_mapa *mapa, int n_equipo, int fd_sim[2], sem_t *equipos_listos);
 
 #endif

@@ -11,11 +11,12 @@
 #include <string.h>
 #include <signal.h>
 #include <math.h>
+#include <time.h>
 #include <stdbool.h>
 #include <unistd.h>
 #include <semaphore.h>
 
-#define N_EQUIPOS 3 	// Número de equipos
+#define N_EQUIPOS 4 	// Número de equipos
 #define N_NAVES 3 		// Número de naves por equipo
 #define BUFFER_SIZE 80 	// Tamaño del buffer que se usa para leer de los pipes
 #define TAM 256    		// Tamaño máximo de los mensajes
@@ -24,17 +25,21 @@
 #define MENSAJE_MOVER_NAVE "Mover nave" 	// Mensaje que envía el jefe a las naves para que estas se muevan
 #define MENSAJE_ATACAR_NAVE "Atacar nave" 	// Mensaje que envía el jefe a las naves para que estas ataquen
 #define NOMBRE_COLA "/cola_simulador"		// Nombre de la cola que comunica a las naves con el simulador
-#define EQUIPOS_LISTOS "equipos_listos"		// Nombre del semáforo que controla que todos los equipos estén listos
+#define SEM_EQUIPOS_LISTOS "sem_equipos_listos"		// Nombre del semáforo que controla que todos los equipos estén listos
+#define SEM_MONITOR "sem_monitor"
+#define SHM "shm"
 
-#define SHM_MAP_NAME "/shm_naves"
+extern char symbol_equipos[N_EQUIPOS]; // Símbolos de los diferentes equipos en el mapa (mirar mapa.c)
 
 typedef struct {
 	char info[TAM];
-	int n_nave, n_equipo;
+	int n_nave;
+	int n_equipo;
+	int x;
+	int y;
 } Mensaje;
 
 /*** SCREEN ***/
-extern char symbol_equipos[N_EQUIPOS]; // Símbolos de los diferentes equipos en el mapa (mirar mapa.c)
 #define MAPA_MAX_X 20 // Número de columnas del mapa
 #define MAPA_MAX_Y 20 // Número de filas del mapa
 #define SCREEN_REFRESH 10000 // Frequencia de refresco del mapa en el monitor

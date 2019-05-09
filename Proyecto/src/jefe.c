@@ -1,27 +1,34 @@
 #include "jefe.h"
 
-void jefe_crear_naves(int n_equipo, int fd_jefe[N_NAVES][2]);
+void jefe_crear_naves(tipo_mapa *mapa, int n_equipo, int fd_jefe[N_NAVES][2]);
 
-void jefe(int n_equipo, int fd_sim[2], sem_t *equipos_listos) {
-	int fd_jefe[N_NAVES][2], i;
+void jefe(tipo_mapa *mapa, int n_equipo, int fd_sim[2], sem_t *sem_equipos_listos) {
+	int fd_jefe[N_NAVES][2];
     char buffer[BUFFER_SIZE];
+    int i, j;
 
     close(fd_sim[1]);
 
-    jefe_crear_naves(n_equipo, fd_jefe);
+    jefe_crear_naves(mapa, n_equipo, fd_jefe);
 
     printf("Jefe %d: equipo %d listo\n", n_equipo+1, n_equipo+1);
-    sem_post(equipos_listos);
+    sem_post(sem_equipos_listos);
 
     while (true) {
         read(fd_sim[0], buffer, sizeof(buffer));
         if (!strcmp(buffer, MENSAJE_TURNO_NUEVO)) {
             //Turno nuevo
-            printf("Jefe %d: recibido inicio de turno\n", n_equipo+1); // PRUEBA
-            sem_post(equipos_listos);
-            strcpy(buffer, MENSAJE_ATACAR_NAVE);
+            sem_post(sem_equipos_listos);
             for (i = 0; i < N_NAVES; i++) {
-                write(fd_jefe[i][1], buffer, sizeof(MENSAJE_ATACAR_NAVE));
+                for (j = 0; j < 2; j++) {
+                    if (rand()%2 == 0) {
+                        strcpy(buffer, MENSAJE_MOVER_NAVE);
+                    } else {
+                        strcpy(buffer, MENSAJE_ATACAR_NAVE);
+                    }
+                    
+                    write(fd_jefe[i][1], buffer, sizeof(buffer));
+                }
             }
         }
     }
@@ -29,7 +36,7 @@ void jefe(int n_equipo, int fd_sim[2], sem_t *equipos_listos) {
     exit(EXIT_SUCCESS);
 }
 
-void jefe_crear_naves(int n_equipo, int fd_jefe[N_NAVES][2]) {
+void jefe_crear_naves(tipo_mapa *mapa, int n_equipo, int fd_jefe[N_NAVES][2]) {
     int pipe_ret, pid, i;
 
     for (i = 0; i < N_NAVES; i++) {
@@ -42,7 +49,7 @@ void jefe_crear_naves(int n_equipo, int fd_jefe[N_NAVES][2]) {
         }
 
         pid = fork();
-        if (pid == 0) nave(n_equipo, i, fd_jefe[i]);
+        if (pid == 0) nave(mapa, n_equipo, i, fd_jefe[i]);
         close(fd_jefe[i][0]);
     }
 }

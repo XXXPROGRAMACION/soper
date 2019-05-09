@@ -1,6 +1,6 @@
 #include "mapa.h"
 
-char symbol_equipos[N_EQUIPOS] = {'A', 'B', 'C'};
+char symbol_equipos[N_EQUIPOS] = {'A', 'B', 'C', 'D'};
 
 int mapa_clean_casilla(tipo_mapa *mapa, int pos_y, int pos_x) {
 	mapa->casillas[pos_y][pos_x].equipo = -1;

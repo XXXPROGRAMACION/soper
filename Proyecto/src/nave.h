@@ -2,7 +2,8 @@
 #define NAVE_H
 
 #include "types.h"
+#include "mapa.h"
 
-void nave(int n_equipo, int n_nave, int fd_jefe[2]);
+void nave(tipo_mapa *mapa, int n_equipo, int n_nave, int fd_jefe[2]);
 
 #endif
