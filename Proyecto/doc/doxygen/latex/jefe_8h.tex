@@ -1,0 +1,76 @@
+\hypertarget{jefe_8h}{}\section{Referencia del Archivo src/jefe.h}
+\label{jefe_8h}\index{src/jefe.\+h@{src/jefe.\+h}}
+
+
+Recoge la funcionalidad de un jefe.  
+
+
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}nave.\+h\char`\"{}}\newline
+Dependencia gráfica adjunta para jefe.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{jefe_8h__incl}
+\end{center}
+\end{figure}
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{jefe_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{jefe_8h_a1da6c9adb36fdd08899e9f54e06a0885}{jefe} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int n\+\_\+equipo, int fd\+\_\+sim\mbox{[}2\mbox{]}, sem\+\_\+t $\ast$equipos\+\_\+listos)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Recoge la funcionalidad de un jefe. 
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{jefe_8h_a1da6c9adb36fdd08899e9f54e06a0885}\label{jefe_8h_a1da6c9adb36fdd08899e9f54e06a0885}} 
+\index{jefe.\+h@{jefe.\+h}!jefe@{jefe}}
+\index{jefe@{jefe}!jefe.\+h@{jefe.\+h}}
+\subsubsection{\texorpdfstring{jefe()}{jefe()}}
+{\footnotesize\ttfamily void jefe (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{n\+\_\+equipo,  }\item[{int}]{fd\+\_\+sim\mbox{[}2\mbox{]},  }\item[{sem\+\_\+t $\ast$}]{sem\+\_\+equipos\+\_\+listos }\end{DoxyParamCaption})}
+
+Función que emula el comportamiento de un jefe. Se ocupa de crear los procesos nave y de mandarles órdenes de acción en cada turno. Gestiona la comunicación entre el simulador y las naves. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Puntero al mapa sobre el que debe trabajar el jefe \\
+\hline
+{\em n\+\_\+equipo} & Número de equipo del jefe \\
+\hline
+{\em fd\+\_\+sim} & Pipe que le permite comunicarse con el simulador \\
+\hline
+{\em sem\+\_\+equipos\+\_\+listos} & Semáforo que permite al simulador saber cúando estan listos los jefes \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{Ver también}
+\hyperlink{nave_8c_a3d3f3f9b58aa6d6db95e19023d33f163}{nave()} 
+
+\hyperlink{simulador_8c_a7ca1584ef7c92847d2a610dffac0ccba}{simulador()}
+\end{DoxySeeAlso}
+Emula el comportamiento de un jefe. Se ocupa de crear los procesos nave y de mandarles órdenes de acción en cada turno. Gestiona la comunicación entre el simulador y las naves. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Puntero al mapa sobre el que debe trabajar el jefe \\
+\hline
+{\em n\+\_\+equipo} & Número de equipo del jefe \\
+\hline
+{\em fd\+\_\+sim} & Pipe que le permite comunicarse con el simulador \\
+\hline
+{\em sem\+\_\+equipos\+\_\+listos} & Semáforo que permite al simulador saber cúando estan listos los jefes \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{Ver también}
+\hyperlink{nave_8c_a3d3f3f9b58aa6d6db95e19023d33f163}{nave()} 
+
+\hyperlink{simulador_8c_a7ca1584ef7c92847d2a610dffac0ccba}{simulador()} 
+\end{DoxySeeAlso}

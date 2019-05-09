@@ -1,0 +1,70 @@
+\hypertarget{jefe_8c}{}\section{Referencia del Archivo src/jefe.c}
+\label{jefe_8c}\index{src/jefe.\+c@{src/jefe.\+c}}
+
+
+Código fuente de jefe.  
+
+
+{\ttfamily \#include \char`\"{}jefe.\+h\char`\"{}}\newline
+Dependencia gráfica adjunta para jefe.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{jefe_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{jefe_8c_a7cce1e5586fbabeb1af35fc7de5b2bfc}{jefe\+\_\+crear\+\_\+naves} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int n\+\_\+equipo, int fd\+\_\+jefe\mbox{[}\hyperlink{types_8h_aa1f2aba814c6d46772f9694849eeaa7a}{N\+\_\+\+N\+A\+V\+ES}\mbox{]}\mbox{[}2\mbox{]}, pid\+\_\+t pids\+\_\+naves\mbox{[}\hyperlink{types_8h_aa1f2aba814c6d46772f9694849eeaa7a}{N\+\_\+\+N\+A\+V\+ES}\mbox{]})
+\item 
+void \hyperlink{jefe_8c_acc2874834095a0921d3b644130bfb4c6}{jefe} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int n\+\_\+equipo, int fd\+\_\+sim\mbox{[}2\mbox{]}, sem\+\_\+t $\ast$sem\+\_\+equipos\+\_\+listos)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Código fuente de jefe. 
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{jefe_8c_acc2874834095a0921d3b644130bfb4c6}\label{jefe_8c_acc2874834095a0921d3b644130bfb4c6}} 
+\index{jefe.\+c@{jefe.\+c}!jefe@{jefe}}
+\index{jefe@{jefe}!jefe.\+c@{jefe.\+c}}
+\subsubsection{\texorpdfstring{jefe()}{jefe()}}
+{\footnotesize\ttfamily void jefe (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{n\+\_\+equipo,  }\item[{int}]{fd\+\_\+sim\mbox{[}2\mbox{]},  }\item[{sem\+\_\+t $\ast$}]{sem\+\_\+equipos\+\_\+listos }\end{DoxyParamCaption})}
+
+Emula el comportamiento de un jefe. Se ocupa de crear los procesos nave y de mandarles órdenes de acción en cada turno. Gestiona la comunicación entre el simulador y las naves. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Puntero al mapa sobre el que debe trabajar el jefe \\
+\hline
+{\em n\+\_\+equipo} & Número de equipo del jefe \\
+\hline
+{\em fd\+\_\+sim} & Pipe que le permite comunicarse con el simulador \\
+\hline
+{\em sem\+\_\+equipos\+\_\+listos} & Semáforo que permite al simulador saber cúando estan listos los jefes \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{Ver también}
+\hyperlink{nave_8c_a3d3f3f9b58aa6d6db95e19023d33f163}{nave()} 
+
+\hyperlink{simulador_8c_a7ca1584ef7c92847d2a610dffac0ccba}{simulador()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{jefe_8c_a7cce1e5586fbabeb1af35fc7de5b2bfc}\label{jefe_8c_a7cce1e5586fbabeb1af35fc7de5b2bfc}} 
+\index{jefe.\+c@{jefe.\+c}!jefe\+\_\+crear\+\_\+naves@{jefe\+\_\+crear\+\_\+naves}}
+\index{jefe\+\_\+crear\+\_\+naves@{jefe\+\_\+crear\+\_\+naves}!jefe.\+c@{jefe.\+c}}
+\subsubsection{\texorpdfstring{jefe\+\_\+crear\+\_\+naves()}{jefe\_crear\_naves()}}
+{\footnotesize\ttfamily void jefe\+\_\+crear\+\_\+naves (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{n\+\_\+equipo,  }\item[{int}]{fd\+\_\+jefe\mbox{[}\+N\+\_\+\+N\+A\+V\+E\+S\mbox{]}\mbox{[}2\mbox{]},  }\item[{pid\+\_\+t}]{pids\+\_\+naves\mbox{[}\+N\+\_\+\+N\+A\+V\+E\+S\mbox{]} }\end{DoxyParamCaption})}
+
+Crea las naves del jefe y las conexiones entre las naves y el jefe. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Puntero al mapa sobre el que trabajan el jefe y las naves \\
+\hline
+{\em n\+\_\+equipo} & Número de equipo del jefe y las naves \\
+\hline
+{\em fd\+\_\+jefe} & Pipes que conectarán al jefe con sus naves \\
+\hline
+{\em pids\+\_\+naves} & En esta estructura se almacenarán los P\+I\+Ds de las naves que se creen \\
+\hline
+\end{DoxyParams}

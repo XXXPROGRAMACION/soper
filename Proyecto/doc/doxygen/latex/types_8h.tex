@@ -1,0 +1,140 @@
+\hypertarget{types_8h}{}\section{Referencia del Archivo src/types.h}
+\label{types_8h}\index{src/types.\+h@{src/types.\+h}}
+
+
+Define los tipos y constantes de datos.  
+
+
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/mman.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$mqueue.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$semaphore.\+h$>$}\newline
+Dependencia gráfica adjunta para types.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{types_8h__incl}
+\end{center}
+\end{figure}
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{types_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structMensaje}{Mensaje}
+\item 
+struct \hyperlink{structtipo__nave}{tipo\+\_\+nave}
+\item 
+struct \hyperlink{structtipo__casilla}{tipo\+\_\+casilla}
+\item 
+struct \hyperlink{structtipo__mapa}{tipo\+\_\+mapa}
+\end{DoxyCompactItemize}
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{types_8h_ab306668933fb4316ac0f5ef291d13dff}\label{types_8h_ab306668933fb4316ac0f5ef291d13dff}} 
+\#define \hyperlink{types_8h_ab306668933fb4316ac0f5ef291d13dff}{N\+\_\+\+E\+Q\+U\+I\+P\+OS}~4
+\begin{DoxyCompactList}\small\item\em Número de equipos. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_aa1f2aba814c6d46772f9694849eeaa7a}\label{types_8h_aa1f2aba814c6d46772f9694849eeaa7a}} 
+\#define \hyperlink{types_8h_aa1f2aba814c6d46772f9694849eeaa7a}{N\+\_\+\+N\+A\+V\+ES}~3
+\begin{DoxyCompactList}\small\item\em Número de naves por equipo. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a6b20d41d6252e9871430c242cb1a56e7}\label{types_8h_a6b20d41d6252e9871430c242cb1a56e7}} 
+\#define \hyperlink{types_8h_a6b20d41d6252e9871430c242cb1a56e7}{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}~80
+\begin{DoxyCompactList}\small\item\em Tamaño del buffer que se usa para leer de los pipes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_ae0b4816fb45161ef9da5e6d6134ee28a}\label{types_8h_ae0b4816fb45161ef9da5e6d6134ee28a}} 
+\#define \hyperlink{types_8h_ae0b4816fb45161ef9da5e6d6134ee28a}{T\+AM}~256
+\begin{DoxyCompactList}\small\item\em Tamaño máximo de los mensajes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_aa24597a54a085c6c2c33b64138f09eff}\label{types_8h_aa24597a54a085c6c2c33b64138f09eff}} 
+\#define \hyperlink{types_8h_aa24597a54a085c6c2c33b64138f09eff}{M\+A\+X\+\_\+\+M\+SG}~10
+\begin{DoxyCompactList}\small\item\em Número máximo de mensajes en la cola. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a8e4f437d2c4b0bdd426658073d9427a7}\label{types_8h_a8e4f437d2c4b0bdd426658073d9427a7}} 
+\#define \hyperlink{types_8h_a8e4f437d2c4b0bdd426658073d9427a7}{T\+U\+R\+NO}~\char`\"{}turno\char`\"{}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structMensaje}{Mensaje} que envía el simulador a los jefes para indicar que es un turno nuevo. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a1ce3da0d4a8e4638874faeae3b66fbcc}\label{types_8h_a1ce3da0d4a8e4638874faeae3b66fbcc}} 
+\#define \hyperlink{types_8h_a1ce3da0d4a8e4638874faeae3b66fbcc}{F\+IN}~\char`\"{}fin\char`\"{}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structMensaje}{Mensaje} que envía el simulador a los jefes para que estos finalicen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a3905426db8ac81dee33ae9b1bfe87686}\label{types_8h_a3905426db8ac81dee33ae9b1bfe87686}} 
+\#define \hyperlink{types_8h_a3905426db8ac81dee33ae9b1bfe87686}{M\+O\+V\+E\+R\+\_\+\+A\+L\+E\+A\+T\+O\+R\+IO}~\char`\"{}mover\+\_\+aleatorio\char`\"{}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structMensaje}{Mensaje} que envía el jefe a las naves para que estas se muevan. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_ab18ddbfae88062858bc64281fe45f5da}\label{types_8h_ab18ddbfae88062858bc64281fe45f5da}} 
+\#define \hyperlink{types_8h_ab18ddbfae88062858bc64281fe45f5da}{A\+T\+A\+C\+AR}~\char`\"{}atacar\char`\"{}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structMensaje}{Mensaje} que envía el jefe a las naves para que estas ataquen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_ab2851177207489621e5c6e7bfad28919}\label{types_8h_ab2851177207489621e5c6e7bfad28919}} 
+\#define \hyperlink{types_8h_ab2851177207489621e5c6e7bfad28919}{D\+E\+S\+T\+R\+U\+IR}~\char`\"{}destruir\char`\"{}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structMensaje}{Mensaje} que envía el jefe a las naves para que estas finalicen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a093baacc5bbbad74df6032772040b5e4}\label{types_8h_a093baacc5bbbad74df6032772040b5e4}} 
+\#define \hyperlink{types_8h_a093baacc5bbbad74df6032772040b5e4}{N\+O\+M\+B\+R\+E\+\_\+\+C\+O\+LA}~\char`\"{}/cola\+\_\+simulador\char`\"{}
+\begin{DoxyCompactList}\small\item\em Nombre de la cola que comunica a las naves con el simulador. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_abc6e82cc8fb483f39e5d7911fc968523}\label{types_8h_abc6e82cc8fb483f39e5d7911fc968523}} 
+\#define \hyperlink{types_8h_abc6e82cc8fb483f39e5d7911fc968523}{S\+E\+M\+\_\+\+E\+Q\+U\+I\+P\+O\+S\+\_\+\+L\+I\+S\+T\+OS}~\char`\"{}sem\+\_\+equipos\+\_\+listos\char`\"{}
+\begin{DoxyCompactList}\small\item\em Nombre del semáforo que controla que todos los equipos estén listos. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a89e06c98ba9a39d383573c9dfbfc9cfd}\label{types_8h_a89e06c98ba9a39d383573c9dfbfc9cfd}} 
+\#define \hyperlink{types_8h_a89e06c98ba9a39d383573c9dfbfc9cfd}{S\+E\+M\+\_\+\+A\+L\+A\+R\+MA}~\char`\"{}sem\+\_\+alarma\char`\"{}
+\begin{DoxyCompactList}\small\item\em Nombre del semáforo que controla la alarma del simulador. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a1d1734c6fa929d193aec55de06e7696b}\label{types_8h_a1d1734c6fa929d193aec55de06e7696b}} 
+\#define \hyperlink{types_8h_a1d1734c6fa929d193aec55de06e7696b}{S\+E\+M\+\_\+\+M\+O\+N\+I\+T\+OR}~\char`\"{}sem\+\_\+monitor\char`\"{}
+\begin{DoxyCompactList}\small\item\em Nombre del semáforo que controla la sincronización simulador-\/monitor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_ad343c34f5cf587d0ee0db7ba56c303cd}\label{types_8h_ad343c34f5cf587d0ee0db7ba56c303cd}} 
+\#define \hyperlink{types_8h_ad343c34f5cf587d0ee0db7ba56c303cd}{S\+HM}~\char`\"{}shm\char`\"{}
+\begin{DoxyCompactList}\small\item\em Nombre de la memoria compartida. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_aef2eccdd4c60af9c7f30ed4eb2a567b0}\label{types_8h_aef2eccdd4c60af9c7f30ed4eb2a567b0}} 
+\#define \hyperlink{types_8h_aef2eccdd4c60af9c7f30ed4eb2a567b0}{M\+A\+P\+A\+\_\+\+M\+A\+X\+\_\+X}~20
+\begin{DoxyCompactList}\small\item\em Número de columnas del mapa. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a3f33f475897a86ab01a06d506eb0d925}\label{types_8h_a3f33f475897a86ab01a06d506eb0d925}} 
+\#define \hyperlink{types_8h_a3f33f475897a86ab01a06d506eb0d925}{M\+A\+P\+A\+\_\+\+M\+A\+X\+\_\+Y}~20
+\begin{DoxyCompactList}\small\item\em Número de filas del mapa. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_ae58c99716cdc7367c33370378abc028e}\label{types_8h_ae58c99716cdc7367c33370378abc028e}} 
+\#define \hyperlink{types_8h_ae58c99716cdc7367c33370378abc028e}{S\+C\+R\+E\+E\+N\+\_\+\+R\+E\+F\+R\+E\+SH}~10000
+\begin{DoxyCompactList}\small\item\em Frequencia de refresco del mapa en el monitor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_adb88bdcd56a92b317684f760ff8e45ea}\label{types_8h_adb88bdcd56a92b317684f760ff8e45ea}} 
+\#define \hyperlink{types_8h_adb88bdcd56a92b317684f760ff8e45ea}{S\+Y\+M\+B\+\_\+\+V\+A\+C\+IO}~\textquotesingle{}.\textquotesingle{}
+\begin{DoxyCompactList}\small\item\em Símbolo para casilla vacia. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_acbaa4801c729e0d091227d4f64a51c9c}\label{types_8h_acbaa4801c729e0d091227d4f64a51c9c}} 
+\#define \hyperlink{types_8h_acbaa4801c729e0d091227d4f64a51c9c}{S\+Y\+M\+B\+\_\+\+T\+O\+C\+A\+DO}~\textquotesingle{}\%\textquotesingle{}
+\begin{DoxyCompactList}\small\item\em Símbolo para tocado. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a9b71befc279d8c06f47141227e7e6da9}\label{types_8h_a9b71befc279d8c06f47141227e7e6da9}} 
+\#define \hyperlink{types_8h_a9b71befc279d8c06f47141227e7e6da9}{S\+Y\+M\+B\+\_\+\+D\+E\+S\+T\+R\+U\+I\+DO}~\textquotesingle{}X\textquotesingle{}
+\begin{DoxyCompactList}\small\item\em Símbolo para destruido. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a8335c476ccea82eea1ba65a7f64afe6b}\label{types_8h_a8335c476ccea82eea1ba65a7f64afe6b}} 
+\#define \hyperlink{types_8h_a8335c476ccea82eea1ba65a7f64afe6b}{S\+Y\+M\+B\+\_\+\+A\+G\+UA}~\textquotesingle{}w\textquotesingle{}
+\begin{DoxyCompactList}\small\item\em Símbolo para agua. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_ade0a06566eb0ebcdbbd6cad6e1bd4f2b}\label{types_8h_ade0a06566eb0ebcdbbd6cad6e1bd4f2b}} 
+\#define \hyperlink{types_8h_ade0a06566eb0ebcdbbd6cad6e1bd4f2b}{V\+I\+D\+A\+\_\+\+M\+AX}~10
+\begin{DoxyCompactList}\small\item\em Vida inicial de una nave. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_ade0024218fd0d3e02f81dfbbb85a3441}\label{types_8h_ade0024218fd0d3e02f81dfbbb85a3441}} 
+\#define \hyperlink{types_8h_ade0024218fd0d3e02f81dfbbb85a3441}{A\+T\+A\+Q\+U\+E\+\_\+\+A\+L\+C\+A\+N\+CE}~20
+\begin{DoxyCompactList}\small\item\em Distancia máxima de un ataque. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a07b6ef9952b43fc051ae7ec4ed494fd3}\label{types_8h_a07b6ef9952b43fc051ae7ec4ed494fd3}} 
+\#define \hyperlink{types_8h_a07b6ef9952b43fc051ae7ec4ed494fd3}{A\+T\+A\+Q\+U\+E\+\_\+\+D\+A\+NO}~50
+\begin{DoxyCompactList}\small\item\em Daño de un ataque. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{types_8h_a4f57e1217f555fee4251f319799b9bff}\label{types_8h_a4f57e1217f555fee4251f319799b9bff}} 
+\#define \hyperlink{types_8h_a4f57e1217f555fee4251f319799b9bff}{T\+U\+R\+N\+O\+\_\+\+S\+E\+CS}~2
+\begin{DoxyCompactList}\small\item\em Segundos que dura un turno. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{types_8h_a8aa1e6a79521de10e22a0a7574f2c8a5}\label{types_8h_a8aa1e6a79521de10e22a0a7574f2c8a5}} 
+char \hyperlink{types_8h_a8aa1e6a79521de10e22a0a7574f2c8a5}{symbol\+\_\+equipos} \mbox{[}\hyperlink{types_8h_ab306668933fb4316ac0f5ef291d13dff}{N\+\_\+\+E\+Q\+U\+I\+P\+OS}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Símbolos de los diferentes equipos en el mapa (\hyperlink{mapa_8c}{mapa.\+c}) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Define los tipos y constantes de datos. 
+

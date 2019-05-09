@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto SOPER: Referencia del Archivo src/monitor.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Proyecto SOPER
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo monitor.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Código fuente del monitor.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;sys/mman.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;mqueue.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="gamescreen_8h_source.html">gamescreen.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="mapa_8h_source.html">mapa.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para monitor.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="monitor_8c__incl.png" border="0" usemap="#src_2monitor_8c" alt=""/></div>
+<map name="src_2monitor_8c" id="src_2monitor_8c">
+<area shape="rect" id="node14" href="gamescreen_8h.html" title="Cabecera del modo pantalla. " alt="" coords="1056,80,1160,107"/>
+<area shape="rect" id="node15" href="mapa_8h.html" title="Cabecera del mapa. " alt="" coords="611,80,677,107"/>
+<area shape="rect" id="node16" href="types_8h.html" title="Define los tipos y constantes de datos. " alt="" coords="626,155,691,181"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a19b6b23fdb523f12cdc3a096dcd92d25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monitor_8c.html#a19b6b23fdb523f12cdc3a096dcd92d25">mapa_print</a> (<a class="el" href="structtipo__mapa.html">tipo_mapa</a> *mapa)</td></tr>
+<tr class="separator:a19b6b23fdb523f12cdc3a096dcd92d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac549a91c75c8860d52299ffd09451849"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monitor_8c.html#ac549a91c75c8860d52299ffd09451849">monitor_configurar_semaforos</a> (sem_t **sem_monitor)</td></tr>
+<tr class="separator:ac549a91c75c8860d52299ffd09451849"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c139d68d58c9d8b1fe46230d5ac7f02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monitor_8c.html#a2c139d68d58c9d8b1fe46230d5ac7f02">monitor_configurar_memoria_compartida</a> (int *shm, <a class="el" href="structtipo__mapa.html">tipo_mapa</a> **mapa)</td></tr>
+<tr class="separator:a2c139d68d58c9d8b1fe46230d5ac7f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fb5c636253d81a14119899234631e04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monitor_8c.html#a1fb5c636253d81a14119899234631e04">simulador_configurar_manejador</a> ()</td></tr>
+<tr class="separator:a1fb5c636253d81a14119899234631e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b575b72100cf87b4803476ed146be02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monitor_8c.html#a9b575b72100cf87b4803476ed146be02">manejador_SIGINT</a> (int pid)</td></tr>
+<tr class="separator:a9b575b72100cf87b4803476ed146be02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="monitor_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Código fuente del monitor. </p>
+</div><h2 class="groupheader">Documentación de las funciones</h2>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Ejecuta el monitor </p>
+
+</div>
+</div>
+<a id="a9b575b72100cf87b4803476ed146be02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b575b72100cf87b4803476ed146be02">&#9670;&nbsp;</a></span>manejador_SIGINT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void manejador_SIGINT </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Manejador de SIGINT. Hace <a class="el" href="gamescreen_8c.html#af3bc8be95518f1d57d6d201a980359be">screen_end()</a> para finalizar el modo pantalla. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pid</td><td>Id del proceso</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Manejador de SIGINT. Hace unlink de los recursos compartidos y envía SIGKILL a todos los procesos de la simulación. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pid</td><td>Id del proceso </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a19b6b23fdb523f12cdc3a096dcd92d25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19b6b23fdb523f12cdc3a096dcd92d25">&#9670;&nbsp;</a></span>mapa_print()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mapa_print </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtipo__mapa.html">tipo_mapa</a> *&#160;</td>
+          <td class="paramname"><em>mapa</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Imprime el mapa </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mapa</td><td>Mapa a imprimir </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2c139d68d58c9d8b1fe46230d5ac7f02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c139d68d58c9d8b1fe46230d5ac7f02">&#9670;&nbsp;</a></span>monitor_configurar_memoria_compartida()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void monitor_configurar_memoria_compartida </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>shm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtipo__mapa.html">tipo_mapa</a> **&#160;</td>
+          <td class="paramname"><em>mapa</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Configura la memoria compartida necesaria para el monitor. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shm</td><td>Referencia a la memoria compartida que se va a abrir </td></tr>
+    <tr><td class="paramname">mapa</td><td>Mapa a abrir en memoria compartida </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac549a91c75c8860d52299ffd09451849"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac549a91c75c8860d52299ffd09451849">&#9670;&nbsp;</a></span>monitor_configurar_semaforos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void monitor_configurar_semaforos </td>
+          <td>(</td>
+          <td class="paramtype">sem_t **&#160;</td>
+          <td class="paramname"><em>sem_monitor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Configura el semáforo que permite al monitor esperar hasta que comience la simulación. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sem_monitor</td><td>Semáforo que permite al monitor esperar hasta que comience la simulación </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1fb5c636253d81a14119899234631e04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fb5c636253d81a14119899234631e04">&#9670;&nbsp;</a></span>simulador_configurar_manejador()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simulador_configurar_manejador </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Crea el manejador de SIGINT, en caso de que se desee interrumpir la ejecución a mitad del proceso. </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

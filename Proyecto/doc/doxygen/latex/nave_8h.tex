@@ -1,0 +1,60 @@
+\hypertarget{nave_8h}{}\section{Referencia del Archivo src/nave.h}
+\label{nave_8h}\index{src/nave.\+h@{src/nave.\+h}}
+
+
+Recoge la funcionalidad de una nave.  
+
+
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mapa.\+h\char`\"{}}\newline
+Dependencia gráfica adjunta para nave.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{nave_8h__incl}
+\end{center}
+\end{figure}
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{nave_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{nave_8h_a3d3f3f9b58aa6d6db95e19023d33f163}{nave} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int n\+\_\+equipo, int n\+\_\+nave, int fd\+\_\+jefe\mbox{[}2\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Recoge la funcionalidad de una nave. 
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{nave_8h_a3d3f3f9b58aa6d6db95e19023d33f163}\label{nave_8h_a3d3f3f9b58aa6d6db95e19023d33f163}} 
+\index{nave.\+h@{nave.\+h}!nave@{nave}}
+\index{nave@{nave}!nave.\+h@{nave.\+h}}
+\subsubsection{\texorpdfstring{nave()}{nave()}}
+{\footnotesize\ttfamily void nave (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{n\+\_\+equipo,  }\item[{int}]{n\+\_\+nave,  }\item[{int}]{fd\+\_\+jefe\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+Emula el comportamiento de una nave, \char`\"{}obedeciendo\char`\"{} las órdenes de su jefe e informando de sus acciones al simulador. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa sobre el que se situa la nave \\
+\hline
+{\em n\+\_\+equipo} & Número de equipo de la nave \\
+\hline
+{\em n\+\_\+nave} & Número de la nave \\
+\hline
+{\em fd\+\_\+jefe} & Pipe que conecta la nave con su jefe \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{Ver también}
+\hyperlink{jefe_8c_acc2874834095a0921d3b644130bfb4c6}{jefe()} 
+
+\hyperlink{simulador_8c_a7ca1584ef7c92847d2a610dffac0ccba}{simulador()} 
+\end{DoxySeeAlso}

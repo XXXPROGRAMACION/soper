@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto SOPER: Fichero Fuente src/mapa.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Proyecto SOPER
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">mapa.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="mapa_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef SRC_MAPA_H_</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define SRC_MAPA_H_</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">int</span> <a class="code" href="mapa_8h.html#a806dc48308c61c06fe9c5c5783bfad8d">mapa_clean_casilla</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <span class="keywordtype">int</span> pos_y, <span class="keywordtype">int</span> pos_x);</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<a class="code" href="structtipo__casilla.html">tipo_casilla</a> <a class="code" href="mapa_8h.html#adedc40364bffd27208a7287434c28c15">mapa_get_casilla</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <span class="keywordtype">int</span> posy, <span class="keywordtype">int</span> posx);</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">int</span> <a class="code" href="mapa_8h.html#a85ae5ebedb02f18ac5a9c0d9296b20e9">mapa_get_distancia</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <span class="keywordtype">int</span> ori_y, <span class="keywordtype">int</span> ori_x, <span class="keywordtype">int</span> target_y, <span class="keywordtype">int</span> target_x);</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<a class="code" href="structtipo__nave.html">tipo_nave</a> <a class="code" href="mapa_8h.html#ae949a08280aeec8b57b32906b6d73f78">mapa_get_nave</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <span class="keywordtype">int</span> equipo, <span class="keywordtype">int</span> num_nave);</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">int</span> <a class="code" href="mapa_8h.html#a407e4361ece24cdd19cb0070181fbb91">mapa_get_num_naves</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <span class="keywordtype">int</span> equipo);</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">char</span> <a class="code" href="mapa_8h.html#a857fce0818018532b801cd6d4df10545">mapa_get_symbol</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <span class="keywordtype">int</span> pos_y, <span class="keywordtype">int</span> pos_x);</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="mapa_8h.html#a67d3dfd58bcde49ba39a670eda876ae0">mapa_is_casilla_vacia</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <span class="keywordtype">int</span> pos_y, <span class="keywordtype">int</span> pos_x);</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapa_8h.html#a555fccad30331311a6185a03c4a53f64">mapa_restore</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa);</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapa_8h.html#a70be4283077b695807f0e4448e13df0e">mapa_send_misil</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <span class="keywordtype">int</span> origen_y, <span class="keywordtype">int</span> origen_x, <span class="keywordtype">int</span> target_y, <span class="keywordtype">int</span> target_x);</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">int</span> <a class="code" href="mapa_8h.html#a9ffafdce1656b32f99897e5395cf3e04">mapa_set_nave</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <a class="code" href="structtipo__nave.html">tipo_nave</a> <a class="code" href="nave_8c.html#a3d3f3f9b58aa6d6db95e19023d33f163">nave</a>);</div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapa_8h.html#a3a2e26d647b360f3cdf093a03ee15b79">mapa_set_num_naves</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <span class="keywordtype">int</span> equipo, <span class="keywordtype">int</span> num_naves);</div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapa_8h.html#ae732477c8a019a0c48fbc6cb65874b49">mapa_set_symbol</a>(<a class="code" href="structtipo__mapa.html">tipo_mapa</a> *mapa, <span class="keywordtype">int</span> pos_y, <span class="keywordtype">int</span> pos_x, <span class="keywordtype">char</span> symbol);</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* SRC_MAPA_H_ */</span><span class="preprocessor"></span></div><div class="ttc" id="mapa_8h_html_ae949a08280aeec8b57b32906b6d73f78"><div class="ttname"><a href="mapa_8h.html#ae949a08280aeec8b57b32906b6d73f78">mapa_get_nave</a></div><div class="ttdeci">tipo_nave mapa_get_nave(tipo_mapa *mapa, int equipo, int num_nave)</div><div class="ttdef"><b>Definition:</b> mapa.c:59</div></div>
+<div class="ttc" id="nave_8c_html_a3d3f3f9b58aa6d6db95e19023d33f163"><div class="ttname"><a href="nave_8c.html#a3d3f3f9b58aa6d6db95e19023d33f163">nave</a></div><div class="ttdeci">void nave(tipo_mapa *mapa, int n_equipo, int n_nave, int fd_jefe[2])</div><div class="ttdef"><b>Definition:</b> nave.c:20</div></div>
+<div class="ttc" id="types_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div><div class="ttdoc">Define los tipos y constantes de datos. </div></div>
+<div class="ttc" id="mapa_8h_html_a806dc48308c61c06fe9c5c5783bfad8d"><div class="ttname"><a href="mapa_8h.html#a806dc48308c61c06fe9c5c5783bfad8d">mapa_clean_casilla</a></div><div class="ttdeci">int mapa_clean_casilla(tipo_mapa *mapa, int pos_y, int pos_x)</div><div class="ttdef"><b>Definition:</b> mapa.c:17</div></div>
+<div class="ttc" id="structtipo__casilla_html"><div class="ttname"><a href="structtipo__casilla.html">tipo_casilla</a></div><div class="ttdef"><b>Definition:</b> types.h:82</div></div>
+<div class="ttc" id="structtipo__mapa_html"><div class="ttname"><a href="structtipo__mapa.html">tipo_mapa</a></div><div class="ttdef"><b>Definition:</b> types.h:88</div></div>
+<div class="ttc" id="mapa_8h_html_a67d3dfd58bcde49ba39a670eda876ae0"><div class="ttname"><a href="mapa_8h.html#a67d3dfd58bcde49ba39a670eda876ae0">mapa_is_casilla_vacia</a></div><div class="ttdeci">bool mapa_is_casilla_vacia(tipo_mapa *mapa, int pos_y, int pos_x)</div><div class="ttdef"><b>Definition:</b> mapa.c:91</div></div>
+<div class="ttc" id="mapa_8h_html_a407e4361ece24cdd19cb0070181fbb91"><div class="ttname"><a href="mapa_8h.html#a407e4361ece24cdd19cb0070181fbb91">mapa_get_num_naves</a></div><div class="ttdeci">int mapa_get_num_naves(tipo_mapa *mapa, int equipo)</div><div class="ttdef"><b>Definition:</b> mapa.c:69</div></div>
+<div class="ttc" id="mapa_8h_html_a85ae5ebedb02f18ac5a9c0d9296b20e9"><div class="ttname"><a href="mapa_8h.html#a85ae5ebedb02f18ac5a9c0d9296b20e9">mapa_get_distancia</a></div><div class="ttdeci">int mapa_get_distancia(tipo_mapa *mapa, int ori_y, int ori_x, int target_y, int target_x)</div><div class="ttdef"><b>Definition:</b> mapa.c:44</div></div>
+<div class="ttc" id="mapa_8h_html_a70be4283077b695807f0e4448e13df0e"><div class="ttname"><a href="mapa_8h.html#a70be4283077b695807f0e4448e13df0e">mapa_send_misil</a></div><div class="ttdeci">void mapa_send_misil(tipo_mapa *mapa, int origen_y, int origen_x, int target_y, int target_x)</div><div class="ttdef"><b>Definition:</b> mapa.c:164</div></div>
+<div class="ttc" id="mapa_8h_html_a857fce0818018532b801cd6d4df10545"><div class="ttname"><a href="mapa_8h.html#a857fce0818018532b801cd6d4df10545">mapa_get_symbol</a></div><div class="ttdeci">char mapa_get_symbol(tipo_mapa *mapa, int pos_y, int pos_x)</div><div class="ttdef"><b>Definition:</b> mapa.c:80</div></div>
+<div class="ttc" id="mapa_8h_html_a555fccad30331311a6185a03c4a53f64"><div class="ttname"><a href="mapa_8h.html#a555fccad30331311a6185a03c4a53f64">mapa_restore</a></div><div class="ttdeci">void mapa_restore(tipo_mapa *mapa)</div><div class="ttdef"><b>Definition:</b> mapa.c:99</div></div>
+<div class="ttc" id="mapa_8h_html_a9ffafdce1656b32f99897e5395cf3e04"><div class="ttname"><a href="mapa_8h.html#a9ffafdce1656b32f99897e5395cf3e04">mapa_set_nave</a></div><div class="ttdeci">int mapa_set_nave(tipo_mapa *mapa, tipo_nave nave)</div><div class="ttdef"><b>Definition:</b> mapa.c:131</div></div>
+<div class="ttc" id="structtipo__nave_html"><div class="ttname"><a href="structtipo__nave.html">tipo_nave</a></div><div class="ttdef"><b>Definition:</b> types.h:72</div></div>
+<div class="ttc" id="mapa_8h_html_ae732477c8a019a0c48fbc6cb65874b49"><div class="ttname"><a href="mapa_8h.html#ae732477c8a019a0c48fbc6cb65874b49">mapa_set_symbol</a></div><div class="ttdeci">void mapa_set_symbol(tipo_mapa *mapa, int pos_y, int pos_x, char symbol)</div><div class="ttdef"><b>Definition:</b> mapa.c:121</div></div>
+<div class="ttc" id="mapa_8h_html_a3a2e26d647b360f3cdf093a03ee15b79"><div class="ttname"><a href="mapa_8h.html#a3a2e26d647b360f3cdf093a03ee15b79">mapa_set_num_naves</a></div><div class="ttdeci">void mapa_set_num_naves(tipo_mapa *mapa, int equipo, int num_naves)</div><div class="ttdef"><b>Definition:</b> mapa.c:151</div></div>
+<div class="ttc" id="mapa_8h_html_adedc40364bffd27208a7287434c28c15"><div class="ttname"><a href="mapa_8h.html#adedc40364bffd27208a7287434c28c15">mapa_get_casilla</a></div><div class="ttdeci">tipo_casilla mapa_get_casilla(tipo_mapa *mapa, int posy, int posx)</div><div class="ttdef"><b>Definition:</b> mapa.c:31</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

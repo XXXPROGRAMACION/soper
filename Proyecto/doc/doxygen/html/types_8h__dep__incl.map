@@ -1,0 +1,10 @@
+<map id="src/types.h" name="src/types.h">
+<area shape="rect" id="node2" href="$jefe_8h.html" title="Recoge la funcionalidad de un jefe. " alt="" coords="5,229,81,256"/>
+<area shape="rect" id="node4" href="$simulador_8c.html" title="Código fuente del simulador. " alt="" coords="171,304,281,331"/>
+<area shape="rect" id="node5" href="$nave_8h.html" title="Recoge la funcionalidad de una nave. " alt="" coords="106,155,189,181"/>
+<area shape="rect" id="node7" href="$mapa_8h.html" title="Cabecera del mapa. " alt="" coords="264,80,351,107"/>
+<area shape="rect" id="node9" href="$monitor_8c.html" title="Código fuente del monitor. " alt="" coords="426,155,525,181"/>
+<area shape="rect" id="node3" href="$jefe_8c.html" title="Código fuente de jefe. " alt="" coords="5,304,81,331"/>
+<area shape="rect" id="node6" href="$nave_8c.html" title="Codigo fuente de nave. " alt="" coords="106,229,189,256"/>
+<area shape="rect" id="node8" href="$mapa_8c.html" title="Código fuente del mapa. " alt="" coords="315,155,401,181"/>
+</map>

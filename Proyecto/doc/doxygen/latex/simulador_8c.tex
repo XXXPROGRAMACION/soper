@@ -1,0 +1,174 @@
+\hypertarget{simulador_8c}{}\section{Referencia del Archivo src/simulador.c}
+\label{simulador_8c}\index{src/simulador.\+c@{src/simulador.\+c}}
+
+
+Código fuente del simulador.  
+
+
+{\ttfamily \#include \char`\"{}jefe.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mapa.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+Dependencia gráfica adjunta para simulador.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{simulador_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{simulador_8c_a7ca1584ef7c92847d2a610dffac0ccba}{simulador} ()
+\item 
+void \hyperlink{simulador_8c_a844708a2e47c074af2c3df7bbc08debe}{simulador\+\_\+crear\+\_\+jefes} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int fd\+\_\+sim\mbox{[}\hyperlink{types_8h_ab306668933fb4316ac0f5ef291d13dff}{N\+\_\+\+E\+Q\+U\+I\+P\+OS}\mbox{]}\mbox{[}2\mbox{]}, sem\+\_\+t $\ast$sem\+\_\+equipos\+\_\+listos)
+\item 
+void \hyperlink{simulador_8c_aafad343d1f6fcf94e098090354257fec}{simulador\+\_\+configurar\+\_\+semaforos} (sem\+\_\+t $\ast$$\ast$sem\+\_\+monitor, sem\+\_\+t $\ast$$\ast$sem\+\_\+equipos\+\_\+listos)
+\item 
+void \hyperlink{simulador_8c_ab7458076c9646b481352dbcaa4962ff4}{simulador\+\_\+configurar\+\_\+manejadores} ()
+\item 
+void \hyperlink{simulador_8c_ab6ce2c925b1ddbd366f414e246565bfb}{simulador\+\_\+configurar\+\_\+cola} (mqd\+\_\+t $\ast$cola)
+\item 
+void \hyperlink{simulador_8c_a28bc47609f58946ba64fb3dd386819c0}{simulador\+\_\+configurar\+\_\+memoria\+\_\+compartida} (int $\ast$shm, \hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$$\ast$mapa)
+\item 
+void \hyperlink{simulador_8c_a7a757062b703107b35d26563c82d07d7}{simulador\+\_\+configurar\+\_\+mapa} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa)
+\item 
+void \hyperlink{simulador_8c_ac3ea499f27bd220f1d39122cce587119}{simulador\+\_\+configurar\+\_\+naves} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa)
+\item 
+void \hyperlink{simulador_8c_a9b575b72100cf87b4803476ed146be02}{manejador\+\_\+\+S\+I\+G\+I\+NT} (int pid)
+\item 
+void \hyperlink{simulador_8c_a1f0c3c2b53531f97806cd6db2f5c68e0}{manejador\+\_\+\+S\+I\+G\+A\+L\+RM} (int pid)
+\item 
+void \hyperlink{simulador_8c_a69385757034f67a3cd63887bdc544b69}{manejador\+\_\+\+S\+I\+G\+T\+E\+RM} (int pid)
+\item 
+int \hyperlink{simulador_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{simulador_8c_a350a4b7e3f7ddadd409eb761bbfb28cb}\label{simulador_8c_a350a4b7e3f7ddadd409eb761bbfb28cb}} 
+sem\+\_\+t $\ast$ {\bfseries sem\+\_\+alarma} = N\+U\+LL
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Código fuente del simulador. 
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{simulador_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{simulador_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{simulador.\+c@{simulador.\+c}!main@{main}}
+\index{main@{main}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Ejecuta el simulador \mbox{\Hypertarget{simulador_8c_a1f0c3c2b53531f97806cd6db2f5c68e0}\label{simulador_8c_a1f0c3c2b53531f97806cd6db2f5c68e0}} 
+\index{simulador.\+c@{simulador.\+c}!manejador\+\_\+\+S\+I\+G\+A\+L\+RM@{manejador\+\_\+\+S\+I\+G\+A\+L\+RM}}
+\index{manejador\+\_\+\+S\+I\+G\+A\+L\+RM@{manejador\+\_\+\+S\+I\+G\+A\+L\+RM}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{manejador\+\_\+\+S\+I\+G\+A\+L\+R\+M()}{manejador\_SIGALRM()}}
+{\footnotesize\ttfamily void manejador\+\_\+\+S\+I\+G\+A\+L\+RM (\begin{DoxyParamCaption}\item[{int}]{pid }\end{DoxyParamCaption})}
+
+Manejador de S\+I\+G\+A\+L\+A\+RM. Sube el semáforo que permite el fin del turno. \mbox{\Hypertarget{simulador_8c_a9b575b72100cf87b4803476ed146be02}\label{simulador_8c_a9b575b72100cf87b4803476ed146be02}} 
+\index{simulador.\+c@{simulador.\+c}!manejador\+\_\+\+S\+I\+G\+I\+NT@{manejador\+\_\+\+S\+I\+G\+I\+NT}}
+\index{manejador\+\_\+\+S\+I\+G\+I\+NT@{manejador\+\_\+\+S\+I\+G\+I\+NT}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{manejador\+\_\+\+S\+I\+G\+I\+N\+T()}{manejador\_SIGINT()}}
+{\footnotesize\ttfamily void manejador\+\_\+\+S\+I\+G\+I\+NT (\begin{DoxyParamCaption}\item[{int}]{pid }\end{DoxyParamCaption})}
+
+Manejador de S\+I\+G\+I\+NT. Hace unlink de los recursos compartidos y envía S\+I\+G\+K\+I\+LL a todos los procesos de la simulación. 
+\begin{DoxyParams}{Parámetros}
+{\em pid} & Id del proceso \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{simulador_8c_a69385757034f67a3cd63887bdc544b69}\label{simulador_8c_a69385757034f67a3cd63887bdc544b69}} 
+\index{simulador.\+c@{simulador.\+c}!manejador\+\_\+\+S\+I\+G\+T\+E\+RM@{manejador\+\_\+\+S\+I\+G\+T\+E\+RM}}
+\index{manejador\+\_\+\+S\+I\+G\+T\+E\+RM@{manejador\+\_\+\+S\+I\+G\+T\+E\+RM}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{manejador\+\_\+\+S\+I\+G\+T\+E\+R\+M()}{manejador\_SIGTERM()}}
+{\footnotesize\ttfamily void manejador\+\_\+\+S\+I\+G\+T\+E\+RM (\begin{DoxyParamCaption}\item[{int}]{pid }\end{DoxyParamCaption})}
+
+Manejador de S\+I\+G\+T\+E\+RM. Finaliza la ejecución. \mbox{\Hypertarget{simulador_8c_a7ca1584ef7c92847d2a610dffac0ccba}\label{simulador_8c_a7ca1584ef7c92847d2a610dffac0ccba}} 
+\index{simulador.\+c@{simulador.\+c}!simulador@{simulador}}
+\index{simulador@{simulador}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{simulador()}{simulador()}}
+{\footnotesize\ttfamily void simulador (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Inicializa los recursos compartidos, crea los jefes y ejecuta el bucle principal del simulador hasta termina la batalla. Al finalizar libera los recursos compartidos. \mbox{\Hypertarget{simulador_8c_ab6ce2c925b1ddbd366f414e246565bfb}\label{simulador_8c_ab6ce2c925b1ddbd366f414e246565bfb}} 
+\index{simulador.\+c@{simulador.\+c}!simulador\+\_\+configurar\+\_\+cola@{simulador\+\_\+configurar\+\_\+cola}}
+\index{simulador\+\_\+configurar\+\_\+cola@{simulador\+\_\+configurar\+\_\+cola}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{simulador\+\_\+configurar\+\_\+cola()}{simulador\_configurar\_cola()}}
+{\footnotesize\ttfamily void simulador\+\_\+configurar\+\_\+cola (\begin{DoxyParamCaption}\item[{mqd\+\_\+t $\ast$}]{cola }\end{DoxyParamCaption})}
+
+Abre o crea la cola de mensajes utilizada para que las naves comuniquen sus acciones al simulador. 
+\begin{DoxyParams}{Parámetros}
+{\em cola} & Cola de mensajes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{simulador_8c_ab7458076c9646b481352dbcaa4962ff4}\label{simulador_8c_ab7458076c9646b481352dbcaa4962ff4}} 
+\index{simulador.\+c@{simulador.\+c}!simulador\+\_\+configurar\+\_\+manejadores@{simulador\+\_\+configurar\+\_\+manejadores}}
+\index{simulador\+\_\+configurar\+\_\+manejadores@{simulador\+\_\+configurar\+\_\+manejadores}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{simulador\+\_\+configurar\+\_\+manejadores()}{simulador\_configurar\_manejadores()}}
+{\footnotesize\ttfamily void simulador\+\_\+configurar\+\_\+manejadores (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Crea los manejadores de las señales utilizadas. S\+I\+G\+I\+NT en caso de que se desee interrumpir la ejecución a mitad del proceso, S\+I\+G\+A\+L\+RM para la duración de los turnos y S\+I\+G\+T\+E\+RM para que las naves finalicen cuando los jefes se lo ordenen. \mbox{\Hypertarget{simulador_8c_a7a757062b703107b35d26563c82d07d7}\label{simulador_8c_a7a757062b703107b35d26563c82d07d7}} 
+\index{simulador.\+c@{simulador.\+c}!simulador\+\_\+configurar\+\_\+mapa@{simulador\+\_\+configurar\+\_\+mapa}}
+\index{simulador\+\_\+configurar\+\_\+mapa@{simulador\+\_\+configurar\+\_\+mapa}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{simulador\+\_\+configurar\+\_\+mapa()}{simulador\_configurar\_mapa()}}
+{\footnotesize\ttfamily void simulador\+\_\+configurar\+\_\+mapa (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa }\end{DoxyParamCaption})}
+
+Inicializa todas las casillas del mapa de la simulación 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{simulador_8c_a28bc47609f58946ba64fb3dd386819c0}\label{simulador_8c_a28bc47609f58946ba64fb3dd386819c0}} 
+\index{simulador.\+c@{simulador.\+c}!simulador\+\_\+configurar\+\_\+memoria\+\_\+compartida@{simulador\+\_\+configurar\+\_\+memoria\+\_\+compartida}}
+\index{simulador\+\_\+configurar\+\_\+memoria\+\_\+compartida@{simulador\+\_\+configurar\+\_\+memoria\+\_\+compartida}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{simulador\+\_\+configurar\+\_\+memoria\+\_\+compartida()}{simulador\_configurar\_memoria\_compartida()}}
+{\footnotesize\ttfamily void simulador\+\_\+configurar\+\_\+memoria\+\_\+compartida (\begin{DoxyParamCaption}\item[{int $\ast$}]{shm,  }\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$$\ast$}]{mapa }\end{DoxyParamCaption})}
+
+Crea la memoria compartida en la que se almacena el mapa de la simulación. 
+\begin{DoxyParams}{Parámetros}
+{\em shm} & Memoria compartida que se debe crear \\
+\hline
+{\em mapa} & Mapa almacenado en la memoria compartida \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{simulador_8c_ac3ea499f27bd220f1d39122cce587119}\label{simulador_8c_ac3ea499f27bd220f1d39122cce587119}} 
+\index{simulador.\+c@{simulador.\+c}!simulador\+\_\+configurar\+\_\+naves@{simulador\+\_\+configurar\+\_\+naves}}
+\index{simulador\+\_\+configurar\+\_\+naves@{simulador\+\_\+configurar\+\_\+naves}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{simulador\+\_\+configurar\+\_\+naves()}{simulador\_configurar\_naves()}}
+{\footnotesize\ttfamily void simulador\+\_\+configurar\+\_\+naves (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa }\end{DoxyParamCaption})}
+
+Configura y añade al mapa las naves de los diferentes equipos, que aparecen en las cuatro esquinas del mapa. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{simulador_8c_aafad343d1f6fcf94e098090354257fec}\label{simulador_8c_aafad343d1f6fcf94e098090354257fec}} 
+\index{simulador.\+c@{simulador.\+c}!simulador\+\_\+configurar\+\_\+semaforos@{simulador\+\_\+configurar\+\_\+semaforos}}
+\index{simulador\+\_\+configurar\+\_\+semaforos@{simulador\+\_\+configurar\+\_\+semaforos}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{simulador\+\_\+configurar\+\_\+semaforos()}{simulador\_configurar\_semaforos()}}
+{\footnotesize\ttfamily void simulador\+\_\+configurar\+\_\+semaforos (\begin{DoxyParamCaption}\item[{sem\+\_\+t $\ast$$\ast$}]{sem\+\_\+monitor,  }\item[{sem\+\_\+t $\ast$$\ast$}]{sem\+\_\+equipos\+\_\+listos }\end{DoxyParamCaption})}
+
+Crea los semáforos necesarias para comunicarse con el monitor y los jefes. 
+\begin{DoxyParams}{Parámetros}
+{\em sem\+\_\+monitor} & Semáforo para comunicarse con el monitor \\
+\hline
+{\em sem\+\_\+equipos\+\_\+listos} & Semáforo para comunicarse con los jefes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{simulador_8c_a844708a2e47c074af2c3df7bbc08debe}\label{simulador_8c_a844708a2e47c074af2c3df7bbc08debe}} 
+\index{simulador.\+c@{simulador.\+c}!simulador\+\_\+crear\+\_\+jefes@{simulador\+\_\+crear\+\_\+jefes}}
+\index{simulador\+\_\+crear\+\_\+jefes@{simulador\+\_\+crear\+\_\+jefes}!simulador.\+c@{simulador.\+c}}
+\subsubsection{\texorpdfstring{simulador\+\_\+crear\+\_\+jefes()}{simulador\_crear\_jefes()}}
+{\footnotesize\ttfamily void simulador\+\_\+crear\+\_\+jefes (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{fd\+\_\+sim\mbox{[}\+N\+\_\+\+E\+Q\+U\+I\+P\+O\+S\mbox{]}\mbox{[}2\mbox{]},  }\item[{sem\+\_\+t $\ast$}]{sem\+\_\+equipos\+\_\+listos }\end{DoxyParamCaption})}
+
+Crea procesos para cada jefe, junto a tuberías para mantener la comunicación 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em fd\+\_\+sim} & Tuberías que se deben crear \\
+\hline
+{\em sem\+\_\+equipos\+\_\+listos} & Semáforo que se pasará a los jefes \\
+\hline
+\end{DoxyParams}

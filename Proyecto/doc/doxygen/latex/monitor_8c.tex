@@ -1,0 +1,117 @@
+\hypertarget{monitor_8c}{}\section{Referencia del Archivo src/monitor.c}
+\label{monitor_8c}\index{src/monitor.\+c@{src/monitor.\+c}}
+
+
+Código fuente del monitor.  
+
+
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/mman.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$mqueue.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}gamescreen.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mapa.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+Dependencia gráfica adjunta para monitor.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{monitor_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{monitor_8c_a19b6b23fdb523f12cdc3a096dcd92d25}{mapa\+\_\+print} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa)
+\item 
+void \hyperlink{monitor_8c_ac549a91c75c8860d52299ffd09451849}{monitor\+\_\+configurar\+\_\+semaforos} (sem\+\_\+t $\ast$$\ast$sem\+\_\+monitor)
+\item 
+void \hyperlink{monitor_8c_a2c139d68d58c9d8b1fe46230d5ac7f02}{monitor\+\_\+configurar\+\_\+memoria\+\_\+compartida} (int $\ast$shm, \hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$$\ast$mapa)
+\item 
+void \hyperlink{monitor_8c_a1fb5c636253d81a14119899234631e04}{simulador\+\_\+configurar\+\_\+manejador} ()
+\item 
+void \hyperlink{monitor_8c_a9b575b72100cf87b4803476ed146be02}{manejador\+\_\+\+S\+I\+G\+I\+NT} (int pid)
+\item 
+int \hyperlink{monitor_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Código fuente del monitor. 
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{monitor_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{monitor_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{monitor.\+c@{monitor.\+c}!main@{main}}
+\index{main@{main}!monitor.\+c@{monitor.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Ejecuta el monitor \mbox{\Hypertarget{monitor_8c_a9b575b72100cf87b4803476ed146be02}\label{monitor_8c_a9b575b72100cf87b4803476ed146be02}} 
+\index{monitor.\+c@{monitor.\+c}!manejador\+\_\+\+S\+I\+G\+I\+NT@{manejador\+\_\+\+S\+I\+G\+I\+NT}}
+\index{manejador\+\_\+\+S\+I\+G\+I\+NT@{manejador\+\_\+\+S\+I\+G\+I\+NT}!monitor.\+c@{monitor.\+c}}
+\subsubsection{\texorpdfstring{manejador\+\_\+\+S\+I\+G\+I\+N\+T()}{manejador\_SIGINT()}}
+{\footnotesize\ttfamily void manejador\+\_\+\+S\+I\+G\+I\+NT (\begin{DoxyParamCaption}\item[{int}]{pid }\end{DoxyParamCaption})}
+
+Manejador de S\+I\+G\+I\+NT. Hace \hyperlink{gamescreen_8c_af3bc8be95518f1d57d6d201a980359be}{screen\+\_\+end()} para finalizar el modo pantalla. 
+\begin{DoxyParams}{Parámetros}
+{\em pid} & Id del proceso\\
+\hline
+\end{DoxyParams}
+Manejador de S\+I\+G\+I\+NT. Hace unlink de los recursos compartidos y envía S\+I\+G\+K\+I\+LL a todos los procesos de la simulación. 
+\begin{DoxyParams}{Parámetros}
+{\em pid} & Id del proceso \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{monitor_8c_a19b6b23fdb523f12cdc3a096dcd92d25}\label{monitor_8c_a19b6b23fdb523f12cdc3a096dcd92d25}} 
+\index{monitor.\+c@{monitor.\+c}!mapa\+\_\+print@{mapa\+\_\+print}}
+\index{mapa\+\_\+print@{mapa\+\_\+print}!monitor.\+c@{monitor.\+c}}
+\subsubsection{\texorpdfstring{mapa\+\_\+print()}{mapa\_print()}}
+{\footnotesize\ttfamily void mapa\+\_\+print (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa }\end{DoxyParamCaption})}
+
+Imprime el mapa 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa a imprimir \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{monitor_8c_a2c139d68d58c9d8b1fe46230d5ac7f02}\label{monitor_8c_a2c139d68d58c9d8b1fe46230d5ac7f02}} 
+\index{monitor.\+c@{monitor.\+c}!monitor\+\_\+configurar\+\_\+memoria\+\_\+compartida@{monitor\+\_\+configurar\+\_\+memoria\+\_\+compartida}}
+\index{monitor\+\_\+configurar\+\_\+memoria\+\_\+compartida@{monitor\+\_\+configurar\+\_\+memoria\+\_\+compartida}!monitor.\+c@{monitor.\+c}}
+\subsubsection{\texorpdfstring{monitor\+\_\+configurar\+\_\+memoria\+\_\+compartida()}{monitor\_configurar\_memoria\_compartida()}}
+{\footnotesize\ttfamily void monitor\+\_\+configurar\+\_\+memoria\+\_\+compartida (\begin{DoxyParamCaption}\item[{int $\ast$}]{shm,  }\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$$\ast$}]{mapa }\end{DoxyParamCaption})}
+
+Configura la memoria compartida necesaria para el monitor. 
+\begin{DoxyParams}{Parámetros}
+{\em shm} & Referencia a la memoria compartida que se va a abrir \\
+\hline
+{\em mapa} & Mapa a abrir en memoria compartida \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{monitor_8c_ac549a91c75c8860d52299ffd09451849}\label{monitor_8c_ac549a91c75c8860d52299ffd09451849}} 
+\index{monitor.\+c@{monitor.\+c}!monitor\+\_\+configurar\+\_\+semaforos@{monitor\+\_\+configurar\+\_\+semaforos}}
+\index{monitor\+\_\+configurar\+\_\+semaforos@{monitor\+\_\+configurar\+\_\+semaforos}!monitor.\+c@{monitor.\+c}}
+\subsubsection{\texorpdfstring{monitor\+\_\+configurar\+\_\+semaforos()}{monitor\_configurar\_semaforos()}}
+{\footnotesize\ttfamily void monitor\+\_\+configurar\+\_\+semaforos (\begin{DoxyParamCaption}\item[{sem\+\_\+t $\ast$$\ast$}]{sem\+\_\+monitor }\end{DoxyParamCaption})}
+
+Configura el semáforo que permite al monitor esperar hasta que comience la simulación. 
+\begin{DoxyParams}{Parámetros}
+{\em sem\+\_\+monitor} & Semáforo que permite al monitor esperar hasta que comience la simulación \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{monitor_8c_a1fb5c636253d81a14119899234631e04}\label{monitor_8c_a1fb5c636253d81a14119899234631e04}} 
+\index{monitor.\+c@{monitor.\+c}!simulador\+\_\+configurar\+\_\+manejador@{simulador\+\_\+configurar\+\_\+manejador}}
+\index{simulador\+\_\+configurar\+\_\+manejador@{simulador\+\_\+configurar\+\_\+manejador}!monitor.\+c@{monitor.\+c}}
+\subsubsection{\texorpdfstring{simulador\+\_\+configurar\+\_\+manejador()}{simulador\_configurar\_manejador()}}
+{\footnotesize\ttfamily void simulador\+\_\+configurar\+\_\+manejador (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Crea el manejador de S\+I\+G\+I\+NT, en caso de que se desee interrumpir la ejecución a mitad del proceso. 

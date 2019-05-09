@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto SOPER: Referencia del Archivo src/simulador.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Proyecto SOPER
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funciones</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo simulador.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Código fuente del simulador.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="jefe_8h_source.html">jefe.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="mapa_8h_source.html">mapa.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Dependencia gráfica adjunta para simulador.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="simulador_8c__incl.png" border="0" usemap="#src_2simulador_8c" alt=""/></div>
+<map name="src_2simulador_8c" id="src_2simulador_8c">
+<area shape="rect" id="node2" href="jefe_8h.html" title="Recoge la funcionalidad de un jefe. " alt="" coords="639,80,694,107"/>
+<area shape="rect" id="node3" href="types_8h.html" title="Define los tipos y constantes de datos. " alt="" coords="651,304,717,331"/>
+<area shape="rect" id="node19" href="mapa_8h.html" title="Cabecera del mapa. " alt="" coords="687,229,753,256"/>
+<area shape="rect" id="node18" href="nave_8h.html" title="Recoge la funcionalidad de una nave. " alt="" coords="636,155,697,181"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a7ca1584ef7c92847d2a610dffac0ccba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#a7ca1584ef7c92847d2a610dffac0ccba">simulador</a> ()</td></tr>
+<tr class="separator:a7ca1584ef7c92847d2a610dffac0ccba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844708a2e47c074af2c3df7bbc08debe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#a844708a2e47c074af2c3df7bbc08debe">simulador_crear_jefes</a> (<a class="el" href="structtipo__mapa.html">tipo_mapa</a> *mapa, int fd_sim[<a class="el" href="types_8h.html#ab306668933fb4316ac0f5ef291d13dff">N_EQUIPOS</a>][2], sem_t *sem_equipos_listos)</td></tr>
+<tr class="separator:a844708a2e47c074af2c3df7bbc08debe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafad343d1f6fcf94e098090354257fec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#aafad343d1f6fcf94e098090354257fec">simulador_configurar_semaforos</a> (sem_t **sem_monitor, sem_t **sem_equipos_listos)</td></tr>
+<tr class="separator:aafad343d1f6fcf94e098090354257fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7458076c9646b481352dbcaa4962ff4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#ab7458076c9646b481352dbcaa4962ff4">simulador_configurar_manejadores</a> ()</td></tr>
+<tr class="separator:ab7458076c9646b481352dbcaa4962ff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6ce2c925b1ddbd366f414e246565bfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#ab6ce2c925b1ddbd366f414e246565bfb">simulador_configurar_cola</a> (mqd_t *cola)</td></tr>
+<tr class="separator:ab6ce2c925b1ddbd366f414e246565bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28bc47609f58946ba64fb3dd386819c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#a28bc47609f58946ba64fb3dd386819c0">simulador_configurar_memoria_compartida</a> (int *shm, <a class="el" href="structtipo__mapa.html">tipo_mapa</a> **mapa)</td></tr>
+<tr class="separator:a28bc47609f58946ba64fb3dd386819c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a757062b703107b35d26563c82d07d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#a7a757062b703107b35d26563c82d07d7">simulador_configurar_mapa</a> (<a class="el" href="structtipo__mapa.html">tipo_mapa</a> *mapa)</td></tr>
+<tr class="separator:a7a757062b703107b35d26563c82d07d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3ea499f27bd220f1d39122cce587119"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#ac3ea499f27bd220f1d39122cce587119">simulador_configurar_naves</a> (<a class="el" href="structtipo__mapa.html">tipo_mapa</a> *mapa)</td></tr>
+<tr class="separator:ac3ea499f27bd220f1d39122cce587119"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b575b72100cf87b4803476ed146be02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#a9b575b72100cf87b4803476ed146be02">manejador_SIGINT</a> (int pid)</td></tr>
+<tr class="separator:a9b575b72100cf87b4803476ed146be02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f0c3c2b53531f97806cd6db2f5c68e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#a1f0c3c2b53531f97806cd6db2f5c68e0">manejador_SIGALRM</a> (int pid)</td></tr>
+<tr class="separator:a1f0c3c2b53531f97806cd6db2f5c68e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69385757034f67a3cd63887bdc544b69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#a69385757034f67a3cd63887bdc544b69">manejador_SIGTERM</a> (int pid)</td></tr>
+<tr class="separator:a69385757034f67a3cd63887bdc544b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="simulador_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a350a4b7e3f7ddadd409eb761bbfb28cb"><td class="memItemLeft" align="right" valign="top"><a id="a350a4b7e3f7ddadd409eb761bbfb28cb"></a>
+sem_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sem_alarma</b> = NULL</td></tr>
+<tr class="separator:a350a4b7e3f7ddadd409eb761bbfb28cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Código fuente del simulador. </p>
+</div><h2 class="groupheader">Documentación de las funciones</h2>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Ejecuta el simulador </p>
+
+</div>
+</div>
+<a id="a1f0c3c2b53531f97806cd6db2f5c68e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f0c3c2b53531f97806cd6db2f5c68e0">&#9670;&nbsp;</a></span>manejador_SIGALRM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void manejador_SIGALRM </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Manejador de SIGALARM. Sube el semáforo que permite el fin del turno. </p>
+
+</div>
+</div>
+<a id="a9b575b72100cf87b4803476ed146be02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b575b72100cf87b4803476ed146be02">&#9670;&nbsp;</a></span>manejador_SIGINT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void manejador_SIGINT </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Manejador de SIGINT. Hace unlink de los recursos compartidos y envía SIGKILL a todos los procesos de la simulación. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pid</td><td>Id del proceso </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a69385757034f67a3cd63887bdc544b69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69385757034f67a3cd63887bdc544b69">&#9670;&nbsp;</a></span>manejador_SIGTERM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void manejador_SIGTERM </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Manejador de SIGTERM. Finaliza la ejecución. </p>
+
+</div>
+</div>
+<a id="a7ca1584ef7c92847d2a610dffac0ccba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ca1584ef7c92847d2a610dffac0ccba">&#9670;&nbsp;</a></span>simulador()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simulador </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inicializa los recursos compartidos, crea los jefes y ejecuta el bucle principal del simulador hasta termina la batalla. Al finalizar libera los recursos compartidos. </p>
+
+</div>
+</div>
+<a id="ab6ce2c925b1ddbd366f414e246565bfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6ce2c925b1ddbd366f414e246565bfb">&#9670;&nbsp;</a></span>simulador_configurar_cola()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simulador_configurar_cola </td>
+          <td>(</td>
+          <td class="paramtype">mqd_t *&#160;</td>
+          <td class="paramname"><em>cola</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Abre o crea la cola de mensajes utilizada para que las naves comuniquen sus acciones al simulador. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cola</td><td>Cola de mensajes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab7458076c9646b481352dbcaa4962ff4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7458076c9646b481352dbcaa4962ff4">&#9670;&nbsp;</a></span>simulador_configurar_manejadores()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simulador_configurar_manejadores </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Crea los manejadores de las señales utilizadas. SIGINT en caso de que se desee interrumpir la ejecución a mitad del proceso, SIGALRM para la duración de los turnos y SIGTERM para que las naves finalicen cuando los jefes se lo ordenen. </p>
+
+</div>
+</div>
+<a id="a7a757062b703107b35d26563c82d07d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a757062b703107b35d26563c82d07d7">&#9670;&nbsp;</a></span>simulador_configurar_mapa()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simulador_configurar_mapa </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtipo__mapa.html">tipo_mapa</a> *&#160;</td>
+          <td class="paramname"><em>mapa</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inicializa todas las casillas del mapa de la simulación </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mapa</td><td>Mapa de la simulación. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a28bc47609f58946ba64fb3dd386819c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28bc47609f58946ba64fb3dd386819c0">&#9670;&nbsp;</a></span>simulador_configurar_memoria_compartida()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simulador_configurar_memoria_compartida </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>shm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtipo__mapa.html">tipo_mapa</a> **&#160;</td>
+          <td class="paramname"><em>mapa</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Crea la memoria compartida en la que se almacena el mapa de la simulación. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shm</td><td>Memoria compartida que se debe crear </td></tr>
+    <tr><td class="paramname">mapa</td><td>Mapa almacenado en la memoria compartida </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac3ea499f27bd220f1d39122cce587119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3ea499f27bd220f1d39122cce587119">&#9670;&nbsp;</a></span>simulador_configurar_naves()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simulador_configurar_naves </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtipo__mapa.html">tipo_mapa</a> *&#160;</td>
+          <td class="paramname"><em>mapa</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Configura y añade al mapa las naves de los diferentes equipos, que aparecen en las cuatro esquinas del mapa. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mapa</td><td>Mapa de la simulación. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aafad343d1f6fcf94e098090354257fec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafad343d1f6fcf94e098090354257fec">&#9670;&nbsp;</a></span>simulador_configurar_semaforos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simulador_configurar_semaforos </td>
+          <td>(</td>
+          <td class="paramtype">sem_t **&#160;</td>
+          <td class="paramname"><em>sem_monitor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sem_t **&#160;</td>
+          <td class="paramname"><em>sem_equipos_listos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Crea los semáforos necesarias para comunicarse con el monitor y los jefes. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sem_monitor</td><td>Semáforo para comunicarse con el monitor </td></tr>
+    <tr><td class="paramname">sem_equipos_listos</td><td>Semáforo para comunicarse con los jefes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a844708a2e47c074af2c3df7bbc08debe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844708a2e47c074af2c3df7bbc08debe">&#9670;&nbsp;</a></span>simulador_crear_jefes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simulador_crear_jefes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtipo__mapa.html">tipo_mapa</a> *&#160;</td>
+          <td class="paramname"><em>mapa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd_sim</em>[N_EQUIPOS][2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sem_t *&#160;</td>
+          <td class="paramname"><em>sem_equipos_listos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Crea procesos para cada jefe, junto a tuberías para mantener la comunicación </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mapa</td><td>Mapa de la simulación </td></tr>
+    <tr><td class="paramname">fd_sim</td><td>Tuberías que se deben crear </td></tr>
+    <tr><td class="paramname">sem_equipos_listos</td><td>Semáforo que se pasará a los jefes </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

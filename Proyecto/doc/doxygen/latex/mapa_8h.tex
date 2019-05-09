@@ -1,0 +1,289 @@
+\hypertarget{mapa_8h}{}\section{Referencia del Archivo src/mapa.h}
+\label{mapa_8h}\index{src/mapa.\+h@{src/mapa.\+h}}
+
+
+Cabecera del mapa.  
+
+
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+Dependencia gráfica adjunta para mapa.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mapa_8h__incl}
+\end{center}
+\end{figure}
+Gráfico de los archivos que directa o indirectamente incluyen a este archivo\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mapa_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{mapa_8h_a806dc48308c61c06fe9c5c5783bfad8d}{mapa\+\_\+clean\+\_\+casilla} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int pos\+\_\+y, int pos\+\_\+x)
+\item 
+\hyperlink{structtipo__casilla}{tipo\+\_\+casilla} \hyperlink{mapa_8h_adedc40364bffd27208a7287434c28c15}{mapa\+\_\+get\+\_\+casilla} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int posy, int posx)
+\item 
+int \hyperlink{mapa_8h_a85ae5ebedb02f18ac5a9c0d9296b20e9}{mapa\+\_\+get\+\_\+distancia} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int ori\+\_\+y, int ori\+\_\+x, int target\+\_\+y, int target\+\_\+x)
+\item 
+\hyperlink{structtipo__nave}{tipo\+\_\+nave} \hyperlink{mapa_8h_ae949a08280aeec8b57b32906b6d73f78}{mapa\+\_\+get\+\_\+nave} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int equipo, int num\+\_\+nave)
+\item 
+int \hyperlink{mapa_8h_a407e4361ece24cdd19cb0070181fbb91}{mapa\+\_\+get\+\_\+num\+\_\+naves} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int equipo)
+\item 
+char \hyperlink{mapa_8h_a857fce0818018532b801cd6d4df10545}{mapa\+\_\+get\+\_\+symbol} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int pos\+\_\+y, int pos\+\_\+x)
+\item 
+bool \hyperlink{mapa_8h_a67d3dfd58bcde49ba39a670eda876ae0}{mapa\+\_\+is\+\_\+casilla\+\_\+vacia} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int pos\+\_\+y, int pos\+\_\+x)
+\item 
+void \hyperlink{mapa_8h_a555fccad30331311a6185a03c4a53f64}{mapa\+\_\+restore} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa)
+\item 
+void \hyperlink{mapa_8h_a70be4283077b695807f0e4448e13df0e}{mapa\+\_\+send\+\_\+misil} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int origen\+\_\+y, int origen\+\_\+x, int target\+\_\+y, int target\+\_\+x)
+\item 
+int \hyperlink{mapa_8h_a9ffafdce1656b32f99897e5395cf3e04}{mapa\+\_\+set\+\_\+nave} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, \hyperlink{structtipo__nave}{tipo\+\_\+nave} \hyperlink{nave_8h_a3d3f3f9b58aa6d6db95e19023d33f163}{nave})
+\item 
+void \hyperlink{mapa_8h_a3a2e26d647b360f3cdf093a03ee15b79}{mapa\+\_\+set\+\_\+num\+\_\+naves} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int equipo, int num\+\_\+naves)
+\item 
+void \hyperlink{mapa_8h_ae732477c8a019a0c48fbc6cb65874b49}{mapa\+\_\+set\+\_\+symbol} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int pos\+\_\+y, int pos\+\_\+x, char symbol)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Cabecera del mapa. 
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{mapa_8h_a806dc48308c61c06fe9c5c5783bfad8d}\label{mapa_8h_a806dc48308c61c06fe9c5c5783bfad8d}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+clean\+\_\+casilla@{mapa\+\_\+clean\+\_\+casilla}}
+\index{mapa\+\_\+clean\+\_\+casilla@{mapa\+\_\+clean\+\_\+casilla}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+clean\+\_\+casilla()}{mapa\_clean\_casilla()}}
+{\footnotesize\ttfamily int mapa\+\_\+clean\+\_\+casilla (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{pos\+\_\+y,  }\item[{int}]{pos\+\_\+x }\end{DoxyParamCaption})}
+
+Reinicia la casilla especificada. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em pos\+\_\+y} & Coordenada y de la casilla \\
+\hline
+{\em pos\+\_\+x} & Coordenada x de la casilla \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Devuelve 0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mapa_8h_adedc40364bffd27208a7287434c28c15}\label{mapa_8h_adedc40364bffd27208a7287434c28c15}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+get\+\_\+casilla@{mapa\+\_\+get\+\_\+casilla}}
+\index{mapa\+\_\+get\+\_\+casilla@{mapa\+\_\+get\+\_\+casilla}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+get\+\_\+casilla()}{mapa\_get\_casilla()}}
+{\footnotesize\ttfamily \hyperlink{structtipo__casilla}{tipo\+\_\+casilla} mapa\+\_\+get\+\_\+casilla (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{pos\+\_\+y,  }\item[{int}]{pos\+\_\+x }\end{DoxyParamCaption})}
+
+Obtiene la casilla especificada. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em pos\+\_\+y} & Coordenada y de la casilla \\
+\hline
+{\em pos\+\_\+x} & Coordenada x de la casilla \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+La casilla especificada. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mapa_8h_a85ae5ebedb02f18ac5a9c0d9296b20e9}\label{mapa_8h_a85ae5ebedb02f18ac5a9c0d9296b20e9}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+get\+\_\+distancia@{mapa\+\_\+get\+\_\+distancia}}
+\index{mapa\+\_\+get\+\_\+distancia@{mapa\+\_\+get\+\_\+distancia}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+get\+\_\+distancia()}{mapa\_get\_distancia()}}
+{\footnotesize\ttfamily int mapa\+\_\+get\+\_\+distancia (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{ori\+\_\+y,  }\item[{int}]{ori\+\_\+x,  }\item[{int}]{target\+\_\+y,  }\item[{int}]{target\+\_\+x }\end{DoxyParamCaption})}
+
+Obtiene la distancia de las coordenadas de origen a las coordenadas objetivo. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em ori\+\_\+y} & Coordenada y origen \\
+\hline
+{\em ori\+\_\+x} & Coordenada x origen \\
+\hline
+{\em target\+\_\+y} & Coordenada y objetivo \\
+\hline
+{\em targer\+\_\+x} & Coordenada x objetivo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Valor máximo entre la distancia en el eje X y la distancia en el eje Y 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mapa_8h_ae949a08280aeec8b57b32906b6d73f78}\label{mapa_8h_ae949a08280aeec8b57b32906b6d73f78}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+get\+\_\+nave@{mapa\+\_\+get\+\_\+nave}}
+\index{mapa\+\_\+get\+\_\+nave@{mapa\+\_\+get\+\_\+nave}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+get\+\_\+nave()}{mapa\_get\_nave()}}
+{\footnotesize\ttfamily \hyperlink{structtipo__nave}{tipo\+\_\+nave} mapa\+\_\+get\+\_\+nave (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{equipo,  }\item[{int}]{num\+\_\+nave }\end{DoxyParamCaption})}
+
+Devuelve la nave especificada del equipo indicado. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em equipo} & Equipo de la nave a devolver \\
+\hline
+{\em num\+\_\+nave} & Número de la nave a devolver \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Nave especificada del equipo indicado. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mapa_8h_a407e4361ece24cdd19cb0070181fbb91}\label{mapa_8h_a407e4361ece24cdd19cb0070181fbb91}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+get\+\_\+num\+\_\+naves@{mapa\+\_\+get\+\_\+num\+\_\+naves}}
+\index{mapa\+\_\+get\+\_\+num\+\_\+naves@{mapa\+\_\+get\+\_\+num\+\_\+naves}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+get\+\_\+num\+\_\+naves()}{mapa\_get\_num\_naves()}}
+{\footnotesize\ttfamily int mapa\+\_\+get\+\_\+num\+\_\+naves (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{equipo }\end{DoxyParamCaption})}
+
+Devuelve el número de naves restantes del equipo indicado. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em equipo} & Equipo del que se desean conocer las naves restantes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Naves restantes del equipo indicado. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mapa_8h_a857fce0818018532b801cd6d4df10545}\label{mapa_8h_a857fce0818018532b801cd6d4df10545}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+get\+\_\+symbol@{mapa\+\_\+get\+\_\+symbol}}
+\index{mapa\+\_\+get\+\_\+symbol@{mapa\+\_\+get\+\_\+symbol}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+get\+\_\+symbol()}{mapa\_get\_symbol()}}
+{\footnotesize\ttfamily char mapa\+\_\+get\+\_\+symbol (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{pos\+\_\+y,  }\item[{int}]{pos\+\_\+x }\end{DoxyParamCaption})}
+
+Devuelve el símbolo de la casilla especificada. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em pos\+\_\+y} & Coordenada y de la casilla \\
+\hline
+{\em pos\+\_\+x} & Coordenada x de la casilla \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Símbolo de la casilla especificada. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mapa_8h_a67d3dfd58bcde49ba39a670eda876ae0}\label{mapa_8h_a67d3dfd58bcde49ba39a670eda876ae0}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+is\+\_\+casilla\+\_\+vacia@{mapa\+\_\+is\+\_\+casilla\+\_\+vacia}}
+\index{mapa\+\_\+is\+\_\+casilla\+\_\+vacia@{mapa\+\_\+is\+\_\+casilla\+\_\+vacia}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+is\+\_\+casilla\+\_\+vacia()}{mapa\_is\_casilla\_vacia()}}
+{\footnotesize\ttfamily bool mapa\+\_\+is\+\_\+casilla\+\_\+vacia (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{pos\+\_\+y,  }\item[{int}]{pos\+\_\+x }\end{DoxyParamCaption})}
+
+Indica si la casilla especificada está vacía. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em pos\+\_\+y} & Coordenada y de la casilla \\
+\hline
+{\em pos\+\_\+x} & Coordenada x de la casilla \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Si la casilla especificada está vacía o no. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mapa_8h_a555fccad30331311a6185a03c4a53f64}\label{mapa_8h_a555fccad30331311a6185a03c4a53f64}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+restore@{mapa\+\_\+restore}}
+\index{mapa\+\_\+restore@{mapa\+\_\+restore}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+restore()}{mapa\_restore()}}
+{\footnotesize\ttfamily void mapa\+\_\+restore (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa }\end{DoxyParamCaption})}
+
+Restaura los símbolos de las casillas del mapa, conservando solo las naves. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mapa_8h_a70be4283077b695807f0e4448e13df0e}\label{mapa_8h_a70be4283077b695807f0e4448e13df0e}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+send\+\_\+misil@{mapa\+\_\+send\+\_\+misil}}
+\index{mapa\+\_\+send\+\_\+misil@{mapa\+\_\+send\+\_\+misil}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+send\+\_\+misil()}{mapa\_send\_misil()}}
+{\footnotesize\ttfamily void mapa\+\_\+send\+\_\+misil (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{origen\+\_\+y,  }\item[{int}]{origen\+\_\+x,  }\item[{int}]{target\+\_\+y,  }\item[{int}]{target\+\_\+x }\end{DoxyParamCaption})}
+
+Establece el símbolo de la casilla especificada. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em pos\+\_\+y} & Coordenada y de la casilla \\
+\hline
+{\em pos\+\_\+x} & Coordenada x de la casilla \\
+\hline
+{\em symbol} & Nuevo símbolo de la casilla especificada.\\
+\hline
+\end{DoxyParams}
+Imprime por pantalla la animación de un misil dirigido desde las coordenadas de origen a las de destino. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em ori\+\_\+y} & Coordenada y origen \\
+\hline
+{\em ori\+\_\+x} & Coordenada x origen \\
+\hline
+{\em target\+\_\+y} & Coordenada y objetivo \\
+\hline
+{\em targer\+\_\+x} & Coordenada x objetivo \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mapa_8h_a9ffafdce1656b32f99897e5395cf3e04}\label{mapa_8h_a9ffafdce1656b32f99897e5395cf3e04}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+set\+\_\+nave@{mapa\+\_\+set\+\_\+nave}}
+\index{mapa\+\_\+set\+\_\+nave@{mapa\+\_\+set\+\_\+nave}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+set\+\_\+nave()}{mapa\_set\_nave()}}
+{\footnotesize\ttfamily int mapa\+\_\+set\+\_\+nave (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{\hyperlink{structtipo__nave}{tipo\+\_\+nave}}]{nave }\end{DoxyParamCaption})}
+
+Añade una nueva nave al mapa de la simulación. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em nave} & Nueva nave que añadir al mapa \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Devuelve 0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mapa_8h_a3a2e26d647b360f3cdf093a03ee15b79}\label{mapa_8h_a3a2e26d647b360f3cdf093a03ee15b79}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+set\+\_\+num\+\_\+naves@{mapa\+\_\+set\+\_\+num\+\_\+naves}}
+\index{mapa\+\_\+set\+\_\+num\+\_\+naves@{mapa\+\_\+set\+\_\+num\+\_\+naves}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+set\+\_\+num\+\_\+naves()}{mapa\_set\_num\_naves()}}
+{\footnotesize\ttfamily void mapa\+\_\+set\+\_\+num\+\_\+naves (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{equipo,  }\item[{int}]{num\+\_\+naves }\end{DoxyParamCaption})}
+
+Establece el número de naves restantes de un equipo. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em equipo} & Equipo al que se establecerá el nuevo valor de naves restantes \\
+\hline
+{\em num\+\_\+naves} & Naves restantes del equipo especificado \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mapa_8h_ae732477c8a019a0c48fbc6cb65874b49}\label{mapa_8h_ae732477c8a019a0c48fbc6cb65874b49}} 
+\index{mapa.\+h@{mapa.\+h}!mapa\+\_\+set\+\_\+symbol@{mapa\+\_\+set\+\_\+symbol}}
+\index{mapa\+\_\+set\+\_\+symbol@{mapa\+\_\+set\+\_\+symbol}!mapa.\+h@{mapa.\+h}}
+\subsubsection{\texorpdfstring{mapa\+\_\+set\+\_\+symbol()}{mapa\_set\_symbol()}}
+{\footnotesize\ttfamily void mapa\+\_\+set\+\_\+symbol (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{pos\+\_\+y,  }\item[{int}]{pos\+\_\+x,  }\item[{char}]{symbol }\end{DoxyParamCaption})}
+
+Imprime por pantalla la animación de un misil dirigido desde las coordenadas de origen a las de destino. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em ori\+\_\+y} & Coordenada y origen \\
+\hline
+{\em ori\+\_\+x} & Coordenada x origen \\
+\hline
+{\em target\+\_\+y} & Coordenada y objetivo \\
+\hline
+{\em targer\+\_\+x} & Coordenada x objetivo\\
+\hline
+\end{DoxyParams}
+Establece el símbolo de la casilla especificada. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa de la simulación \\
+\hline
+{\em pos\+\_\+y} & Coordenada y de la casilla \\
+\hline
+{\em pos\+\_\+x} & Coordenada x de la casilla \\
+\hline
+{\em symbol} & Nuevo símbolo de la casilla especificada. \\
+\hline
+\end{DoxyParams}

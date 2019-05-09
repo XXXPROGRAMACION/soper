@@ -1,0 +1,68 @@
+\hypertarget{nave_8c}{}\section{Referencia del Archivo src/nave.c}
+\label{nave_8c}\index{src/nave.\+c@{src/nave.\+c}}
+
+
+Codigo fuente de nave.  
+
+
+{\ttfamily \#include \char`\"{}nave.\+h\char`\"{}}\newline
+Dependencia gráfica adjunta para nave.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{nave_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{nave_8c_a1add2308319c21965be67ae8d3099296}{nave\+\_\+configurar\+\_\+cola} (int n\+\_\+equipo, int n\+\_\+nave, mqd\+\_\+t $\ast$cola)
+\item 
+void \hyperlink{nave_8c_a3d3f3f9b58aa6d6db95e19023d33f163}{nave} (\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$mapa, int n\+\_\+equipo, int n\+\_\+nave, int fd\+\_\+jefe\mbox{[}2\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Codigo fuente de nave. 
+
+
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{nave_8c_a3d3f3f9b58aa6d6db95e19023d33f163}\label{nave_8c_a3d3f3f9b58aa6d6db95e19023d33f163}} 
+\index{nave.\+c@{nave.\+c}!nave@{nave}}
+\index{nave@{nave}!nave.\+c@{nave.\+c}}
+\subsubsection{\texorpdfstring{nave()}{nave()}}
+{\footnotesize\ttfamily void nave (\begin{DoxyParamCaption}\item[{\hyperlink{structtipo__mapa}{tipo\+\_\+mapa} $\ast$}]{mapa,  }\item[{int}]{n\+\_\+equipo,  }\item[{int}]{n\+\_\+nave,  }\item[{int}]{fd\+\_\+jefe\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
+Emula el comportamiento de una nave, \char`\"{}obedeciendo\char`\"{} las órdenes de su jefe e informando de sus acciones al simulador. 
+\begin{DoxyParams}{Parámetros}
+{\em mapa} & Mapa sobre el que se situa la nave \\
+\hline
+{\em n\+\_\+equipo} & Número de equipo de la nave \\
+\hline
+{\em n\+\_\+nave} & Número de la nave \\
+\hline
+{\em fd\+\_\+jefe} & Pipe que conecta la nave con su jefe \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{Ver también}
+\hyperlink{jefe_8c_acc2874834095a0921d3b644130bfb4c6}{jefe()} 
+
+\hyperlink{simulador_8c_a7ca1584ef7c92847d2a610dffac0ccba}{simulador()} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{nave_8c_a1add2308319c21965be67ae8d3099296}\label{nave_8c_a1add2308319c21965be67ae8d3099296}} 
+\index{nave.\+c@{nave.\+c}!nave\+\_\+configurar\+\_\+cola@{nave\+\_\+configurar\+\_\+cola}}
+\index{nave\+\_\+configurar\+\_\+cola@{nave\+\_\+configurar\+\_\+cola}!nave.\+c@{nave.\+c}}
+\subsubsection{\texorpdfstring{nave\+\_\+configurar\+\_\+cola()}{nave\_configurar\_cola()}}
+{\footnotesize\ttfamily void nave\+\_\+configurar\+\_\+cola (\begin{DoxyParamCaption}\item[{int}]{n\+\_\+equipo,  }\item[{int}]{n\+\_\+nave,  }\item[{mqd\+\_\+t $\ast$}]{cola }\end{DoxyParamCaption})}
+
+Configura la cola de mensajes que comunica a la nave con el simulador 
+\begin{DoxyParams}{Parámetros}
+{\em n\+\_\+equipo} & Número de equipo de la nave \\
+\hline
+{\em n\+\_\+equipo} & Número de la nave \\
+\hline
+{\em cola} & Cola de mensajes a configurar \\
+\hline
+\end{DoxyParams}
